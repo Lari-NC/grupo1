@@ -1,15 +1,16 @@
-
 package grupo1;
+import java.util.*;
 
 public class TerminalGestionada extends Terminal{
-    
-    private Array<Naviera> navieras = new Array<Naviera>();
-    private Array<Shipper> shippers = new Array<Shipper>();
-    private Array<Consignee> consignees = new Array<Consignee>();
+	
+	
+    private List<Naviera> navieras = new ArrayList<>();
+    private List<Shipper> shippers = new ArrayList<>();
+    private List<Consignee> consignees = new ArrayList<>();
     //private Array<EmpresaTranportista> empresas = new Array<EmpresaTranportista>();
-    private Array<Camion> camionesPermitidos = new Array<Camion>();
-    private Array<Chofer> choferesPermitidos = new Array<Chofer>();
-    private Array<Circuitos> circuitosDeInteres = new Array<Circuitos>();
+    private List<Camion> camionesPermitidos = new ArrayList<>();
+    private List<Chofer> choferesPermitidos = new ArrayList<>();
+    private List<Circuitos> circuitosDeInteres = new ArrayList<>();
 
     public TerminalGestionada() {
         super();
