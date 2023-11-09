@@ -1,7 +1,9 @@
+package grupo1;
+
 public class Tramo {
     
     private double precio;
-    private LocalTime tiempo;
+    private LocalTime tiempo; // lo pasamos a int y que sean cantidad
     private Terminal terminalInicio;
     private Terminal terminalFin;
 
@@ -16,5 +18,6 @@ public class Tramo {
         return null;
     }
 
+    
     
 }

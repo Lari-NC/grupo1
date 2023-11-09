@@ -1,10 +1,12 @@
+package grupo1;
+
 public class Servicio {
 
-    private double precioFijo;
+    private int precio;
 
-    public Servicio(double precio) {
-        this.precioFijo = precio
+    public Servicio(int precio) {
+        this.precio = precio
     }
 
-    public abstract double getPrecioFijo();
+    public abstract int getPrecio();
 }

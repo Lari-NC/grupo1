@@ -1,6 +1,16 @@
+package grupo1;
+
 public class Lavado extends Servicio{
     
-    public Lavado() {
-        super();
+private int volumenMax;
+
+    public Lavado(int precio) {
+        super(precio);
+        this.volumenMax = 70;
+    }
+
+    public int getPrecio() {
+        
+        return
     }
 }

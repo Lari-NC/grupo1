@@ -1,3 +1,5 @@
+package grupo1;
+
 public class Tanque extends Container {
     
     private double consumo;

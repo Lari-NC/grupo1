@@ -1,3 +1,5 @@
+package grupo1;
+
 public class Consignee extends Cliente {
     
     public Consignee (String nombre, int dni, String domicilio, int telefono, String mail) {

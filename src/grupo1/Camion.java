@@ -1,3 +1,5 @@
+package grupo1;
+
 public class Camion {
     
     private Chofer chofer;
