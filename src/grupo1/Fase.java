@@ -1,3 +1,6 @@
+package grupo1;
+
+
 public class Fase {
 
     private Fase siguiente;

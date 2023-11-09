@@ -1,15 +1,18 @@
 package grupo1;
 
+import java.util.*;
+
 public class Buque {
 
-    private Set<Container> cargas;
+    private List<Container> cargas ;
     
     public Buque() {
-        this.cargas = new Set<Container>();
+        this.cargas = new ArrayList<>();
     }
 
-    public Set<Container> getCargas() {
-        return this.cargas
+    public ArrayList<Container> getCargas() {
+        return this.cargas;
+        // help
     }
 
     public void addCarga(Container carga) {

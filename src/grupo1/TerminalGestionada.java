@@ -10,7 +10,7 @@ public class TerminalGestionada extends Terminal{
     //private Array<EmpresaTranportista> empresas = new Array<EmpresaTranportista>();
     private List<Camion> camionesPermitidos = new ArrayList<>();
     private List<Chofer> choferesPermitidos = new ArrayList<>();
-    private List<Circuitos> circuitosDeInteres = new ArrayList<>();
+    private List<Circuito> circuitosDeInteres = new ArrayList<>();
 
     public TerminalGestionada() {
         super();
@@ -27,6 +27,7 @@ public class TerminalGestionada extends Terminal{
     public void registrarConsignee(Consignee consignee) {
         this.consignees.add(consignee);
     }
+    
     /* 
     public void registrarEmpresaTranportista(EmpresaTranportista empresa) {
         this.empresas.add(empresa);
@@ -34,15 +35,17 @@ public class TerminalGestionada extends Terminal{
     */
 
     public void registrarCamion(Camion camion) {
-        this.camiones.add(camion);
+        this.camionesPermitidos.add(camion);
     }
 
     public void registrarChofer(Chofer chofer) {
-        this.choferes.add(chofer);
+        this.choferesPermitidos.add(chofer);
     }
 
     public void registarCircuitosDeInteres() {
         for(Naviera naviera : this.navieras){
-            this.circuitosDeInteres.add(naviera.circuitosQuePasanPor(this));
+        	this.circuitosDeInteres.add(naviera.circuitosQuePasanPorTerminal(this);
         }
+        
     }
+}
