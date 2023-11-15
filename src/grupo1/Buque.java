@@ -4,15 +4,14 @@ import java.util.*;
 
 public class Buque {
 
-    private List<Container> cargas ;
+	private List<Container> cargas = new ArrayList<>();
     
     public Buque() {
         this.cargas = new ArrayList<>();
     }
 
-    public ArrayList<Container> getCargas() {
+    public List<Container> getCargas() {
         return this.cargas;
-        // help
     }
 
     public void addCarga(Container carga) {
