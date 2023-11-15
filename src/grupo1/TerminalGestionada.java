@@ -41,10 +41,11 @@ public class TerminalGestionada extends Terminal{
     public void registrarChofer(Chofer chofer) {
         this.choferesPermitidos.add(chofer);
     }
-
+    
     public void registarCircuitosDeInteres() {
         for(Naviera naviera : this.navieras){
-        	this.circuitosDeInteres.add(naviera.circuitosQuePasanPorTerminal(this);
+  
+        	this.circuitosDeInteres.addAll(naviera.circuitosQuePasanPorTerminal(this));
         }
         
     }

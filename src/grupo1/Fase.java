@@ -2,14 +2,17 @@ package grupo1;
 
 
 public class Fase {
-
-    private Fase siguiente;
     
     public Fase() {
     }
-
-    //@Override
-    public Fase getSiguiente() {
-        return this.siguiente;
+    
+    
+    public boolean verificarCambioFase(Buque buque) {
+    	return false;
     }
+    
+    public Fase siguiente() {
+    		return new Fase(); 
+    }
+    
 }
