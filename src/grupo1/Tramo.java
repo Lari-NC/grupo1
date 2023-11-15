@@ -1,24 +1,38 @@
 package grupo1;
-
+import java.util.Date;
 
 public class Tramo {
     
     private double precio; // creoq ue no ?? dsps reviso
-    private int tiempo; // cantidad de horas, mas simple :)
+    private int tiempo; 
     private Terminal terminalInicio;
+    private Date fechaSalida;
     private Terminal terminalFin;
+    private Date fechaLlegada;
 
-    public Tramo(Terminal tInicio, Terminal tFin, int tiempo, int precio) {
+    public Tramo(Terminal tInicio, Terminal tFin, int tiempo, int precio, Date fechaSalida, Date fechaLlegada) {
         this.terminalInicio = tInicio;
         this.terminalFin = tFin;
         this.precio = precio;
-        this.tiempo = this.tiempoEntre(tInicio, tFin);
+        this.tiempo = tiempo;
+        this.fechaLlegada = fechaLlegada;
+        this.fechaSalida = fechaSalida;
     }
-
-    private int tiempoEntre(Terminal tInicio, Terminal tFin) {
-        return this.tiempo;
-    }
-
     
+    public Date getFechaSalida() {
+    	return this.fechaSalida;
+    }
+    
+    public Date getFechaLlegada() {
+    	return this.fechaLlegada;
+    }
+
+    public Terminal getTerminalInicio() {
+    	return this.terminalInicio;
+    }
+    
+    public Terminal getTerminalLlegada() {
+    	return this.getTerminalLlegada();
+    }
     
 }

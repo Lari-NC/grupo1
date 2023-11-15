@@ -7,7 +7,7 @@ public class TerminalGestionada extends Terminal{
     private List<Naviera> navieras = new ArrayList<>();
     private List<Shipper> shippers = new ArrayList<>();
     private List<Consignee> consignees = new ArrayList<>();
-    //private Array<EmpresaTranportista> empresas = new Array<EmpresaTranportista>();
+    private List<EmpresaTranportista> empresas = new ArrayList<>();
     private List<Camion> camionesPermitidos = new ArrayList<>();
     private List<Chofer> choferesPermitidos = new ArrayList<>();
     private List<Circuito> circuitosDeInteres = new ArrayList<>();
@@ -28,11 +28,11 @@ public class TerminalGestionada extends Terminal{
         this.consignees.add(consignee);
     }
     
-    /* 
+  
     public void registrarEmpresaTranportista(EmpresaTranportista empresa) {
         this.empresas.add(empresa);
     }
-    */
+    
 
     public void registrarCamion(Camion camion) {
         this.camionesPermitidos.add(camion);
