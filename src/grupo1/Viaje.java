@@ -1,5 +1,7 @@
 package grupo1;
 
+import grupo1.circuito.Circuito;
+
 public class Viaje {
     
     private Circuito circuito;

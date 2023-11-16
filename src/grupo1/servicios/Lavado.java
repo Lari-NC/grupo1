@@ -1,4 +1,4 @@
-package grupo1;
+package grupo1.servicios;
 
 public class Lavado extends Servicio{
     

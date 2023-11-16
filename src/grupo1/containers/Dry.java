@@ -1,4 +1,4 @@
-package grupo1;
+package grupo1.containers;
 
 public class Dry extends Container {
     

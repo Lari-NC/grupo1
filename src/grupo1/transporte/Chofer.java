@@ -1,4 +1,4 @@
-package grupo1;
+package grupo1.transporte;
 
 public class Chofer {
     

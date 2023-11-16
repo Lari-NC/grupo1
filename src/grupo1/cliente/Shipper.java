@@ -1,4 +1,4 @@
-package grupo1;
+package grupo1.cliente;
 
 public class Shipper extends Cliente {
     

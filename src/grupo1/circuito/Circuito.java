@@ -1,6 +1,8 @@
-package grupo1;
+package grupo1.circuito;
 
 import java.util.*;
+
+import grupo1.Terminal;
 
 public class Circuito {
 

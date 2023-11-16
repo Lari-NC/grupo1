@@ -1,6 +1,11 @@
-package grupo1;
+package grupo1.buque;
 
 import java.util.*;
+
+import grupo1.Posicion;
+import grupo1.TerminalGestionada;
+import grupo1.buque.fases.Outbound;
+import grupo1.containers.Container;
 
 public class Buque{
 

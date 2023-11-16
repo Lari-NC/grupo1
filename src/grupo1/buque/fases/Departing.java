@@ -1,15 +1,18 @@
-package grupo1;
+package grupo1.buque.fases;
 
-public class Outbound extends Fase{
+import grupo1.buque.Buque;
+import grupo1.buque.Fase;
+
+public class Departing extends Fase{
     
-    public Outbound() {
+    public Departing() {
         super();
     }
     
     @Override
     public boolean verificarCambioFase(Buque buque) {
     	
-    	if(buque.getPosicion() <= 50 ) {
+    	if(buque.getPosicion() >= 1 ) {
     		return true;
     	}
     	return false;
@@ -17,9 +20,7 @@ public class Outbound extends Fase{
     
     @Override
     public Fase siguiente() {
-    	return new Inbound();
+    	return new Outbound();
     
     }
-    
-    
 }
