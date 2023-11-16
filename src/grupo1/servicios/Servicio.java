@@ -5,8 +5,10 @@ public class Servicio {
     private int precio;
 
     public Servicio(int precio) {
-        this.precio = precio
+        this.precio = precio;
     }
 
-    public abstract int getPrecio();
+    public int getPrecio() {
+    	return this.precio;
+    };
 }

@@ -2,7 +2,9 @@ package grupo1.servicios;
 
 public class Almacenamiento extends Servicio{
     
-    public Almacenamiento() {
-        super();
+    public Almacenamiento(int precio) {
+        super(precio);
     }
+    
+
 }
