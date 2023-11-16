@@ -12,10 +12,10 @@ public class FiltroNOT extends Filtrador {
     }
 
     @Override
-    public ArrayList<Circuito> evaluar(ArrayList<Circuito> lista) {
+    public ArrayList<Circuito> filtrar(ArrayList<Circuito> lista) {
     	/*Saca de mi lista de circuitos, todos los que cumplen la condicion de filtrado*/
     	
-        ArrayList<Circuito> resultadoFiltro = filtro.evaluar(lista);
+        ArrayList<Circuito> resultadoFiltro = filtro.filtrar(lista);
         lista.removeAll(resultadoFiltro);
         return lista;
     }

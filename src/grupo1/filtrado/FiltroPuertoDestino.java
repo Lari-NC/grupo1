@@ -14,7 +14,7 @@ public class FiltroPuertoDestino extends Filtrador{
 	    }
 
 	  @Override
-	  public ArrayList<Circuito> evaluar(ArrayList<Circuito> lista) {
+	  public ArrayList<Circuito> filtrar(ArrayList<Circuito> lista) {
 		  /*evalua mi lista de circuitos que le de y me devuelve una nuieva lista con los
 		   * que tengan mi puerto de llegada como un puerto de destino. No considera casos bordes ej:
 		   * esta atras en el circuito,, no me pidan mucho soy solo una chica :(  dsps sigo

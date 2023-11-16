@@ -11,11 +11,11 @@ public class FiltroOR extends Binario {
 	    }
 
     @Override
-    public ArrayList<Circuito> evaluar(ArrayList<Circuito> lista) {
+    public ArrayList<Circuito> filtrar(ArrayList<Circuito> lista) {
     	
     	/*se hacen copias de la lista apra no taparlas y se filtra una concdicion a la vez*/
-        ArrayList<Circuito> resultadoFiltro1 = getFiltro1().evaluar(new ArrayList<>(lista));
-        ArrayList<Circuito> resultadoFiltro2 = getFiltro2().evaluar(new ArrayList<>(lista));
+        ArrayList<Circuito> resultadoFiltro1 = getFiltro1().filtrar(new ArrayList<>(lista));
+        ArrayList<Circuito> resultadoFiltro2 = getFiltro2().filtrar(new ArrayList<>(lista));
         
     	/*se suman los resultados de las listas resultantes*/
         resultadoFiltro1.addAll(resultadoFiltro2);
