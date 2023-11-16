@@ -1,18 +1,13 @@
 package grupo1.buque;
 
 
-public class Fase {
+public abstract class Fase {
     
-    public Fase() {
-    }
+    public Fase() {}
     
     
-    public boolean verificarCambioFase(Buque buque) {
-    	return false;
-    }
+    public abstract boolean verificarCambioFase(Buque buque);
     
-    public Fase siguiente() {
-    		return new Fase(); 
-    }
+    public abstract Fase siguiente();
     
 }
