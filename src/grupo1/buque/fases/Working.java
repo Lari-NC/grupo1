@@ -1,7 +1,6 @@
 package grupo1.buque.fases;
 
 import grupo1.buque.Buque;
-import grupo1.buque.Fase;
 
 public class Working extends Fase{
     
@@ -10,9 +9,9 @@ public class Working extends Fase{
     }
     
     @Override
-    public boolean verificarCambioFase(Buque buque) {
+    public boolean condicionFase(Buque buque) {
     	
-    	if(buque.tieneOrdenDepart() ) {
+    	if(buque.tieneOrdenWorking() ) {
     		return true;
     	}
     	return false;

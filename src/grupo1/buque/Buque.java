@@ -4,6 +4,7 @@ import java.util.*;
 
 import grupo1.Posicion;
 import grupo1.TerminalGestionada;
+import grupo1.buque.fases.Fase;
 import grupo1.buque.fases.Outbound;
 import grupo1.containers.Container;
 
@@ -36,8 +37,9 @@ public class Buque{
     }
     
     
-    public int getDistancia(TerminalGestionada terminal) {
-    	// creoq ue poodrias er todo si o si respecto anuestra gesrionada en vewz de saber donde esta  
+    public /*int*/ getDistancia(TerminalGestionada terminal) {
+    	// problema, deberia concoer a al terminal en vez de ser parametrizado,
+    	//porque sino pierdo el polimorfismo de las fases comentente el int asi sale error y lo ven 
     	Posicion posicionB = this.getPosicion();
     	Posicion posicionT = terminal.getPosicion();
     	return posicionB.distanciaEntre(posicionT);
@@ -46,7 +48,7 @@ public class Buque{
     
     public void actualizarFase() {
     	
-    	if (this.getfase().verificarCambioFase(this)) {
+    	if (this.getfase().condicionFase(this)) {
     		this.faseActual = this.getfase().siguiente() ;
     	}
     }

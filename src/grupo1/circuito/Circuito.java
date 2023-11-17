@@ -20,44 +20,73 @@ public class Circuito {
    public List<Tramo> getTramos(){
 	   return this.tramos;
    }
-     
-   public Date getFechaSalida() {
-	   Date fechaSalida = primerTramo().getFechaSalida();
-	   return   fechaSalida;
-   }
-
-	private Tramo primerTramo() {
-		return this.tramos.get(0);
-	}
 	
-	public Date getFechaLlegada() {
-		Date fechaLlegada = ultimoTramo().getFechaLlegada();
-		return   fechaLlegada;
-	   }
+	private Tramo primerTramo() {
+		return this.getTramos().get(0);
+	}
 
 	private Tramo ultimoTramo() {
 		
-		int tamano = tramos.size();	
-		return this.tramos.get(tamano -1 );
+		int tamano = getTramos().size();	
+		return this.getTramos().get(tamano -1 );
 		
 		}
     
    public boolean incluyeATerminal(Terminal terminal) {
 	   /*Recorrido buscando la terminal parametrizada en nuestros tramos de llegada, analizando el caso borde
-	   de que la terminal sea la terminal de partida del circuito */
+	   de que la terminal sea la terminal de partida del circuito 
 	   
 	   Terminal primeraTerminal = this.primerTramo().getTerminalInicio();
-	   boolean resultado =  primeraTerminal == terminal;
+	   boolean resultado =  primeraTerminal.equals(terminal);
 	   
 	   while(!resultado) {
 		   for(Tramo t : tramos ) {
-			   resultado = t.getTerminalLlegada() == terminal;
+			   resultado = t.getTerminalLlegada().equals(terminal);
 		   }
 	   }  
 		   return resultado;
-	}
-	 
+		   
+		   *
+		   *
+		  segun chat gpt tira bucle infinito ^^  */
 	   
+	   	//bsuco caso borde de que sea la primera terminal de todo el circuito
+	    Terminal primeraTerminal = this.primerTramo().getTerminalInicio();
+	    boolean resultado = primeraTerminal.equals(terminal);
+
+	    // Recorrido buscando la terminal en los tramos de llegada
+	    for (Tramo t : this.getTramos()) {
+	        // Verificar si la terminal es la terminal de llegada en algún tramo
+	        if (t.getTerminalLlegada().equals(terminal)) {
+	            resultado = true;
+	        }
+	    }
+
+	    return resultado;
+	}
+	
+   public boolean incluyeATerminalDespuesDeTerminal(Terminal terminalGestionada, Terminal terminalDestino) {
+	  //mucho texto pero funciona no quiero tocarlo
+	  
+	    boolean encontreGestionada = false;
+	    boolean estaDestinoDespuesDeGestionada = false;
+	    
+	    for (Tramo tramo : this.getTramos()) {
+	    	//chequeo si encuentro la gestionada(primero)
+	        if (tramo.getTerminalInicio().equals(terminalGestionada)) {
+	            encontreGestionada = true;
+	        }
+	        //chequeo  si ya encontre la gestionada y ahora encuento la destino
+	        if (encontreGestionada && (tramo.getTerminalInicio().equals(terminalDestino) || tramo.getTerminalLlegada().equals(terminalDestino) )) {
+	        
+	        	estaDestinoDespuesDeGestionada = true;
+	        }
+	    }
+	    
+	    return estaDestinoDespuesDeGestionada;
+	    
+	} 
+   	   
 	   
  }
 
