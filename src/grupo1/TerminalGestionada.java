@@ -21,6 +21,7 @@ public class TerminalGestionada extends Terminal{
     private List<Chofer> choferesPermitidos = new ArrayList<>();
     private List<Circuito> circuitosDeInteres = new ArrayList<>();
     private List<Orden> ordenes = new ArrayList<>();
+    private List<Container> cargasPorRetirar = new ArrayList<>();
 
     public TerminalGestionada() {
         super();
@@ -87,5 +88,34 @@ public class TerminalGestionada extends Terminal{
 		return ;
 	}
 	
+	public void recibirOrdenDeImportación(Orden ordenDeImportacion) {
+		if (ordenDeImportacion.terminalDestino() == this) {
+			//eliminar carga de buque.
+			this.agregarCarga_ACargasPorRetirar(ordenDeImportacion.getContainer());
+			this.notificarAlCliente_RetiroDeCarga(ordenDeImportacion.getConsignee());
+		}
+	}
+	
+	public void notificarAlCliente_RetiroDeCarga(Consignee consignee) {
+		this.enviarMailNotificandoA_(consignee);
+	}
+	
+	public void agregarCarga_ACargasPorRetirar(Container carga) {
+		this.getCargasPorRetirar().add(carga);
+	}
+	
+	public List<Container> getCargasPorRetirar() {
+		return this.cargasPorRetirar;
+	}
+	
+	public void enviarMailNotificandoA_(Consignee consignee) {
+		return;
+	}
+	
+	public realizarRetiroDeCargaDeOrden_(Orden orden) {
+		if (elCoferYCamionSonPermitidos() && not pasaron24HorasDesdeQueLlegoLaCarga) {
+			this.getCargasPorRetirar().remove(posicionDeCarga(orden.getContainer()));
+		}
+	}
 	
 }
