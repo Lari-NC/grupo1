@@ -5,6 +5,6 @@ import java.util.ArrayList;
 import grupo1.circuito.Circuito;
 
 public abstract class Buscador {
-	    public abstract ArrayList<Circuito> buscar(ArrayList<Circuito> lista);
-	}
+	public abstract ArrayList<Circuito> buscar(ArrayList<Circuito> lista);
+}
 

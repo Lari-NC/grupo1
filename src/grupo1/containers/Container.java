@@ -30,4 +30,8 @@ public class Container {
     public double getPesoTotal() {
         return this.pesoTotal;
     }
+    
+    public double metrosCubicos() {
+    	return getAncho() * getLargo() * getAlto();
+    }
 }
