@@ -1,9 +1,11 @@
 package grupo1;
+import java.time.LocalDate;
 import java.util.*;
 
 import grupo1.circuito.Circuito;
 import grupo1.cliente.Consignee;
 import grupo1.cliente.Shipper;
+import grupo1.containers.Container;
 import grupo1.transporte.Camion;
 import grupo1.transporte.Chofer;
 import grupo1.transporte.EmpresaTransportista;
@@ -18,6 +20,7 @@ public class TerminalGestionada extends Terminal{
     private List<Camion> camionesPermitidos = new ArrayList<>();
     private List<Chofer> choferesPermitidos = new ArrayList<>();
     private List<Circuito> circuitosDeInteres = new ArrayList<>();
+    private List<Orden> ordenes = new ArrayList<>();
 
     public TerminalGestionada() {
         super();
@@ -56,4 +59,14 @@ public class TerminalGestionada extends Terminal{
         }
         
     }
+    
+    public void registrarExportacion (Shipper emisor, Consignee receptor, Container container, Viaje viaje, LocalDate fechaDeSalida, LocalDate fechaDeLlegada, Camion camion, Chofer chofer) {
+    	Orden ordenARegistar = new Orden(emisor, receptor, container, viaje, fechaDeSalida, fechaDeLlegada, camion, chofer);
+    	this.ordenes.add(ordenARegistar);
+    }
+
+	public List<Orden> getOrdenes() {
+		return this.ordenes;
+	}
+    
 }

@@ -5,7 +5,7 @@ import grupo1.Terminal;
 
 public class Tramo {
     
-    private double precio; // creoq ue no ?? dsps reviso
+    private int precio; // creoq ue no ?? dsps reviso
     private int tiempo; 
     private Terminal terminalInicio;
     private Terminal terminalFin;
@@ -19,6 +19,9 @@ public class Tramo {
 
     }
     
+    public int getPrecio() {
+    	return this.precio;
+    }
 
     public Terminal getTerminalInicio() {
     	return this.terminalInicio;
