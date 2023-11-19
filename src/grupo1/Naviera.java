@@ -6,24 +6,20 @@ import grupo1.circuito.Circuito;
 
 public class Naviera {
 
-    private List<Circuito> circuitos;
+    private List<Circuito> circuitos = new ArrayList<>();
     
-    public Naviera() {
-        this.circuitos = new ArrayList<>();
-    }
+    public Naviera(){}
 
     public void addCircuito(Circuito circuito) {
         this.circuitos.add(circuito);
     }
 
-    public ArrayList<Circuito> circuitosQuePasanPorTerminal(Terminal terminal){
-    	
-        ArrayList<Circuito> circuitosQuePasanPorLaTeminalDada = new ArrayList<>();
-        
+    public List<Circuito> circuitosQuePasanPorTerminal(Terminal terminal){
+        List<Circuito> circuitosQuePasanPorLaTeminalDada = new ArrayList<>();
         for (Circuito circuito : this.circuitos) {
             if (circuito.incluyeATerminal(terminal)) {
             	circuitosQuePasanPorLaTeminalDada.add(circuito);
-            };
+            }
         }
         return circuitosQuePasanPorLaTeminalDada;
     }

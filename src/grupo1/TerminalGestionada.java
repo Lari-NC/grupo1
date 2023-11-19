@@ -90,7 +90,6 @@ public class TerminalGestionada extends Terminal{
 	
 	public void recibirOrdenDeImportación(Orden ordenDeImportacion) {
 		if (ordenDeImportacion.terminalDestino() == this) {
-			//eliminar carga de buque.
 			this.agregarCarga_ACargasPorRetirar(ordenDeImportacion.getContainer());
 			this.notificarAlCliente_RetiroDeCarga(ordenDeImportacion.getConsignee());
 		}

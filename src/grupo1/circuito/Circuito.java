@@ -13,7 +13,7 @@ public class Circuito {
     
     public void addTramo(Tramo tramo) {
     	//Se considera que solo se pueden agregar tramos consecuivos y respetando el orden establecido del Array.
-    	//El primer tramo es el de empieza el ciurcuito y el ultimo es el de fin del circuito
+    	//El primer tramo es el de empieza el ciurcuito y el ultimo es el de fin del circuito.
     	this.tramos.add(tramo);
        }
     
