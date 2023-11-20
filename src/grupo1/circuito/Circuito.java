@@ -53,20 +53,20 @@ public class Circuito {
 	
 	public List<Terminal> terminalesRecorridas() {
 		// Primero lo guardo en un set para que no haya repetidos.
-		LinkedHashSet<Terminal> terminalesRecorridas = new LinkedHashSet<>();
+		List<Terminal> terminalesRecorridas = new ArrayList<>();
 
-		for (Tramo tramo : this.getTramos()) {
+		for(Tramo tramo : this.getTramos()) {
 			terminalesRecorridas.add(tramo.getTerminalInicio());
 			terminalesRecorridas.add(tramo.getTerminalLlegada());
 		}
 
-		return new ArrayList<>(terminalesRecorridas); // Convierto el conjunto a una lista para el retorno.
+		return terminalesRecorridas; // Convierto el conjunto a un arreglo para el retorno.
 	}
 	
 	public int posicionDeTerminalEnRecorrido(Terminal terminal) {
 		// PRECONDICIÓN: La terminal dada debe existir en el recorrido.
 		for (int i = 0 ; i < this.terminalesRecorridas().size() ; i++) {
-			if (this.terminalesRecorridas().get(i).equals(terminal)) {
+			if (this.terminalesRecorridas().get(i) == terminal) {
 				return i;
 			}
 		}
@@ -88,9 +88,9 @@ public class Circuito {
 
 	}
 
-	public boolean incluyeATerminalDespuesDeTerminal(Terminal terminalGestionada, Terminal terminalDestino) {
+	public boolean incluyeATerminalAntesDeTerminal(Terminal terminalGestionada, Terminal terminalDestino) {
 
-		return incluyeATerminal(terminalGestionada) && incluyeATerminal(terminalDestino) && (posicionDeTerminalEnRecorrido(terminalGestionada) > posicionDeTerminal_EnRecorrido(terminalDestino));
+		return incluyeATerminal(terminalGestionada) && incluyeATerminal(terminalDestino) && (posicionDeTerminalEnRecorrido(terminalGestionada) < posicionDeTerminalEnRecorrido(terminalDestino));
 
 	}
     
