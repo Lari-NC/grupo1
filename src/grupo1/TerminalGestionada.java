@@ -97,23 +97,20 @@ public class TerminalGestionada extends Terminal{
 		return ; //no envía el mail pero lo dejamos a modo simbolico
 	}
 	
-	public void realizarRetiroDeCargaDeOrden(Orden orden) {
-		if (this.elCoferYCamionSonPermitidos() && !this.pasaron24HorasDesdeQueLlegoLaCarga()) {
-			this.getCargasPorRetirar().remove(this.posicionDeCarga(orden.getContainer()));
+	public void realizarRetiroDeCargaDeOrden(Orden orden) throws IllegalArgumentException {
+		
+		this.entraUnCamionALaTerminal(orden.getCamion());
+		
+		if (!this.pasaron24HorasDesdeQueLlegoLaCarga()) {
+			this.getCargasPorRetirar().remove(orden.getContainer());
 		}
-	}
-	
-	public boolean elCoferYCamionSonPermitidos() {
-		return ;
+		
 	}
 	
 	public boolean pasaron24HorasDesdeQueLlegoLaCarga() {
 		return ;
 	}
 	
-	public Posicion posicionDeCarga() {
-		return ;
-	}
 	
 	public void entraUnCamionALaTerminal(Camion camion) {
         this.chequearSiElCamionEstaRegistrado(camion);
