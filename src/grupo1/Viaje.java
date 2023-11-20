@@ -13,4 +13,8 @@ public class Viaje {
     public Circuito getCircuito() {
         return this.circuito;
     }
+    
+    public Terminal getTerminalDestino() {
+    	return ;
+    }
 }
