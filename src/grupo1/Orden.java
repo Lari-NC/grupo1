@@ -60,5 +60,9 @@ public class Orden {
 	public Chofer getChofer() {
 		return this.chofer;
 	}
+	
+	public Terminal getTerminalDestino() {
+		return this.getViaje().getTerminalDestino();
+	}
     
 }
