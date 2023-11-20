@@ -1,11 +1,14 @@
 package grupo1;
+
 import java.time.LocalDate;
+import java.util.*;
 
 import grupo1.cliente.Consignee;
 import grupo1.cliente.Shipper;
 import grupo1.containers.Container;
 import grupo1.transporte.Camion;
 import grupo1.transporte.Chofer;
+import grupo1.servicios.Servicio;
 
 public class Orden {
     
@@ -17,8 +20,9 @@ public class Orden {
 	private LocalDate fechaDeLlegada;
 	private Camion camion;
 	private Chofer chofer;
+	private List<Servicio> servicios = new ArrayList<>();
 	
-    public Orden(Shipper emisor, Consignee receptor, Container container, Viaje viaje, LocalDate fechaDeSalida, LocalDate fechaDeLlegada, Camion camion, Chofer chofer) {
+    public Orden(Shipper emisor, Consignee receptor, Container container, Viaje viaje, LocalDate fechaDeSalida, LocalDate fechaDeLlegada, Camion camion, Chofer chofer, List<Servicio> servicios) {
 		this.shipper        = emisor;
 		this.consignee      = receptor;
 		this.container      = container;
@@ -27,6 +31,7 @@ public class Orden {
 		this.fechaDeLlegada = fechaDeLlegada;
 		this.camion         = camion;
 		this.chofer         = chofer;
+		this.servicios 		= servicios;
     }
 
 	public Shipper getShipper() {
@@ -63,6 +68,16 @@ public class Orden {
 	
 	public Terminal getTerminalDestino() {
 		return this.getViaje().getTerminalDestino();
+	}
+
+	public List<Servicio> getServicios() {
+		return servicios;
+	}
+	
+	public Factura getFactura() {
+		// precioViaje(PrecioCircuito), precioPorServicio, precioTotal.
+		Factura factura = new Factura(this.getViaje(), this.getServicios());
+		return factura;
 	}
     
 }

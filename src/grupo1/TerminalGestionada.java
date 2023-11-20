@@ -103,8 +103,7 @@ public class TerminalGestionada extends Terminal{
 		
 		if (!this.pasaron24HorasDesdeQueLlegoLaCarga()) {
 			this.getCargasPorRetirar().remove(orden.getContainer());
-		}
-		
+		}	
 	}
 	
 	public boolean pasaron24HorasDesdeQueLlegoLaCarga() {

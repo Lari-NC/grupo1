@@ -21,6 +21,7 @@ public class Circuito {
     	this.tramos.add(tramo);
        }
     
+    // GETTERS: 
     public List<Tramo> getTramos(){
     	return this.tramos;
     }
@@ -29,15 +30,27 @@ public class Circuito {
     	return this.fechaDeSalida;
     }
 	
-	private Tramo primerTramo() {
+	private Tramo getPrimerTramo() {
 		return this.getTramos().get(0);
 	}
 
-	private Tramo ultimoTramo() {
+	private Tramo getUltimoTramo() {
 		int tamano = getTramos().size();	
 		return this.getTramos().get(tamano -1 );
 	}
 
+	public LocalDate getFechaSalidaTramo(Tramo tramo) {
+    	// PRECONDICIÓN: El tramo dado debe existir en el circuito.
+    	LocalDate fecha = this.getFechaDeSalida();
+    	for (Tramo t : tramos) {
+    		if(t != tramo) {
+    			fecha = fecha.plusDays(t.getTiempo());
+    		}
+    	}
+    		
+    	return fecha;
+    }
+	
 	public List<Terminal> terminalesRecorridas() {
 		// Primero lo guardo en un set para que no haya repetidos.
 		LinkedHashSet<Terminal> terminalesRecorridas = new LinkedHashSet<>();
@@ -49,20 +62,8 @@ public class Circuito {
 
 		return new ArrayList<>(terminalesRecorridas); // Convierto el conjunto a una lista para el retorno.
 	}
-
-	public boolean incluyeATerminal(Terminal terminal) {
-
-		return this.terminalesRecorridas().contains(terminal);
-
-	}
-
-	public boolean incluyeATerminalDespuesDeTerminal(Terminal terminalGestionada, Terminal terminalDestino) {
-
-		return incluyeATerminal(terminalGestionada) && incluyeATerminal(terminalDestino) && (posicionDeTerminal_EnRecorrido(terminalGestionada) > posicionDeTerminal_EnRecorrido(terminalDestino));
-
-	}
-
-	public int posicionDeTerminal_EnRecorrido(Terminal terminal) {
+	
+	public int posicionDeTerminalEnRecorrido(Terminal terminal) {
 		// PRECONDICIÓN: La terminal dada debe existir en el recorrido.
 		for (int i = 0 ; i < this.terminalesRecorridas().size() ; i++) {
 			if (this.terminalesRecorridas().get(i).equals(terminal)) {
@@ -72,28 +73,27 @@ public class Circuito {
 		return -1; // Nunca debería retornar este valor.
 	}
    
-	public int precioTotalDeCircuito() {
+	public int getPrecioTotalDeCircuito() {
    		int precioTotal = 0;
    		for (Tramo tramo : this.tramos) {
    			precioTotal += tramo.getPrecio();
    		}
    		return precioTotal;
    	}
+
+	// TESTING:
+	public boolean incluyeATerminal(Terminal terminal) {
+
+		return this.terminalesRecorridas().contains(terminal);
+
+	}
+
+	public boolean incluyeATerminalDespuesDeTerminal(Terminal terminalGestionada, Terminal terminalDestino) {
+
+		return incluyeATerminal(terminalGestionada) && incluyeATerminal(terminalDestino) && (posicionDeTerminalEnRecorrido(terminalGestionada) > posicionDeTerminal_EnRecorrido(terminalDestino));
+
+	}
     
-	//
-    public LocalDate getFechaSalidaTramo(Tramo tramo) {
-    	// PRECONDICIÓN: El tramo dado debe existir en el circuito.
-    	LocalDate fecha = this.getFechaDeSalida();
-    	for (Tramo t : tramos) {
-    		if(t != tramo) {
-    			fecha = fecha.plusDays(t.getTiempo());
-    		}
-    	}
-    		
-    	return fecha;
-    }
-    
-    //
  }
 
 /* ELIMINADOS (?:

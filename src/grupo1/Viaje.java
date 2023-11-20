@@ -17,4 +17,8 @@ public class Viaje {
     public Terminal getTerminalDestino() {
     	return ;
     }
+    
+    public int getPrecioViaje() {
+    	return this.getCircuito().getPrecioTotalDeCircuito();
+    }
 }
