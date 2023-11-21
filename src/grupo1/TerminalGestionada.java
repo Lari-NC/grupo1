@@ -3,7 +3,7 @@ import java.time.LocalDate;
 import java.util.*;
 
 import grupo1.circuito.Circuito;
-import grupo1.cliente.Consignee;
+import grupo1.cliente.ConsigneeTest;
 import grupo1.cliente.Shipper;
 import grupo1.containers.Container;
 import grupo1.transporte.Camion;
@@ -15,7 +15,7 @@ public class TerminalGestionada extends Terminal{
 	
     private List<Naviera> navieras = new ArrayList<>();
     private List<Shipper> shippers = new ArrayList<>();
-    private List<Consignee> consignees = new ArrayList<>();
+    private List<ConsigneeTest> consignees = new ArrayList<>();
     private List<EmpresaTransportista> empresas = new ArrayList<>();
     private List<Camion> camionesPermitidos = new ArrayList<>();
     private List<Chofer> choferesPermitidos = new ArrayList<>();
@@ -36,7 +36,7 @@ public class TerminalGestionada extends Terminal{
         this.shippers.add(shipper);
     }
 
-    public void registrarConsignee(Consignee consignee) {
+    public void registrarConsignee(ConsigneeTest consignee) {
         this.consignees.add(consignee);
     }
     
@@ -81,7 +81,7 @@ public class TerminalGestionada extends Terminal{
 		}
 	}
 	
-	public void notificarAlClienteRetiroDeCarga(Consignee consignee) {
+	public void notificarAlClienteRetiroDeCarga(ConsigneeTest consignee) {
 		this.enviarMailNotificandoA(consignee);
 	}
 	
@@ -93,7 +93,7 @@ public class TerminalGestionada extends Terminal{
 		return this.cargasPorRetirar;
 	}
 	
-	public void enviarMailNotificandoA(Consignee consignee) {
+	public void enviarMailNotificandoA(ConsigneeTest consignee) {
 		return ; //no envía el mail pero lo dejamos a modo simbolico
 	}
 	
@@ -130,7 +130,7 @@ public class TerminalGestionada extends Terminal{
     
     
     //EXPORTACIÓN:
-    public void registrarExportacion (Shipper emisor, Consignee receptor, Container container, Viaje viaje, LocalDate fechaDeSalida, LocalDate fechaDeLlegada, Camion camion, Chofer chofer) {
+    public void registrarExportacion (Shipper emisor, ConsigneeTest receptor, Container container, Viaje viaje, LocalDate fechaDeSalida, LocalDate fechaDeLlegada, Camion camion, Chofer chofer) {
     	Orden ordenARegistar = new Orden(emisor, receptor, container, viaje, fechaDeSalida, fechaDeLlegada, camion, chofer);
     	this.ordenes.add(ordenARegistar);
     }
