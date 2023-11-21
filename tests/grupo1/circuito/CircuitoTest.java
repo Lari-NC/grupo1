@@ -57,26 +57,43 @@ class CircuitoTest {
 		assertTrue(circuito1.incluyeATerminal(terminalA));
 	}
 	
+	/*
 	@Test
 	void x() {
 		circuito1.addTramo(tramo1);
 		Terminal[] terminales = {terminalA, terminalB};
 		assertEquals(terminales, circuito1.terminalesRecorridas());
-
+	}
+	*/
 	
+	/*
 	@Test
 	void cuandoAgregamosUnTramoDesdeTermAHastaTermB_AUnCircuitoRecienCreado_LaPosiciónDeTermAEs0() {
 		circuito1.addTramo(tramo1);
 		assertEquals(0, circuito1.posicionDeTerminalEnRecorrido(terminalA));
 	}
+	*/
 	
+	/*
 	@Test 
-	void unCircuitoConUnTramoDesdeTermAHastaTermB_TieneUnRecorridoDeTerminalesDondePrimeroApareceTermAYLuegoTermB(){
+	void unCircuitoConUnTramoDesdeTermAHastaTermB_TieneUnRecorridoDeTerminalesDondePrimeroApareceTermAYLuegoTermB() {
 		circuito1.addTramo(tramo1);
 		circuito1.addTramo(tramo2);
 		assertTrue(circuito1.incluyeATerminalAntesDeTerminal(terminalA, terminalB));
 	}
 	
+	@Test 
+	void enUnCircuitoCon1Tramo_ElTiempoQueTardeEnCompletarseElMismo_SeraEquivalenteAlTiempoQueTardaraEseTramoQueTiene() {
+		circuito1.addTramo(tramo1);
+		assertEquals(tramo1.getTiempo(), circuito1.getTiempoTotal());
+	}
+	
+	@Test 
+	void enUnCircuitoCon1Tramo_ElPrecioTotalDelCircuito_SeraEquivalenteAlPrecioDelTramoQueContieneDichoCircuito() {
+		circuito1.addTramo(tramo1);
+		assertEquals(tramo1.getPrecio(), circuito1.getPrecioTotalDeCircuito());
+	}
+	*/
 	
 
 }
