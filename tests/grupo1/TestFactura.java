@@ -17,7 +17,7 @@ public class TestFactura {
 
     @BeforeEach
     void setUp() throws Exception {
-        viaje = mock(Viaje.class);
+        this.viaje = mock(Viaje.class);
         when(viaje.getPrecioViaje()).thenReturn(10000);
 
         Servicio servicioAlmacenamiento = mock(Servicio.class);

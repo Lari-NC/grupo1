@@ -6,7 +6,7 @@ import java.util.*;
 import grupo1.cliente.ConsigneeTest;
 import grupo1.cliente.Shipper;
 import grupo1.containers.Container;
-import grupo1.transporte.Camion;
+import grupo1.transporte.CamionTest;
 import grupo1.transporte.Chofer;
 import grupo1.servicios.Servicio;
 
@@ -18,11 +18,11 @@ public class Orden {
 	private Viaje viaje;
 	private LocalDate fechaDeSalida;
 	private LocalDate fechaDeLlegada;
-	private Camion camion;
+	private CamionTest camion;
 	private Chofer chofer;
 	private List<Servicio> servicios = new ArrayList<>();
 	
-    public Orden(Shipper emisor, ConsigneeTest receptor, Container container, Viaje viaje, LocalDate fechaDeSalida, LocalDate fechaDeLlegada, Camion camion, Chofer chofer, List<Servicio> servicios) {
+    public Orden(Shipper emisor, ConsigneeTest receptor, Container container, Viaje viaje, LocalDate fechaDeSalida, LocalDate fechaDeLlegada, CamionTest camion, Chofer chofer, List<Servicio> servicios) {
 		this.shipper        = emisor;
 		this.consignee      = receptor;
 		this.container      = container;
@@ -58,7 +58,7 @@ public class Orden {
 		return this.fechaDeLlegada;
 	}
 
-	public Camion getCamion() {
+	public CamionTest getCamion() {
 		return this.camion;
 	}
 

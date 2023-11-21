@@ -6,7 +6,7 @@ import grupo1.circuito.Circuito;
 import grupo1.cliente.ConsigneeTest;
 import grupo1.cliente.Shipper;
 import grupo1.containers.Container;
-import grupo1.transporte.Camion;
+import grupo1.transporte.CamionTest;
 import grupo1.transporte.Chofer;
 import grupo1.transporte.EmpresaTransportista;
 
@@ -17,7 +17,7 @@ public class TerminalGestionada extends Terminal{
     private List<Shipper> shippers = new ArrayList<>();
     private List<ConsigneeTest> consignees = new ArrayList<>();
     private List<EmpresaTransportista> empresas = new ArrayList<>();
-    private List<Camion> camionesPermitidos = new ArrayList<>();
+    private List<CamionTest> camionesPermitidos = new ArrayList<>();
     private List<Chofer> choferesPermitidos = new ArrayList<>();
     private List<Circuito> circuitosDeInteres = new ArrayList<>();
     private List<Orden> ordenes = new ArrayList<>();
@@ -44,7 +44,7 @@ public class TerminalGestionada extends Terminal{
         this.empresas.add(empresa);
     }
 
-    public void registrarCamion(Camion camion) {
+    public void registrarCamion(CamionTest camion) {
         this.camionesPermitidos.add(camion);
     }
 
@@ -68,7 +68,7 @@ public class TerminalGestionada extends Terminal{
         return choferesPermitidos;
     }
 
-    public List<Camion> getCamionesPermitidos() {
+    public List<CamionTest> getCamionesPermitidos() {
         return camionesPermitidos;
     }
 	
@@ -111,12 +111,12 @@ public class TerminalGestionada extends Terminal{
 	}
 	
 	
-	public void entraUnCamionALaTerminal(Camion camion) {
+	public void entraUnCamionALaTerminal(CamionTest camion) {
         this.chequearSiElCamionEstaRegistrado(camion);
         this.chequearSiElChoferEstaRegistrado(camion.getChofer());
     }
 
-    private void chequearSiElCamionEstaRegistrado(Camion camion) {
+    private void chequearSiElCamionEstaRegistrado(CamionTest camion) {
     	if (!this.getCamionesPermitidos().contains(camion)) {
         	throw new IllegalArgumentException("El camion no tiene el ingreso permitido a la terminal");
         }
@@ -130,7 +130,7 @@ public class TerminalGestionada extends Terminal{
     
     
     //EXPORTACIÓN:
-    public void registrarExportacion (Shipper emisor, ConsigneeTest receptor, Container container, Viaje viaje, LocalDate fechaDeSalida, LocalDate fechaDeLlegada, Camion camion, Chofer chofer) {
+    public void registrarExportacion (Shipper emisor, ConsigneeTest receptor, Container container, Viaje viaje, LocalDate fechaDeSalida, LocalDate fechaDeLlegada, CamionTest camion, Chofer chofer) {
     	Orden ordenARegistar = new Orden(emisor, receptor, container, viaje, fechaDeSalida, fechaDeLlegada, camion, chofer);
     	this.ordenes.add(ordenARegistar);
     }
