@@ -11,4 +11,8 @@ public class Servicio {
     public int getPrecio() {
     	return this.precio;
     };
+    
+    public String getTipoServicio() {
+    	return this.getClass().getSimpleName();
+    }
 }

@@ -9,7 +9,9 @@ public class Viaje {
     public Viaje(Circuito c) {
         this.circuito = c;
     }
-
+    
+    public Viaje() {} //para mockito
+    
     public Circuito getCircuito() {
         return this.circuito;
     }
