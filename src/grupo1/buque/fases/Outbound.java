@@ -16,11 +16,12 @@ public class Outbound extends Fase{
     @Override
     public Fase siguiente() {
     	return new Inbound();
-    
     }
 
 	@Override
-	public void realizarAccion(Buque buque) {}
+	public void realizarAccion(Buque buque) {
+		
+	}
 
     
     

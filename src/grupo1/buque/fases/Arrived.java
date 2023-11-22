@@ -16,10 +16,11 @@ public class Arrived extends Fase{
     @Override
     public Fase siguiente() {
     	return new Working();
-    
     }
 
 	@Override
-	public void realizarAccion(Buque buque) {}
+	public void realizarAccion(Buque buque) {
+		
+	}
 
 }

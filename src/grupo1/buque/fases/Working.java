@@ -17,14 +17,12 @@ public class Working extends Fase{
     @Override
     public Fase siguiente() {
     	return new Departing();
-    
     }
 
 	@Override
 	public void realizarAccion(Buque buque) {
-		//(buque.getTerminal().getOrdenesPorRetirar()).addAll(buque.getCargas()); LO QUE ESTABA ANTES
 		TerminalGestionada t = buque.getTerminal(); 
-		t.agregarOrdenesPorRetirar(buque);
+		t.decargarBuque(buque);
+		t.cargarBuque(buque);
 	}
-
 }

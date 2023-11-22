@@ -80,4 +80,8 @@ public class Orden {
 		Factura factura = new Factura(this.getViaje(), this.getServicios());
 		return factura;
 	}
+	
+	public void agregarServicioAlmacenamiento() {
+		
+	}
 }

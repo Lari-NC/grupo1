@@ -7,4 +7,8 @@ public class Shipper extends Cliente {
     public void recibirFactura(Factura facturaOrden) {
 		System.out.print(facturaOrden.getDesgloce());
 	}
+    
+    public void recibirMailCargaEnviada() {
+		System.out.print("Su carga fue enviada! Puede realizar el seguimiento de la misma sde nuestra página web con su nro de DNI.");
+	}
 }

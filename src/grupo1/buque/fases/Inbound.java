@@ -18,11 +18,10 @@ public class Inbound extends Fase{
     @Override
     public Fase siguiente() {
     	return new Arrived();
-    
     }
 
 	@Override
 	public void realizarAccion(Buque buque) {
-		buque.getTerminal().darAvisoDeBuqueInbound(buque);
+		buque.darAvisoInboundATerminal();
 	}
 }

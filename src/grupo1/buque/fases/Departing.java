@@ -16,11 +16,10 @@ public class Departing extends Fase{
     @Override
     public Fase siguiente() {
     	return new Outbound();
-    
     }
     
 	@Override
-	public void realizarAccion() {
-		// TODO Auto-generated method stub
-		}
+	public void realizarAccion(Buque buque) {
+		buque.darAvisoDepartATerminal();
+	}
 }

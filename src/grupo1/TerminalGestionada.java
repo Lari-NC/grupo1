@@ -26,6 +26,7 @@ public class TerminalGestionada extends Terminal{
     private List<Orden> ordenesExpo 			= new ArrayList<>();
     private List<Orden> ordenesImpo 			= new ArrayList<>();
     private List<Orden> ordenesPorRetirar 		= new ArrayList<>();
+    private List<Orden> ordenesExpoEnviadas     = new ArrayList<>();
     private List<Servicio> serviciosAOfrecer	= new ArrayList<>();
     
     
@@ -99,7 +100,6 @@ public class TerminalGestionada extends Terminal{
 	}
     
     // IMPORTACIÓN:
-	
 	public void agregarOrdenImportacion(Orden orden) {
 		this.ordenesImpo.add(orden);
 	}
@@ -112,46 +112,50 @@ public class TerminalGestionada extends Terminal{
 		consignee.recibirMailParaRetiro();
 	}
 	
-	public void agregarOrdenesPorRetirar(Buque buque) {
-		// Ver lo de fechaaaa D:
+	public void decargarBuque(Buque buque) {
 		List<Orden> ordenesParaRetirar = new ArrayList<>();
+		
 		for (Orden o : this.getOrdenesImportacion()) {
+			// iteramos sobre cada orden de importación de nuestra terminal
 			Container cont = o.getContainer();
+			// extraemos el container de la orden
+			
+			// iteramos sobre cada container del buque
 			for (Container c : buque.getCargas()) {
+				// comparamos cada buque para saber si es el mismo que el de nuestra orden
 				if(cont == c) {
+					// si son el mismo lo agrega a las ordenes listas para el retiro
 					ordenesParaRetirar.add(o);
 				}
 			}
 		}
+		// almacena las ordenes listas para el retiro
 		this.ordenesPorRetirar.addAll(ordenesParaRetirar);
 	}
 
 	public void realizarRetiroDeCargaDeOrden(Orden orden, Camion camion) throws IllegalArgumentException {
 		
-		this.entraUnCamionALaTerminal(camion);
-		this.realizarEntregaCarga(orden);
-		this.agregarServicioAlmacenamiento(orden);
+		LocalDate fechaRetiro = LocalDate.now();
+
+        this.entraUnCamionALaTerminal(camion);
+        this.realizarEntregaCarga(orden);
+
+        if(orden.getFechaDeLlegada() != fechaRetiro) {
+        	this.agregarServicioAlmacenamiento(orden);
+        }
 			
 	}
 	
 	private void agregarServicioAlmacenamiento(Orden orden) {
 		// puede que la que la llame tmb le pase la fecha hora actual de cuando llega el camion
 		// para poder comparar si pasaron 24 hs
-		
-		if (!this.pasaron24HorasDesdeQueLlegoLaCarga()) {
-			orden.agregarServicioAlmacenamiento();//pequeño detalle el almacenamineto tiene un precio como lo paso? q tb deberia ser x
-		}
+		orden.agregarServicioAlmacenamiento();//pequeño detalle el almacenamineto tiene un precio como lo paso? q tb deberia ser x
 	}
 
 	private void realizarEntregaCarga(Orden orden) {
 		// this.getCargasPorRetirar().remove(orden.getContainer());
 		this.getOrdenesPorRetirar().remove(orden);
 	}
-
-	public boolean pasaron24HorasDesdeQueLlegoLaCarga() {
-		return ;
-	}
-	
 	
 	public void entraUnCamionALaTerminal(Camion camion) {
         this.chequearSiElCamionEstaRegistrado(camion);
@@ -170,6 +174,18 @@ public class TerminalGestionada extends Terminal{
     	}
     }
     
+	public void recibirBuqueAvisoInbound(Buque buque) {
+		// dar aviso a todas nuestras ordenes de importación que tiene  al buque dado.
+		for(Orden o : this.ordenesImpo) {
+			if(o.getViaje().getBuque() == buque) {
+				this.notificarAlClienteRetiroDeCarga(o.getConsignee());
+			}
+		}
+	}
+	
+    
+    
+    //OTRAS COSAS:
     //HAY QUE VER COMO MANDAR LA FACTURA apra usar este mensaje 
     
     private void facturarOrden(Orden orden) {
@@ -180,7 +196,13 @@ public class TerminalGestionada extends Terminal{
     	(orden.getShipper()).recibirFactura(facturaOrden);
     }
     
+    public void darOrdenWorking(Buque buque) {
+    	buque.recibirOrdenWorking();
+    }
     
+    public void darOrdenDepart(Buque buque) {
+    	buque.recibirOrdenDepart();
+    }
     
     //EXPORTACIÓN:
     public void registrarExportacion (Shipper emisor, Consignee receptor, Container container, Viaje viaje, LocalDate fechaDeSalida, LocalDate fechaDeLlegada, Camion camion, Chofer chofer,List<Servicio> servicios) {
@@ -188,7 +210,33 @@ public class TerminalGestionada extends Terminal{
     	this.ordenesExpo.add(ordenARegistar);
     }
     
-    // FALTAN:
+    public void cargarBuque(Buque buque) {
+		List<Orden> ordenesParaEnviar = new ArrayList<>();
+		
+		for (Orden o : this.getOrdenesExportacion()) {
+			// iteramos sobre cada orden de exportación de nuestra terminal
+			if(buque == o.getViaje().getBuque()) {
+				ordenesParaEnviar.add(o);
+			}
+		}
+		this.ordenesExpoEnviadas.addAll(ordenesParaEnviar);
+		buque.addCargasDe(ordenesParaEnviar);
+	}
+    
+	public void recibirBuqueAvisoDepart(Buque buque) {
+		// dar aviso a todas nuestras ordenes de importación que tiene  al buque dado.
+		for(Orden o : this.ordenesExpoEnviadas) {
+			if(o.getViaje().getBuque() == buque) {
+				this.notificarAlClienteSalidaDeCarga(o.getShipper());
+			}
+		}
+	}
+    
+    private void notificarAlClienteSalidaDeCarga(Shipper shipper) {
+    	shipper.recibirMailCargaEnviada();
+	}
+
+	// FALTAN:
     public Circuito mejorCircuitoHasta_(Terminal terminalDestino) {
 		/*3.Devolver el mejor circuito que une a la terminal con un determinado puerto destino.
 		*/
