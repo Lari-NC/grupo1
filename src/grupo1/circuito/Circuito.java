@@ -103,16 +103,28 @@ public class Circuito {
 	}
 	
 	public Circuito crearCircuitoEspecificoPara_Y_(Terminal terminalInicial, Terminal TerminalFinal) {
-
-		return Arrays.copyOfRange (this.getTramos(), posicionDeTramoConTerminalInicial(terminalInicial), posicionDeTramoConTerminalFinal(TerminalFinal));
+		Circuito circuitoEspecifico = new Circuito(this.fechaDeSalida);
+		List<Tramo> listaDeTramosAcordada = this.getTramos().subList (this.posicionDeTramoConTerminalInicial(terminalInicial), this.posicionDeTramoConTerminalFinal(TerminalFinal));
+		circuitoEspecifico.getTramos().addAll(listaDeTramosAcordada);
+		return circuitoEspecifico;
 	}
 	
-	public Posicion posicionDeTramoConTerminalInicial(Terminal terminalInicial) {
-		return ;
+	public int posicionDeTramoConTerminalInicial(Terminal terminalInicial) {
+		for (int i = 0; i < this.getTramos().size(); i++) {
+            if (this.getTramos().get(i).getTerminalInicio() == terminalInicial) {
+                return i; // Elemento encontrado, devuelve el índice
+            }
+        }
+        return -1; // Elemento no encontrado
 	}
 	
-	public Posicion posicionDeTramoConTerminalFinal(Terminal terminalFinal) {
-		return ;	
+	public int posicionDeTramoConTerminalFinal(Terminal terminalFinal) {
+		for (int i = 0; i < this.getTramos().size(); i++) {
+            if (this.getTramos().get(i).getTerminalLlegada() == terminalFinal) {
+                return i; // Elemento encontrado, devuelve el índice
+            }
+        }
+        return -1; // Elemento no encontrado
 	}
  }
 
