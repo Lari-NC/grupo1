@@ -1,16 +1,18 @@
 package grupo1;
 
+import grupo1.buque.Buque;
 import grupo1.circuito.Circuito;
 
 public class Viaje {
-    
+	
+    private Buque buque;
     private Circuito circuito;
 
-    public Viaje(Circuito c) {
+    public Viaje(Circuito c, Buque b) {
         this.circuito = c;
+        this.buque = b;
     }
-    
-    public Viaje() {} //para mockito
+
     
     public Circuito getCircuito() {
         return this.circuito;

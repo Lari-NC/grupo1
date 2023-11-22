@@ -3,26 +3,27 @@ package grupo1;
 import java.time.LocalDate;
 import java.util.*;
 
-import grupo1.cliente.ConsigneeTest;
+import grupo1.cliente.Consignee;
 import grupo1.cliente.Shipper;
 import grupo1.containers.Container;
-import grupo1.transporte.CamionTest;
+import grupo1.transporte.Camion;
+import grupo1.transporte.Camion;
 import grupo1.transporte.Chofer;
 import grupo1.servicios.Servicio;
 
 public class Orden {
     
 	private Shipper shipper;
-	private ConsigneeTest consignee;
+	private Consignee consignee;
 	private Container container;
 	private Viaje viaje;
 	private LocalDate fechaDeSalida;
 	private LocalDate fechaDeLlegada;
-	private CamionTest camion;
+	private Camion camion;
 	private Chofer chofer;
 	private List<Servicio> servicios = new ArrayList<>();
 	
-    public Orden(Shipper emisor, ConsigneeTest receptor, Container container, Viaje viaje, LocalDate fechaDeSalida, LocalDate fechaDeLlegada, CamionTest camion, Chofer chofer, List<Servicio> servicios) {
+    public Orden(Shipper emisor, Consignee receptor, Container container, Viaje viaje, LocalDate fechaDeSalida, LocalDate fechaDeLlegada, Camion camion, Chofer chofer, List<Servicio> servicios) {
 		this.shipper        = emisor;
 		this.consignee      = receptor;
 		this.container      = container;
@@ -38,7 +39,7 @@ public class Orden {
 		return this.shipper;
 	}
 
-	public ConsigneeTest getConsignee() {
+	public Consignee getConsignee() {
 		return this.consignee;
 	}
 
@@ -58,7 +59,7 @@ public class Orden {
 		return this.fechaDeLlegada;
 	}
 
-	public CamionTest getCamion() {
+	public Camion getCamion() {
 		return this.camion;
 	}
 

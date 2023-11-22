@@ -1,5 +1,6 @@
 package grupo1.buque.fases;
 
+import grupo1.TerminalGestionada;
 import grupo1.buque.Buque;
 
 public class Departing extends Fase{
@@ -22,4 +23,10 @@ public class Departing extends Fase{
     	return new Outbound();
     
     }
+    
+	@Override
+	public void realizarAccion() {
+		// TODO Auto-generated method stub
+		
+	}
 }

@@ -5,14 +5,14 @@ import java.util.List;
 
 public class EmpresaTransportista {
 	private List<Chofer> choferesRegistrados= new ArrayList<>();
-	private List<CamionTest> camionesRegistrados= new ArrayList<>();
+	private List<Camion> camionesRegistrados= new ArrayList<>();
 	
 	
 	public void addd(Chofer chofer) {
 		this.choferesRegistrados.add(chofer);
 	}
 	
-	public void addd(CamionTest camion) {
+	public void addd(Camion camion) {
 		this.camionesRegistrados.add(camion);
 	}
 }

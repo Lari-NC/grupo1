@@ -15,34 +15,32 @@ public class FacturaTest {
     private Viaje viajeFactura;
     private Servicio servicioLavado;
     private  Servicio servicioAlmacenamiento;
-    private List<Servicio> serviciosFactura;
+    private List<Servicio> serviciosFactura = new ArrayList<>();;
     private Factura factura;
 
     @BeforeEach
     void setUp() throws Exception {
         //mocks
-    	viajeFactura = mock(Viaje.class);
-        when(viajeFactura.getPrecioViaje()).thenReturn(10000);
+    	this.viajeFactura = mock(Viaje.class);
+        when(this.viajeFactura.getPrecioViaje()).thenReturn(10000);
 
-        servicioAlmacenamiento = mock(Servicio.class);
-        when(servicioAlmacenamiento.getTipoServicio()).thenReturn("Almacenamiento");
-        when(servicioAlmacenamiento.getPrecio()).thenReturn(400);
+        this.servicioAlmacenamiento = mock(Servicio.class);
+        when(this.servicioAlmacenamiento.getTipoServicio()).thenReturn("Almacenamiento");
+        when(this.servicioAlmacenamiento.getPrecio()).thenReturn(400);
 
-        servicioLavado = mock(Servicio.class);
-        when(servicioLavado.getTipoServicio()).thenReturn("Lavado");
-        when(servicioLavado.getPrecio()).thenReturn(500);
+        this.servicioLavado = mock(Servicio.class);
+        when(this.servicioLavado.getTipoServicio()).thenReturn("Lavado");
+        when(this.servicioLavado.getPrecio()).thenReturn(500);
 
-        
-        serviciosFactura.add(servicioAlmacenamiento);
-        serviciosFactura.add(servicioLavado);
-        
-        factura = new Factura(viajeFactura, serviciosFactura);
+        this.serviciosFactura.add(this.servicioAlmacenamiento);
+        this.serviciosFactura.add(this.servicioLavado);
     }
 
     @Test
     public void testGetDesgloce() {
     	
-        String resultado = factura.getDesgloce();
+    	this.factura = new Factura(viajeFactura, serviciosFactura);
+        String resultado = this.factura.getDesgloce();
         String resultadoEsperado = "Viaje Completo\t$10000\n\nServicios:\nAlmacenamiento\t$400\nLavado\t$500\n";
 
         assertEquals(resultadoEsperado, resultado);

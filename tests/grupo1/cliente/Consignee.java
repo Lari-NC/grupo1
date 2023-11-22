@@ -1,11 +1,11 @@
-package grupo1.transporte;
+package grupo1.cliente;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-class CamionTest {
+class Consignee {
 
 	@BeforeEach
 	void setUp() throws Exception {

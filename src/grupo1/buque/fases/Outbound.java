@@ -12,7 +12,7 @@ public class Outbound extends Fase{
     @Override
     public boolean condicionFase(Buque buque) {
    	
-    	if(buque.getDistancia(terminal) >= 1 ) {
+    	if(buque.getDistancia(getTerminal()) >= 1 ) {
     		return true;
     	}
     	return false;
@@ -23,6 +23,11 @@ public class Outbound extends Fase{
     	return new Inbound();
     
     }
+
+	@Override
+	public void realizarAccion(Buque buque) {}
+
+    
     
     
 }

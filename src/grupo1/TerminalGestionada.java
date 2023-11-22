@@ -2,11 +2,13 @@ package grupo1;
 import java.time.LocalDate;
 import java.util.*;
 
+import grupo1.buque.Buque;
 import grupo1.circuito.Circuito;
-import grupo1.cliente.ConsigneeTest;
+import grupo1.cliente.Consignee;
 import grupo1.cliente.Shipper;
 import grupo1.containers.Container;
-import grupo1.transporte.CamionTest;
+import grupo1.servicios.Servicio;
+import grupo1.transporte.Camion;
 import grupo1.transporte.Chofer;
 import grupo1.transporte.EmpresaTransportista;
 
@@ -15,19 +17,21 @@ public class TerminalGestionada extends Terminal{
 	
     private List<Naviera> navieras = new ArrayList<>();
     private List<Shipper> shippers = new ArrayList<>();
-    private List<ConsigneeTest> consignees = new ArrayList<>();
+    private List<Consignee> consignees = new ArrayList<>();
     private List<EmpresaTransportista> empresas = new ArrayList<>();
-    private List<CamionTest> camionesPermitidos = new ArrayList<>();
+    private List<Camion> camionesPermitidos = new ArrayList<>();
     private List<Chofer> choferesPermitidos = new ArrayList<>();
     private List<Circuito> circuitosDeInteres = new ArrayList<>();
-    private List<Orden> ordenes = new ArrayList<>();
+    private List<Orden> ordenesExpo= new ArrayList<>();
     private List<Container> cargasPorRetirar = new ArrayList<>();
-
+    //si tenemos las listas de todas las ordenes de impo y de expo?? 
+    
+    
     public TerminalGestionada(Posicion p) {
         super(p);
     }
 
-    // REGISTROS: 
+    // REGISTRAR: 
     public void registrarNaviera(Naviera naviera) {
         this.navieras.add(naviera);
     }
@@ -36,7 +40,7 @@ public class TerminalGestionada extends Terminal{
         this.shippers.add(shipper);
     }
 
-    public void registrarConsignee(ConsigneeTest consignee) {
+    public void registrarConsignee(Consignee consignee) {
         this.consignees.add(consignee);
     }
     
@@ -44,7 +48,7 @@ public class TerminalGestionada extends Terminal{
         this.empresas.add(empresa);
     }
 
-    public void registrarCamion(CamionTest camion) {
+    public void registrarCamion(Camion camion) {
         this.camionesPermitidos.add(camion);
     }
 
@@ -61,62 +65,72 @@ public class TerminalGestionada extends Terminal{
 
     // GETTERS:
 	public List<Orden> getOrdenes() {
-		return this.ordenes;
+		return this.ordenesExpo;
 	}
 	
 	public List<Chofer> getChoferesPermitidos() {
         return choferesPermitidos;
     }
 
-    public List<CamionTest> getCamionesPermitidos() {
+    public List<Camion> getCamionesPermitidos() {
         return camionesPermitidos;
     }
-	
-    
-    // IMPORTACIÓN:
-	public void recibirOrdenDeImportación(Orden ordenDeImportacion) {
-		if (ordenDeImportacion.getTerminalDestino() == this) {
-			this.agregarCargaACargasPorRetirar(ordenDeImportacion.getContainer());
-			this.notificarAlClienteRetiroDeCarga(ordenDeImportacion.getConsignee());
-		}
-	}
-	
-	public void notificarAlClienteRetiroDeCarga(ConsigneeTest consignee) {
-		this.enviarMailNotificandoA(consignee);
-	}
-	
-	public void agregarCargaACargasPorRetirar(Container carga) {
-		this.getCargasPorRetirar().add(carga);
-	}
 	
 	public List<Container> getCargasPorRetirar() {
 		return this.cargasPorRetirar;
 	}
-	
-	public void enviarMailNotificandoA(ConsigneeTest consignee) {
-		return ; //no envía el mail pero lo dejamos a modo simbolico
+    
+    // IMPORTACIÓN:
+    // saco el if xq es algo que se asume que es 
+	public void recibirOrdenDeImportación(Orden ordenDeImportacion) {// es recibir orden de impo? o es recibir una carga apra que retiren????
+		//llega el buque, deja las cargas apra que retiren 
+		this.agregarCargaACargasPorRetirar(ordenDeImportacion.getContainer());
+		// lo hace la fase del buque que deja las cosas: this.notificarAlClienteRetiroDeCarga(ordenDeImportacion.getConsignee());
 	}
 	
-	public void realizarRetiroDeCargaDeOrden(Orden orden) throws IllegalArgumentException {
+	public void llegaUnaImportacion() {
+		//refactor de ^^
+	}
+	
+	public void notificarAlClienteRetiroDeCarga(Consignee consignee) {
+		consignee.recibirMailParaRetiro();
+	}
+	
+	public void agregarCargaACargasPorRetirar(Container carga) {
+		// hacer q reciba una lista y agregue todas, porque l buque no deja de a 1
+		this.getCargasPorRetirar().add(carga);
+	}
+
+	public void realizarRetiroDeCargaDeOrden(Orden orden, Camion camion) throws IllegalArgumentException {
 		
-		this.entraUnCamionALaTerminal(orden.getCamion());
-		
+		this.entraUnCamionALaTerminal(camion);
+		this.realizarEntregaCarga(orden);
+		this.agregarServicioAlmacenamiento(orden);
+			
+	}
+	
+	
+	private void agregarServicioAlmacenamiento(Orden orden) {
 		if (!this.pasaron24HorasDesdeQueLlegoLaCarga()) {
-			this.getCargasPorRetirar().remove(orden.getContainer());
-		}	
+			orden.agregarServicioAlmacenamiento();
+		}
 	}
-	
+
+	private void realizarEntregaCarga(Orden orden) {
+		this.getCargasPorRetirar().remove(orden.getContainer());
+	}
+
 	public boolean pasaron24HorasDesdeQueLlegoLaCarga() {
 		return ;
 	}
 	
 	
-	public void entraUnCamionALaTerminal(CamionTest camion) {
+	public void entraUnCamionALaTerminal(Camion camion) {
         this.chequearSiElCamionEstaRegistrado(camion);
         this.chequearSiElChoferEstaRegistrado(camion.getChofer());
     }
 
-    private void chequearSiElCamionEstaRegistrado(CamionTest camion) {
+    private void chequearSiElCamionEstaRegistrado(Camion camion) {
     	if (!this.getCamionesPermitidos().contains(camion)) {
         	throw new IllegalArgumentException("El camion no tiene el ingreso permitido a la terminal");
         }
@@ -130,9 +144,9 @@ public class TerminalGestionada extends Terminal{
     
     
     //EXPORTACIÓN:
-    public void registrarExportacion (Shipper emisor, ConsigneeTest receptor, Container container, Viaje viaje, LocalDate fechaDeSalida, LocalDate fechaDeLlegada, CamionTest camion, Chofer chofer) {
-    	Orden ordenARegistar = new Orden(emisor, receptor, container, viaje, fechaDeSalida, fechaDeLlegada, camion, chofer);
-    	this.ordenes.add(ordenARegistar);
+    public void registrarExportacion (Shipper emisor, Consignee receptor, Container container, Viaje viaje, LocalDate fechaDeSalida, LocalDate fechaDeLlegada, Camion camion, Chofer chofer,List<Servicio> servicios) {
+    	Orden ordenARegistar = new Orden(emisor, receptor, container, viaje, fechaDeSalida, fechaDeLlegada, camion, chofer, servicios);
+    	this.ordenesExpo.add(ordenARegistar);
     }
     
     // FALTAN:

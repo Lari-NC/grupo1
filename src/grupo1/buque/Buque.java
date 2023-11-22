@@ -13,7 +13,6 @@ public class Buque{
     private List<Container> cargas = new ArrayList<>();
     private Fase faseActual;
     private GPS gps;
-    // en todas las fases ahora maneja la posicion comoo distancia a la termianl, supongo que eso hayq ue arreglarlo muchisimo
     
     public Buque() {
      this.faseActual = new Outbound();
@@ -37,21 +36,24 @@ public class Buque{
     }
     
     
-    public /*int*/ getDistancia(TerminalGestionada terminal) {
-    	// problema, deberia concoer a al terminal en vez de ser parametrizado,
-    	//porque sino pierdo el polimorfismo de las fases comentente el int asi sale error y lo ven 
-    	Posicion posicionB = this.getPosicion();
+    public int getDistancia(TerminalGestionada terminal) {
+    
     	Posicion posicionT = terminal.getPosicion();
-    	return posicionB.distanciaEntre(posicionT);
+    	return (this.getPosicion()).distanciaHasta(posicionT);
     	
     }
     
-    public void actualizarFase() {
+    public void actualizarFase(TerminalGestionada terminal) {
     	
-    	if (this.getfase().condicionFase(this)) {
+    	if (this.getfase().condicionFase(this) {
     		this.faseActual = this.getfase().siguiente() ;
+    		this.realizarAccionFase();
     	}
     }
     
+    public void realizarAccionFase() {
+    	this.faseActual.realizarAccion();
+    }
 
+    
 }
