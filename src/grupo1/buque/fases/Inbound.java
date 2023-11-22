@@ -18,6 +18,7 @@ public class Inbound extends Fase{
     	return false;
     }
     
+    
     @Override
     public Fase siguiente() {
     	return new Arrived();

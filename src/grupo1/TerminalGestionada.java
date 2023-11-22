@@ -24,7 +24,7 @@ public class TerminalGestionada extends Terminal{
     private List<Circuito> circuitosDeInteres = new ArrayList<>();
     private List<Orden> ordenesExpo= new ArrayList<>();
     private List<Container> cargasPorRetirar = new ArrayList<>();
-    //si tenemos las listas de todas las ordenes de impo y de expo?? 
+    
     
     
     public TerminalGestionada(Posicion p) {
@@ -185,4 +185,6 @@ public class TerminalGestionada extends Terminal{
 		*/
 		return ;
 	}
+
+
 }

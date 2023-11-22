@@ -8,11 +8,11 @@ public class EmpresaTransportista {
 	private List<Camion> camionesRegistrados= new ArrayList<>();
 	
 	
-	public void addd(Chofer chofer) {
+	public void addChofer(Chofer chofer) {
 		this.choferesRegistrados.add(chofer);
 	}
 	
-	public void addd(Camion camion) {
+	public void addCamion(Camion camion) {
 		this.camionesRegistrados.add(camion);
 	}
 }
