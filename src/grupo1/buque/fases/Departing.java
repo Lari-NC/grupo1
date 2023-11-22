@@ -1,6 +1,5 @@
 package grupo1.buque.fases;
 
-import grupo1.TerminalGestionada;
 import grupo1.buque.Buque;
 
 public class Departing extends Fase{
@@ -11,11 +10,7 @@ public class Departing extends Fase{
     
     @Override
     public boolean condicionFase(Buque buque) {
-    	
-    	if(buque.tieneOrdenDepart() ) {
-    		return true;
-    	}
-    	return false;
+    	return buque.tieneOrdenDepart();
     }
      
     @Override

@@ -1,6 +1,5 @@
 package grupo1.buque.fases;
 
-import grupo1.TerminalGestionada;
 import grupo1.buque.Buque;
 
 public class Outbound extends Fase{
@@ -11,11 +10,7 @@ public class Outbound extends Fase{
     
     @Override
     public boolean condicionFase(Buque buque) {
-   	
-    	if(buque.getDistancia(getTerminal()) >= 1 ) {
-    		return true;
-    	}
-    	return false;
+    	return buque.getDistancia() >= 1;
     }
     
     @Override

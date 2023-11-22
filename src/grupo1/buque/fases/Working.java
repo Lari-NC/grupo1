@@ -11,11 +11,7 @@ public class Working extends Fase{
     
     @Override
     public boolean condicionFase(Buque buque) {
-    	
-    	if(buque.tieneOrdenWorking() ) {
-    		return true;
-    	}
-    	return false;
+    	return buque.tieneOrdenWorking();
     }
     
     @Override
@@ -26,7 +22,9 @@ public class Working extends Fase{
 
 	@Override
 	public void realizarAccion(Buque buque) {
-		(this.getTerminal().getCargasPorRetirar()).addAll(buque.getCargas()) ;
+		//(buque.getTerminal().getOrdenesPorRetirar()).addAll(buque.getCargas()); LO QUE ESTABA ANTES
+		TerminalGestionada t = buque.getTerminal(); 
+		t.agregarOrdenesPorRetirar(buque);
 	}
 
 }

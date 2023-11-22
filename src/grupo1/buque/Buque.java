@@ -13,9 +13,11 @@ public class Buque{
     private List<Container> cargas = new ArrayList<>();
     private Fase faseActual;
     private GPS gps;
+    private TerminalGestionada terminalG;
     
-    public Buque() {
+    public Buque(TerminalGestionada tg) {
      this.faseActual = new Outbound();
+     this.terminalG = tg;
     }
     
     public Posicion getPosicion() {
@@ -30,21 +32,23 @@ public class Buque{
         return this.cargas;
      
     }
-
-    public void addCarga(Container carga) {
-        this.cargas.add(carga);
+    
+    public TerminalGestionada getTerminal() {
+    	return this.terminalG;
     }
     
+    public int getDistancia() {
     
-    public int getDistancia(TerminalGestionada terminal) {
-    
-    	Posicion posicionT = terminal.getPosicion();
+    	Posicion posicionT = this.getTerminal().getPosicion();
     	return (this.getPosicion()).distanciaHasta(posicionT);
     	
     }
     
-    public void actualizarFase(TerminalGestionada terminal) {
-    	
+    public void addCarga(Container carga) {
+        this.cargas.add(carga);
+    }
+    
+    public void actualizarFase() {
     	if (this.getfase().condicionFase(this)) {
     		this.faseActual = this.getfase().siguiente() ;
     		this.realizarAccionFase();

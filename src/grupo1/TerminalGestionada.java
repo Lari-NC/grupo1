@@ -22,8 +22,9 @@ public class TerminalGestionada extends Terminal{
     private List<Camion> camionesPermitidos = new ArrayList<>();
     private List<Chofer> choferesPermitidos = new ArrayList<>();
     private List<Circuito> circuitosDeInteres = new ArrayList<>();
-    private List<Orden> ordenesExpo= new ArrayList<>();
-    private List<Container> cargasPorRetirar = new ArrayList<>();
+    private List<Orden> ordenesExpo = new ArrayList<>();
+    private List<Orden> ordenesImpo = new ArrayList<>();
+    private List<Orden> ordenesPorRetirar = new ArrayList<>();
     
     
     
@@ -64,8 +65,12 @@ public class TerminalGestionada extends Terminal{
     
 
     // GETTERS:
-	public List<Orden> getOrdenes() {
+	public List<Orden> getOrdenesExportacion() {
 		return this.ordenesExpo;
+	}
+	
+	public List<Orden> getOrdenesImportacion() {
+		return this.ordenesImpo;
 	}
 	
 	public List<Chofer> getChoferesPermitidos() {
@@ -76,19 +81,17 @@ public class TerminalGestionada extends Terminal{
         return camionesPermitidos;
     }
 	
-	public List<Container> getCargasPorRetirar() {
-		return this.cargasPorRetirar;
+	public List<Orden> getOrdenesPorRetirar() {
+		return this.ordenesPorRetirar;
 	}
     
     // IMPORTACIÓN:
-    // saco el if xq es algo que se asume que es 
-	public void recibirOrdenDeImportación(Orden ordenDeImportacion) {// es recibir orden de impo? o es recibir una carga apra que retiren????
-		//llega el buque, deja las cargas apra que retiren 
-		this.agregarCargaACargasPorRetirar(ordenDeImportacion.getContainer());
-		// lo hace la fase del buque que deja las cosas: this.notificarAlClienteRetiroDeCarga(ordenDeImportacion.getConsignee());
+	
+	public void agregarOrdenImportacion(Orden orden) {
+		this.ordenesImpo.add(orden);
 	}
 	
-	public void llegaUnaImportacion() {
+	public void llegaUnaBuque(Buque buque) {
 		//refactor de ^^ xq creo que no es
 	}
 	
@@ -96,9 +99,18 @@ public class TerminalGestionada extends Terminal{
 		consignee.recibirMailParaRetiro();
 	}
 	
-	public void agregarCargaACargasPorRetirar(Container carga) {
-		// hacer q reciba una lista y agregue todas, porque l buque no deja de a 1. Ver lo de fechaaaa D:
-		this.getCargasPorRetirar().add(carga);
+	public void agregarOrdenesPorRetirar(Buque buque) {
+		// Ver lo de fechaaaa D:
+		List<Orden> ordenesParaRetirar = new ArrayList<>();
+		for (Orden o : this.ordenesImpo) {
+			Container cont = o.getContainer();
+			for (Container c : buque.getCargas()) {
+				if(cont == c) {
+					ordenesParaRetirar.add(o);
+				}
+			}
+		}
+		this.ordenesPorRetirar.addAll(ordenesParaRetirar);
 	}
 
 	
@@ -185,6 +197,5 @@ public class TerminalGestionada extends Terminal{
 		*/
 		return ;
 	}
-
 
 }
