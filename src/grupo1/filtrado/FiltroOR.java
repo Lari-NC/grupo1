@@ -6,9 +6,9 @@ import grupo1.circuito.Circuito;
 
 public class FiltroOR extends Binario {
 
-	  public FiltroOR(Buscador filtro1, Buscador filtro2) {
-	        super(filtro1, filtro2);
-	    }
+	public FiltroOR(Buscador filtro1, Buscador filtro2) {
+		super(filtro1, filtro2);
+	}
 
     @Override
     public ArrayList<Circuito> buscar(ArrayList<Circuito> lista) {

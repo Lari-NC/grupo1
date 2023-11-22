@@ -5,6 +5,7 @@ public class Camion {
     private Chofer chofer;
 
     public Camion() {
+    	
     }
 
     public void asignarChofer(Chofer c) {

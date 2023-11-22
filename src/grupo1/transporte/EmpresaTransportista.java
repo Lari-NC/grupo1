@@ -4,8 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class EmpresaTransportista {
-	private List<Chofer> choferesRegistrados= new ArrayList<>();
-	private List<Camion> camionesRegistrados= new ArrayList<>();
+	private List<Chofer> choferesRegistrados = new ArrayList<>();
+	private List<Camion> camionesRegistrados = new ArrayList<>();
 	
 	
 	public void addChofer(Chofer chofer) {
