@@ -1,4 +1,5 @@
 package grupo1.circuito;
+
 import grupo1.Terminal;
 
 public class Tramo {
@@ -10,9 +11,9 @@ public class Tramo {
 
     public Tramo(Terminal tInicio, Terminal tFin, int tiempo, int precio) {
         this.terminalInicio = tInicio;
-        this.terminalFin = tFin;
-        this.precio = precio;
-        this.tiempo = tiempo;
+        this.terminalFin 	= tFin;
+        this.precio 		= precio;
+        this.tiempo 		= tiempo;
     }
   
     public Terminal getTerminalInicio() {

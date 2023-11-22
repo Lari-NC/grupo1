@@ -12,8 +12,12 @@ public class Viaje {
 
     public Viaje(Circuito c, Buque b, Terminal terminalInicial, Terminal terminalDestino) {
         this.circuito = c.crearCircuitoEspecificoPara_Y_(terminalInicial, terminalDestino);
-        this.buque = b;
+        this.buque 	  = b;
     }
+    
+	public Buque getBuque() {
+		return buque;
+	}
     
     public Circuito getCircuito() {
         return this.circuito;

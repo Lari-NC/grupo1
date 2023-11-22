@@ -1,4 +1,5 @@
 package grupo1;
+
 import java.time.LocalDate;
 import java.util.*;
 
@@ -15,17 +16,17 @@ import grupo1.transporte.EmpresaTransportista;
 public class TerminalGestionada extends Terminal{
 	
 	
-    private List<Naviera> navieras = new ArrayList<>();
-    private List<Shipper> shippers = new ArrayList<>();
-    private List<Consignee> consignees = new ArrayList<>();
+    private List<Naviera> navieras 				= new ArrayList<>();
+    private List<Shipper> shippers 				= new ArrayList<>();
+    private List<Consignee> consignees 			= new ArrayList<>();
     private List<EmpresaTransportista> empresas = new ArrayList<>();
-    private List<Camion> camionesPermitidos = new ArrayList<>();
-    private List<Chofer> choferesPermitidos = new ArrayList<>();
-    private List<Circuito> circuitosDeInteres = new ArrayList<>();
-    private List<Orden> ordenesExpo = new ArrayList<>();
-    private List<Orden> ordenesImpo = new ArrayList<>();
-    private List<Orden> ordenesPorRetirar = new ArrayList<>();
-    
+    private List<Camion> camionesPermitidos 	= new ArrayList<>();
+    private List<Chofer> choferesPermitidos 	= new ArrayList<>();
+    private List<Circuito> circuitosDeInteres 	= new ArrayList<>();
+    private List<Orden> ordenesExpo 			= new ArrayList<>();
+    private List<Orden> ordenesImpo 			= new ArrayList<>();
+    private List<Orden> ordenesPorRetirar 		= new ArrayList<>();
+    private List<Servicio> serviciosAOfrecer	= new ArrayList<>();
     
     
     public TerminalGestionada(Posicion p) {
@@ -63,6 +64,14 @@ public class TerminalGestionada extends Terminal{
         }
     }
     
+    public void registrarServiciosAOfrecer(List<Servicio> servicios) {
+    	this.getServiciosAOfrecer().addAll(servicios);
+    }
+    
+    public void registrarServicioAOfrecer(Servicio servicio) {
+    	this.getServiciosAOfrecer().add(servicio);
+    }
+    
 
     // GETTERS:
 	public List<Orden> getOrdenesExportacion() {
@@ -84,6 +93,10 @@ public class TerminalGestionada extends Terminal{
 	public List<Orden> getOrdenesPorRetirar() {
 		return this.ordenesPorRetirar;
 	}
+	
+	public List<Servicio> getServiciosAOfrecer() {
+		return serviciosAOfrecer;
+	}
     
     // IMPORTACIÓN:
 	
@@ -102,7 +115,7 @@ public class TerminalGestionada extends Terminal{
 	public void agregarOrdenesPorRetirar(Buque buque) {
 		// Ver lo de fechaaaa D:
 		List<Orden> ordenesParaRetirar = new ArrayList<>();
-		for (Orden o : this.ordenesImpo) {
+		for (Orden o : this.getOrdenesImportacion()) {
 			Container cont = o.getContainer();
 			for (Container c : buque.getCargas()) {
 				if(cont == c) {
@@ -113,8 +126,6 @@ public class TerminalGestionada extends Terminal{
 		this.ordenesPorRetirar.addAll(ordenesParaRetirar);
 	}
 
-	
-	
 	public void realizarRetiroDeCargaDeOrden(Orden orden, Camion camion) throws IllegalArgumentException {
 		
 		this.entraUnCamionALaTerminal(camion);
@@ -122,7 +133,6 @@ public class TerminalGestionada extends Terminal{
 		this.agregarServicioAlmacenamiento(orden);
 			
 	}
-	
 	
 	private void agregarServicioAlmacenamiento(Orden orden) {
 		// puede que la que la llame tmb le pase la fecha hora actual de cuando llega el camion
@@ -134,7 +144,8 @@ public class TerminalGestionada extends Terminal{
 	}
 
 	private void realizarEntregaCarga(Orden orden) {
-		this.getCargasPorRetirar().remove(orden.getContainer());
+		// this.getCargasPorRetirar().remove(orden.getContainer());
+		this.getOrdenesPorRetirar().remove(orden);
 	}
 
 	public boolean pasaron24HorasDesdeQueLlegoLaCarga() {

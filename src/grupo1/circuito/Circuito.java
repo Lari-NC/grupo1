@@ -4,6 +4,7 @@ import java.time.LocalDate;
 import java.util.*;
 import java.util.LinkedHashSet;
 
+import grupo1.Posicion;
 import grupo1.Terminal;
 
 public class Circuito {
@@ -30,6 +31,7 @@ public class Circuito {
     	return this.fechaDeSalida;
     }
 	
+    /* NO SE ESTÁN USANDO... SACAR??
 	private Tramo getPrimerTramo() {
 		return this.getTramos().get(0);
 	}
@@ -38,6 +40,7 @@ public class Circuito {
 		int tamano = getTramos().size();	
 		return this.getTramos().get(tamano -1 );
 	}
+	*/
 
 	public LocalDate getFechaSalidaTramo(Tramo tramo) {
     	// PRECONDICIÓN: El tramo dado debe existir en el circuito.
@@ -104,8 +107,12 @@ public class Circuito {
 		return Arrays.copyOfRange (this.getTramos(), posicionDeTramoConTerminalInicial(terminalInicial), posicionDeTramoConTerminalFinal(TerminalFinal));
 	}
 	
-	public posicionDeTramoConTerminalInicial(Terminal terminalInicial) {
-		
+	public Posicion posicionDeTramoConTerminalInicial(Terminal terminalInicial) {
+		return ;
+	}
+	
+	public Posicion posicionDeTramoConTerminalFinal(Terminal terminalFinal) {
+		return ;	
 	}
  }
 

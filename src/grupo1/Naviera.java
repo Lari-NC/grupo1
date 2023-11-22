@@ -8,15 +8,21 @@ public class Naviera {
 
     private List<Circuito> circuitos = new ArrayList<>();
     
-    public Naviera(){}
-
+    public Naviera(){
+    	
+    }
+    
+    public List<Circuito> getCircuitos(){
+    	return this.circuitos;
+    }
+    
     public void addCircuito(Circuito circuito) {
         this.circuitos.add(circuito);
     }
 
     public List<Circuito> circuitosQuePasanPorTerminal(Terminal terminal){
         List<Circuito> circuitosQuePasanPorLaTeminalDada = new ArrayList<>();
-        for (Circuito circuito : this.circuitos) {
+        for (Circuito circuito : this.getCircuitos()) {
             if (circuito.incluyeATerminal(terminal)) {
             	circuitosQuePasanPorLaTeminalDada.add(circuito);
             }
