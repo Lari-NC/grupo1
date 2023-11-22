@@ -3,6 +3,7 @@ package grupo1.circuito;
 import static org.junit.jupiter.api.Assertions.*;
 
 import java.time.LocalDate;
+import java.util.*;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -57,15 +58,17 @@ class CircuitoTest {
 		assertTrue(circuito1.incluyeATerminal(terminalA));
 	}
 	
-	/*
+	
 	@Test
 	void x() {
 		circuito1.addTramo(tramo1);
-		Terminal[] terminales = {terminalA, terminalB};
-		assertEquals(terminales, circuito1.terminalesRecorridas());
+		List<Terminal> terminales = new ArrayList<>();
+		terminales.add(terminalA);
+		terminales.add(terminalB);
+		assertEquals(terminales, circuito1.getTerminalesRecorridas());
 	}
-	*/
-	
+
+
 	/*
 	@Test
 	void cuandoAgregamosUnTramoDesdeTermAHastaTermB_AUnCircuitoRecienCreado_LaPosiciónDeTermAEs0() {

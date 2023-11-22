@@ -47,20 +47,18 @@ public class Circuito {
     			fecha = fecha.plusDays(t.getTiempo());
     		}
     	}
-    		
     	return fecha;
     }
 	
 	public List<Terminal> terminalesRecorridas() {
-		// Primero lo guardo en un set para que no haya repetidos.
+		
 		List<Terminal> terminalesRecorridas = new ArrayList<>();
-
+		terminalesRecorridas.add((this.getTramos().get(0)).getTerminalInicio());
+		
 		for(Tramo tramo : this.getTramos()) {
-			terminalesRecorridas.add(tramo.getTerminalInicio());
 			terminalesRecorridas.add(tramo.getTerminalLlegada());
 		}
-
-		return terminalesRecorridas; // Convierto el conjunto a un arreglo para el retorno.
+		return terminalesRecorridas; 
 	}
 	
 	public int posicionDeTerminalEnRecorrido(Terminal terminal) {
@@ -83,9 +81,7 @@ public class Circuito {
 
 	// TESTING:
 	public boolean incluyeATerminal(Terminal terminal) {
-
 		return this.terminalesRecorridas().contains(terminal);
-
 	}
 
 	public boolean incluyeATerminalAntesDeTerminal(Terminal terminalGestionada, Terminal terminalDestino) {
@@ -93,7 +89,15 @@ public class Circuito {
 		return incluyeATerminal(terminalGestionada) && incluyeATerminal(terminalDestino) && (posicionDeTerminalEnRecorrido(terminalGestionada) < posicionDeTerminalEnRecorrido(terminalDestino));
 
 	}
-    
+	
+	public Circuito crearCircuitoEspecificoPara_Y_(Terminal terminalInicial, Terminal TerminalFinal) {
+
+		return Arrays.copyOfRange (this.getTramos(), posicionDeTramoConTerminalInicial(terminalInicial), posicionDeTramoConTerminalFinal(TerminalFinal));
+	}
+	
+	public posicionDeTramoConTerminalInicial(Terminal terminalInicial) {
+		
+	}
  }
 
 /* ELIMINADOS (?:

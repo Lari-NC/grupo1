@@ -11,5 +11,4 @@ public class Terminal {
     public Posicion getPosicion(){
     	return this.posicion;
     }
-    
 }
