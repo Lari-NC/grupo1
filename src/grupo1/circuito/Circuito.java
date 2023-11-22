@@ -78,6 +78,15 @@ public class Circuito {
    		}
    		return precioTotal;
    	}
+	
+
+	public int getTiempoTotal() {
+		int tiempoTotal = 0;
+		for (Tramo t : tramos) {
+			tiempoTotal += t.getTiempo();
+		}
+		return tiempoTotal;
+	}
 
 	// TESTING:
 	public boolean incluyeATerminal(Terminal terminal) {
