@@ -45,14 +45,14 @@ public class Buque{
     
     public void actualizarFase(TerminalGestionada terminal) {
     	
-    	if (this.getfase().condicionFase(this) {
+    	if (this.getfase().condicionFase(this)) {
     		this.faseActual = this.getfase().siguiente() ;
     		this.realizarAccionFase();
     	}
     }
     
     public void realizarAccionFase() {
-    	this.faseActual.realizarAccion();
+    	this.faseActual.realizarAccion(this);
     }
 
     

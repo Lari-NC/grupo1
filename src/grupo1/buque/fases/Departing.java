@@ -27,6 +27,5 @@ public class Departing extends Fase{
 	@Override
 	public void realizarAccion() {
 		// TODO Auto-generated method stub
-		
-	}
+		}
 }

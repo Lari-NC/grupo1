@@ -89,7 +89,7 @@ public class TerminalGestionada extends Terminal{
 	}
 	
 	public void llegaUnaImportacion() {
-		//refactor de ^^
+		//refactor de ^^ xq creo que no es
 	}
 	
 	public void notificarAlClienteRetiroDeCarga(Consignee consignee) {
@@ -97,10 +97,12 @@ public class TerminalGestionada extends Terminal{
 	}
 	
 	public void agregarCargaACargasPorRetirar(Container carga) {
-		// hacer q reciba una lista y agregue todas, porque l buque no deja de a 1
+		// hacer q reciba una lista y agregue todas, porque l buque no deja de a 1. Ver lo de fechaaaa D:
 		this.getCargasPorRetirar().add(carga);
 	}
 
+	
+	
 	public void realizarRetiroDeCargaDeOrden(Orden orden, Camion camion) throws IllegalArgumentException {
 		
 		this.entraUnCamionALaTerminal(camion);
@@ -111,8 +113,11 @@ public class TerminalGestionada extends Terminal{
 	
 	
 	private void agregarServicioAlmacenamiento(Orden orden) {
+		// puede que la que la llame tmb le pase la fecha hora actual de cuando llega el camion
+		// para poder comparar si pasaron 24 hs
+		
 		if (!this.pasaron24HorasDesdeQueLlegoLaCarga()) {
-			orden.agregarServicioAlmacenamiento();
+			orden.agregarServicioAlmacenamiento();//pequeño detalle el almacenamineto tiene un precio como lo paso? q tb deberia ser x
 		}
 	}
 
@@ -141,6 +146,17 @@ public class TerminalGestionada extends Terminal{
         	throw new IllegalArgumentException("El chofer no tiene el ingreso permitido a la terminal");
     	}
     }
+    
+    //HAY QUE VER COMO MANDAR LA FACTURA apra usar este mensaje 
+    
+    private void facturarOrden(Orden orden) {
+    	// Se le envia la factura al shipper, el encargado de el pedido. Despues como deciden encargarse
+    	// de dividirse los pagos no nos importa como terminal
+    	
+    	Factura facturaOrden = new Factura(orden.getViaje(), orden.getServicios());
+    	(orden.getShipper()).recibirFactura(facturaOrden);
+    }
+    
     
     
     //EXPORTACIÓN:
