@@ -14,8 +14,8 @@ public class FacturaTest {
 
     private Viaje viajeFactura;
     private Servicio servicioLavado;
-    private  Servicio servicioAlmacenamiento;
-    private List<Servicio> serviciosFactura = new ArrayList<>();;
+    private Servicio servicioAlmacenamiento;
+    private List<Servicio> serviciosFactura = new ArrayList<>();
     private Factura factura;
 
     @BeforeEach

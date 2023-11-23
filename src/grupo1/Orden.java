@@ -81,12 +81,11 @@ public class Orden {
 		return factura;
 	}
 	
-	public void agregarServicioAlmacenamiento() {
-		//this.getServicios().add(??); 
-		// FALTA COMPORTAMIENTO.
+	public void agregarServicioAlmacenamiento(Servicio servicioAlmacenamiento) {
+		this.getServicios().add(servicioAlmacenamiento);
 	}
 	
-	public void agregarServicioPesado() {
-		//this.getServicios().add(??);
+	public void agregarServicioPesado(Servicio servicioPesado) {
+		this.getServicios().add(servicioPesado);
 	}
 }

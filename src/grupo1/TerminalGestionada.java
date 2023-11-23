@@ -140,16 +140,10 @@ public class TerminalGestionada extends Terminal{
         this.entraUnCamionALaTerminal(camion);
         this.realizarEntregaCarga(orden);
 
-        if(orden.getFechaDeLlegada() != fechaRetiro) {
-        	this.agregarServicioAlmacenamiento(orden);
+        if(fechaRetiro.isAfter(orden.getFechaDeLlegada())) {
+        	this.agregarServicioAlmacenamientoA(orden);
         }
 			
-	}
-	
-	private void agregarServicioAlmacenamiento(Orden orden) {
-		// puede que la que la llame tmb le pase la fecha hora actual de cuando llega el camion
-		// para poder comparar si pasaron 24 hs
-		orden.agregarServicioAlmacenamiento();//pequeño detalle el almacenamineto tiene un precio como lo paso? q tb deberia ser x
 	}
 
 	private void realizarEntregaCarga(Orden orden) {
@@ -209,6 +203,25 @@ public class TerminalGestionada extends Terminal{
     public void darOrdenDepart(Buque buque) {
     	buque.recibirOrdenDepart();
     }
+	
+	private void agregarServicioAlmacenamientoA(Orden orden) {
+		//orden.agregarServicioAlmacenamiento();//pequeño detalle el almacenamineto tiene un precio como lo paso? q tb deberia ser x
+		// verificamos que la terminal cuente con un servicio de almacenamiento
+		for(Servicio servicio : this.getServiciosAOfrecer()) {
+			if(servicio.getTipoServicio() == "Almacenamiento") {
+				orden.agregarServicioAlmacenamiento(servicio);
+			}
+		}
+	}
+	
+	private void agregarServicioPesadoA(Orden orden) {
+		// verificamos que la terminal cuente con un servicio de pesado
+		for(Servicio servicio : this.getServiciosAOfrecer()) {
+			if(servicio.getTipoServicio() == "Pesado") {
+				orden.agregarServicioPesado(servicio);
+			}
+		}
+	}
     
     
     //EXPORTACIÓN:
@@ -225,7 +238,7 @@ public class TerminalGestionada extends Terminal{
 			if(buque == o.getViaje().getBuque()) {
 				ordenesParaEnviar.add(o);
 			}
-			o.agregarServicioPesado(); // TODAVÍA NO ESTÁ IMPLEMENTADO
+			this.agregarServicioPesadoA(o);
 		}
 		this.ordenesExpoEnviadas.addAll(ordenesParaEnviar);
 		buque.addCargasDe(ordenesParaEnviar);
