@@ -2,9 +2,7 @@ package grupo1.circuito;
 
 import java.time.LocalDate;
 import java.util.*;
-import java.util.LinkedHashSet;
 
-import grupo1.Posicion;
 import grupo1.Terminal;
 
 public class Circuito {
@@ -17,8 +15,8 @@ public class Circuito {
 	}
     
     public void addTramo(Tramo tramo) {
-    	//Se considera que solo se pueden agregar tramos consecuivos y respetando el orden establecido del Array.
-    	//El primer tramo es el de empieza el ciurcuito y el ultimo es el de fin del circuito.
+    	// Se considera que solo se pueden agregar tramos consecuivos y respetando el orden establecido del Array.
+    	// El primer tramo es donde empieza el ciurcuito y el ultimo es el de fin del circuito.
     	this.tramos.add(tramo);
        }
     
@@ -31,11 +29,12 @@ public class Circuito {
     	return this.fechaDeSalida;
     }
 	
-    /* NO SE ESTÁN USANDO... SACAR??
+    
 	private Tramo getPrimerTramo() {
 		return this.getTramos().get(0);
 	}
 
+	/* NO SE USA... ELIMINAR??
 	private Tramo getUltimoTramo() {
 		int tamano = getTramos().size();	
 		return this.getTramos().get(tamano -1 );
@@ -46,17 +45,33 @@ public class Circuito {
     	// PRECONDICIÓN: El tramo dado debe existir en el circuito.
     	LocalDate fecha = this.getFechaDeSalida();
     	for (Tramo t : tramos) {
-    		if(t != tramo) {
+    		if(!t.equals(tramo)) {
     			fecha = fecha.plusDays(t.getTiempo());
+    			break;
     		}
     	}
     	return fecha;
     }
 	
+	public LocalDate getFechaLlegadaTramo(Tramo tramo) {
+		// PRECONDICIÓN: El tramo dado debe existir en el circuito.
+    	LocalDate fecha = this.getFechaDeSalida();
+    	for (Tramo t : tramos) {
+    		if(!t.equals(tramo)) {
+    			fecha = fecha.plusDays(t.getTiempo());
+    		}
+    		else {
+    			fecha = fecha.plusDays(t.getTiempo() - 1);
+    			break;
+    		}
+    	}
+    	return fecha; 
+	}
+	
 	public List<Terminal> terminalesRecorridas() {
 		
 		List<Terminal> terminalesRecorridas = new ArrayList<>();
-		terminalesRecorridas.add((this.getTramos().get(0)).getTerminalInicio());
+		terminalesRecorridas.add((this.getPrimerTramo()).getTerminalInicio());
 		
 		for(Tramo tramo : this.getTramos()) {
 			terminalesRecorridas.add(tramo.getTerminalLlegada());
@@ -67,7 +82,7 @@ public class Circuito {
 	public int posicionDeTerminalEnRecorrido(Terminal terminal) {
 		// PRECONDICIÓN: La terminal dada debe existir en el recorrido.
 		for (int i = 0 ; i < this.terminalesRecorridas().size() ; i++) {
-			if (this.terminalesRecorridas().get(i) == terminal) {
+			if (this.terminalesRecorridas().get(i).equals(terminal)) {
 				return i;
 			}
 		}
@@ -96,10 +111,36 @@ public class Circuito {
 		return this.terminalesRecorridas().contains(terminal);
 	}
 
-	public boolean incluyeATerminalAntesDeTerminal(Terminal terminalGestionada, Terminal terminalDestino) {
+	public boolean incluyeATerminalAntesDeTerminal(Terminal terminalA, Terminal terminalB) {
 
-		return incluyeATerminal(terminalGestionada) && incluyeATerminal(terminalDestino) && (posicionDeTerminalEnRecorrido(terminalGestionada) < posicionDeTerminalEnRecorrido(terminalDestino));
-
+		return incluyeATerminal(terminalA) && 
+			   incluyeATerminal(terminalB) && 
+			   (posicionDeTerminalEnRecorrido(terminalA) < posicionDeTerminalEnRecorrido(terminalB));
+	}
+	
+	
+	public boolean incluyeATerminalDespuesDeTerminal(Terminal terminalA, Terminal terminalB) {	
+		// En nuestro caso la terminalA siempre debería ser la gestionada.
+		return incluyeATerminal(terminalA) && 
+			   incluyeATerminal(terminalB) && 
+			   (posicionDeTerminalEnRecorrido(terminalA) > posicionDeTerminalEnRecorrido(terminalB));
+	}
+	
+	public boolean saleDeTerminalEnLaFecha(Terminal terminalSalida, LocalDate fecha) {
+		// En nuestro caso la terminal de origen siempre debería ser la gestionada.
+		// NOTA: Usé streams para evitar que con un for siga iterando a pedar de haber 
+		// encontrado una coincidencia y que lo haga con mayor legibilidad.
+		return tramos.stream()
+				.anyMatch(tramo -> tramo.getTerminalInicio().equals(terminalSalida) &&
+						  this.getFechaSalidaTramo(tramo).equals(fecha));
+	}
+	
+	public boolean llegaEnLaFecha(Terminal terminalGestionada, LocalDate fecha) {
+		// En nuestro caso la terminal de origen siempre debería ser la gestionada.
+		// NOTA: Usé streams para evitar el miedo al booleano con un if addentro de 
+		// un for que retorne directamente true o false.
+		return tramos.stream()
+                .anyMatch(tramo -> this.getFechaLlegadaTramo(tramo).equals(fecha));
 	}
 	
 	public Circuito crearCircuitoEspecificoPara_Y_(Terminal terminalInicial, Terminal TerminalFinal) {
@@ -127,6 +168,8 @@ public class Circuito {
         return -1; // Elemento no encontrado
 	}
  }
+
+	
 
 /* ELIMINADOS (?:
 
@@ -165,20 +208,19 @@ public class Circuito {
 	    return resultado;
 	}
 	
-	public boolean incluyeATerminalDespuesDeTerminal(Terminal terminalGestionada, Terminal terminalDestino) {
-		//mucho texto pero funciona no quiero tocarlo
-	  
-	    boolean encontreGestionada = false;
+	public boolean incluyeATerminalDespuesDeTerminal(Terminal terminalA, Terminal terminalB) {
+		
+		boolean encontreGestionada = false;
 	    boolean estaDestinoDespuesDeGestionada = false;
 	    
 	    for (Tramo tramo : this.getTramos()) {
-	    	//chequeo si encuentro la gestionada(primero)
-	        encontreGestionada = tramo.getTerminalInicio().equals(terminalGestionada);
-	        //chequeo  si ya encontre la gestionada y ahora encuento la destino
-	        estaDestinoDespuesDeGestionada = encontreGestionada && (tramo.getTerminalInicio().equals(terminalDestino) || tramo.getTerminalLlegada().equals(terminalDestino));
+	    	//chequeo si encuentro la terminalA(primero)
+	        encontreGestionada = tramo.getTerminalInicio().equals(terminalA);
+	        //chequeo  si ya encontre la termnalA y ahora encuento la terminalB
+	        estaDestinoDespuesDeGestionada = encontreGestionada && (tramo.getTerminalInicio().equals(terminalB) || tramo.getTerminalLlegada().equals(terminalB));
 	    }
 	    return estaDestinoDespuesDeGestionada;
-   }
+	}
    
  */
 

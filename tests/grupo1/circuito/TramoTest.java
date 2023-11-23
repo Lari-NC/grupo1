@@ -1,4 +1,5 @@
 package grupo1.circuito;
+
 import grupo1.Posicion;
 import grupo1.Terminal;
 import static org.junit.jupiter.api.Assertions.*;
@@ -18,9 +19,9 @@ class TramoTest {
 	void setUp() throws Exception {
 		posicionDeA = new Posicion(1,1);
 		posicionDeB = new Posicion(1,2); 
-		terminalA = new Terminal(posicionDeA);
-		terminalB = new Terminal(posicionDeB);
-		tramo1 = new Tramo(terminalA,terminalB, 1, 1000);
+		terminalA   = new Terminal(posicionDeA);
+		terminalB   = new Terminal(posicionDeB);
+		tramo1      = new Tramo(terminalA,terminalB, 1, 1000);
 	}
 
 	@Test

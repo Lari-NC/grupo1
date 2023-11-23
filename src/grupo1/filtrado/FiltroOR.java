@@ -13,11 +13,11 @@ public class FiltroOR extends Binario {
     @Override
     public ArrayList<Circuito> buscar(ArrayList<Circuito> lista) {
     	
-    	/*se hacen copias de la lista apra no taparlas y se filtra una concdicion a la vez*/
+    	// Se hacen copias de la lista para no sobreescribirlas y se filtra una condición a la vez
         ArrayList<Circuito> resultadoFiltro1 = getFiltro1().buscar(new ArrayList<>(lista));
         ArrayList<Circuito> resultadoFiltro2 = getFiltro2().buscar(new ArrayList<>(lista));
         
-    	/*se suman los resultados de las listas resultantes*/
+    	// Se combinan los resultados de ambas listas resultantes anteriormente
         resultadoFiltro1.addAll(resultadoFiltro2);
 
         return resultadoFiltro1;

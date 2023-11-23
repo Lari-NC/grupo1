@@ -13,13 +13,12 @@ public class FiltroAND extends Binario {
     @Override
     public ArrayList<Circuito> buscar(ArrayList<Circuito> lista) {
     	
-    	/*Filtro primeor mi primera condicion sobre la lista original*/
-        ArrayList<Circuito> resultadoFiltro1 = getFiltro1().buscar(lista);
+    	// Filtro los resultados en base a mi primer filtro sobre la lista original
+        ArrayList<Circuito> resultadoFiltro = getFiltro1().buscar(lista);
         
-    	/*Vuelvo a filtrar el resultado de el priemr filtro con mi segundo*/
-        ArrayList<Circuito> resultadoFiltro2 = getFiltro2().buscar(resultadoFiltro1);
+    	// Vuelvo a filtrar el resultado del primer filtro en base a mi segundo
+        resultadoFiltro = getFiltro2().buscar(resultadoFiltro);
   
-
-        return resultadoFiltro2;
+        return resultadoFiltro;
     }
 }
