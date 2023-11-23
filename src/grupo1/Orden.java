@@ -47,14 +47,16 @@ public class Orden {
 		return this.container;
 	}
 
-	public LocalDate getFechaDeSalida() {
-		return this.fechaDeSalida;
-	}
-
+	
 	public Viaje getViaje() {
 		return this.viaje;
 	}
 
+	public LocalDate getFechaDeSalida() {
+		return this.fechaDeSalida;
+	}
+
+	
 	public LocalDate getFechaDeLlegada() {
 		return this.fechaDeLlegada;
 	}
@@ -67,12 +69,12 @@ public class Orden {
 		return this.chofer;
 	}
 	
-	public Terminal getTerminalDestino() {
-		return this.getViaje().getTerminalDestino();
-	}
-
 	public List<Servicio> getServicios() {
 		return servicios;
+	}
+	
+	public Terminal getTerminalDestino() {
+		return this.getViaje().getTerminalDestino();
 	}
 	
 	public Factura getFactura() {
