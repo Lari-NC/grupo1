@@ -2,36 +2,36 @@ package grupo1.containers;
 
 public class Container {
 
-    private double ancho;
-    private double largo;
-    private double alto;
-    private double pesoTotal;
+    private int ancho;
+    private int largo;
+    private int alto;
+    private int pesoTotal;
 
 
-    public Container(double ancho, double largo, double alto, double peso) {
+    public Container(int ancho, int largo, int alto, int peso) {
         this.ancho     = ancho;
         this.largo     = largo;
         this.alto      = alto;
         this.pesoTotal = peso; 
     }
 
-    public double getAncho() {
+    public int getAncho() {
         return this.ancho;
     }
 
-    public double getLargo() {
+    public int getLargo() {
         return this.largo;
     }
 
-    public double getAlto() {
+    public int getAlto() {
         return this.alto;
     }
 
-    public double getPesoTotal() {
+    public int getPesoTotal() {
         return this.pesoTotal;
     }
     
-    public double metrosCubicos() {
+    public int metrosCubicos() {
     	return getAncho() * getLargo() * getAlto();
     }
 }

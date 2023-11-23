@@ -175,7 +175,7 @@ public class TerminalGestionada extends Terminal{
     }
     
 	public void recibirBuqueAvisoInbound(Buque buque) {
-		// dar aviso a todas nuestras ordenes de importación que tiene  al buque dado.
+		// dar aviso a todas nuestras ordenes de importación que tienen al buque dado.
 		for(Orden o : this.ordenesImpo) {
 			if(o.getViaje().getBuque() == buque) {
 				this.notificarAlClienteRetiroDeCarga(o.getConsignee());
@@ -183,11 +183,17 @@ public class TerminalGestionada extends Terminal{
 		}
 	}
 	
+	public void recibirBuqueAvisoOutbound(Buque buque) {
+		// dar aviso a todas nuestras ordenes de importación que tienen al buque dado.
+		for(Orden o : this.ordenesPorRetirar) {
+			if(o.getViaje().getBuque() == buque) {
+				this.facturarOrden(o);
+			}
+		}
+	}
     
     
     //OTRAS COSAS:
-    //HAY QUE VER COMO MANDAR LA FACTURA apra usar este mensaje 
-    
     private void facturarOrden(Orden orden) {
     	// Se le envia la factura al shipper, el encargado de el pedido. Despues como deciden encargarse
     	// de dividirse los pagos no nos importa como terminal
@@ -204,6 +210,7 @@ public class TerminalGestionada extends Terminal{
     	buque.recibirOrdenDepart();
     }
     
+    
     //EXPORTACIÓN:
     public void registrarExportacion (Shipper emisor, Consignee receptor, Container container, Viaje viaje, LocalDate fechaDeSalida, LocalDate fechaDeLlegada, Camion camion, Chofer chofer,List<Servicio> servicios) {
     	Orden ordenARegistar = new Orden(emisor, receptor, container, viaje, fechaDeSalida, fechaDeLlegada, camion, chofer, servicios);
@@ -218,13 +225,15 @@ public class TerminalGestionada extends Terminal{
 			if(buque == o.getViaje().getBuque()) {
 				ordenesParaEnviar.add(o);
 			}
+			o.agregarServicioPesado(); // TODAVÍA NO ESTÁ IMPLEMENTADO
 		}
 		this.ordenesExpoEnviadas.addAll(ordenesParaEnviar);
 		buque.addCargasDe(ordenesParaEnviar);
+		
 	}
     
 	public void recibirBuqueAvisoDepart(Buque buque) {
-		// dar aviso a todas nuestras ordenes de importación que tiene  al buque dado.
+		// dar aviso a todas nuestras ordenes de importación que tienen al buque dado.
 		for(Orden o : this.ordenesExpoEnviadas) {
 			if(o.getViaje().getBuque() == buque) {
 				this.notificarAlClienteSalidaDeCarga(o.getShipper());
@@ -236,25 +245,27 @@ public class TerminalGestionada extends Terminal{
     	shipper.recibirMailCargaEnviada();
 	}
 
+    /*
 	// FALTAN:
     public Circuito mejorCircuitoHasta_(Terminal terminalDestino) {
-		/*3.Devolver el mejor circuito que une a la terminal con un determinado puerto destino.
-		*/
+		//3.Devolver el mejor circuito que une a la terminal con un determinado puerto destino.
+		
 		return ;
 	}
     
 	public int cantidadDeTiempoQueTardaLaNaviera_EnLlegarA_(Naviera naviera, Terminal terminalDestino) {
-		/*4.Devolver cuánto tarda una naviera en llegar desde la terminal gestionada hacia 
-			otra terminal, independientemente de las fechas de los viajes programados.
-		*/
+		//4.Devolver cuánto tarda una naviera en llegar desde la terminal gestionada hacia 
+		//	otra terminal, independientemente de las fechas de los viajes programados.
+		
 		return ;
 	}
 	
 	public LocalDate proximaFechaDePartidaDelBuque_HastaTerminal_ (Buque buque, Terminal terminalDestino) {
-		/*5.Devolver la próxima fecha de partida de un buque desde la terminal gestionada hasta 
-		    otra terminal de destino.
-		*/
+		//5.Devolver la próxima fecha de partida de un buque desde la terminal gestionada hasta 
+		//  otra terminal de destino.
+		
 		return ;
 	}
+	*/
 
 }

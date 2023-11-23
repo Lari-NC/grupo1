@@ -2,14 +2,14 @@ package grupo1.containers;
 
 public class Tanque extends Container {
     
-    private double consumo;
+    private int consumo;
 
-    public Tanque(double ancho, double largo, double alto, double peso, double consumo) {
+    public Tanque(int ancho, int largo, int alto, int peso, int consumo) {
         super(ancho, largo, alto, peso);
         this.consumo = consumo;
     }
 
-    public double getConsumo() {
+    public int getConsumo() {
         return this.consumo;
     }
 }

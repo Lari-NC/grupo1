@@ -1,7 +1,15 @@
 package grupo1.containers;
 
 public class Reefer extends Container {
-	public Reefer(double ancho, double largo, double alto, double peso) {
+	
+	private int consumo;
+	
+	public Reefer(int ancho, int largo, int alto, int peso) {
         super(ancho, largo, alto, peso);
+        this.consumo = 0;
     }
+
+	public int getConsumo() {
+		return consumo;
+	}
 }

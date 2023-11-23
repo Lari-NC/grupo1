@@ -7,7 +7,6 @@ import grupo1.cliente.Consignee;
 import grupo1.cliente.Shipper;
 import grupo1.containers.Container;
 import grupo1.transporte.Camion;
-import grupo1.transporte.Camion;
 import grupo1.transporte.Chofer;
 import grupo1.servicios.Servicio;
 
@@ -24,7 +23,8 @@ public class Orden {
 	private List<Servicio> servicios = new ArrayList<>();
 	
     public Orden(Shipper emisor, Consignee receptor, Container container, Viaje viaje, LocalDate fechaDeSalida, LocalDate fechaDeLlegada, Camion camion, Chofer chofer, List<Servicio> servicios) {
-		this.shipper        = emisor;
+		// Los servicios son una lista de servicios solicitados por el cliente que realiza la orden, sin contar los establecidos por la terminal.
+    	this.shipper        = emisor;
 		this.consignee      = receptor;
 		this.container      = container;
 		this.viaje          = viaje;
@@ -82,6 +82,11 @@ public class Orden {
 	}
 	
 	public void agregarServicioAlmacenamiento() {
-		
+		//this.getServicios().add(??); 
+		// FALTA COMPORTAMIENTO.
+	}
+	
+	public void agregarServicioPesado() {
+		//this.getServicios().add(??);
 	}
 }

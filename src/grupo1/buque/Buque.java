@@ -86,6 +86,10 @@ public class Buque{
     public void darAvisoDepartATerminal() {
     	this.getTerminal().recibirBuqueAvisoDepart(this);
     }
+    
+    public void darAvisoOutboundATerminal() {
+    	this.getTerminal().recibirBuqueAvisoOutbound(this);
+    }
 
 
     public boolean tieneOrdenWorking() {

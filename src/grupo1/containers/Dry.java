@@ -2,7 +2,7 @@ package grupo1.containers;
 
 public class Dry extends Container {
     
-    public Dry(double ancho, double largo, double alto, double peso) {
+    public Dry(int ancho, int largo, int alto, int peso) {
         super(ancho, largo, alto, peso);
     }
 }
