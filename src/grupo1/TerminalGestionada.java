@@ -258,20 +258,23 @@ public class TerminalGestionada extends Terminal{
     	shipper.recibirMailCargaEnviada();
 	}
 
+    public int cantidadDeTiempoQueTardaLaNaviera_EnLlegarA_(Naviera naviera, Terminal terminalDestino) {
+		//4.Devolver cuánto tarda una naviera en llegar desde la terminal gestionada hacia 
+		//	otra terminal, independientemente de las fechas de los viajes programados.
+		
+		return naviera.tiempoDeViajeDesdeHastaTerminal(this, terminalDestino);
+	}
+    
     /*
 	// FALTAN:
     public Circuito mejorCircuitoHasta_(Terminal terminalDestino) {
 		//3.Devolver el mejor circuito que une a la terminal con un determinado puerto destino.
+		// mejor circuito en base a que???
 		
 		return ;
 	}
     
-	public int cantidadDeTiempoQueTardaLaNaviera_EnLlegarA_(Naviera naviera, Terminal terminalDestino) {
-		//4.Devolver cuánto tarda una naviera en llegar desde la terminal gestionada hacia 
-		//	otra terminal, independientemente de las fechas de los viajes programados.
-		
-		return ;
-	}
+	
 	
 	public LocalDate proximaFechaDePartidaDelBuque_HastaTerminal_ (Buque buque, Terminal terminalDestino) {
 		//5.Devolver la próxima fecha de partida de un buque desde la terminal gestionada hasta 
