@@ -7,7 +7,7 @@ import java.util.stream.Collectors;
 import grupo1.Terminal;
 import grupo1.circuito.Circuito;
 
-public class BusquedaPorFechaDeSalida extends Buscador{
+public class BusquedaPorFechaDeSalida extends Busqueda{
 	 
 	private LocalDate fechaSalidaDeseada;
 	private Terminal terminalOrigen;

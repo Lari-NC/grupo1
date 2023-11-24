@@ -6,7 +6,7 @@ import java.util.stream.Collectors;
 import grupo1.Terminal;
 import grupo1.circuito.Circuito;
 
-public class BusquedaPorPuertoDestino extends Buscador{
+public class BusquedaPorPuertoDestino extends Busqueda{
 	 
 	private Terminal terminalDestino;
 	private Terminal terminalOrigen;

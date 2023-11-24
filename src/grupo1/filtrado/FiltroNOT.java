@@ -1,13 +1,12 @@
 package grupo1.filtrado;
 
 import java.util.ArrayList;
-
 import grupo1.circuito.Circuito;
 
-public class FiltroNOT extends Buscador {
-	private Buscador filtro;
+public class FiltroNOT extends Busqueda {
+	private Busqueda filtro;
 
-    public FiltroNOT(Buscador filtro) {
+    public FiltroNOT(Busqueda filtro) {
         this.filtro = filtro;
     }
 
