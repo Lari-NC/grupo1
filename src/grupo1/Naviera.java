@@ -30,11 +30,11 @@ public class Naviera {
         return circuitosQuePasanPorLaTeminalDada;
     }
     
-    public int tiempoDeViajeDesdeHastaTerminal(TerminalGestionada terminalGestionada, Terminal terminalDestino) {
+    public int tiempoDeViajeDesdeHastaTerminal(Terminal terminalA, Terminal terminalDestino) {
     	List<Integer> cantidadDeDiasQueTardan = new ArrayList<>(); 
     	for(Circuito c : this.getCircuitos()) {
-    		if (c.incluyeATerminalAntesDeTerminal(terminalGestionada, terminalDestino)) {
-    			cantidadDeDiasQueTardan.add(c.crearCircuitoEspecificoPara_Y_(terminalGestionada, terminalDestino).getTiempoTotal());
+    		if (c.incluyeATerminalAntesDeTerminal(terminalA, terminalDestino)) {
+    			cantidadDeDiasQueTardan.add(c.crearCircuitoEspecificoPara_Y_(terminalA, terminalDestino).getTiempoTotal());
     		}
     	}
     	return Collections.min(cantidadDeDiasQueTardan);

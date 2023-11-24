@@ -15,4 +15,12 @@ public class EmpresaTransportista {
 	public void addCamion(Camion camion) {
 		this.camionesRegistrados.add(camion);
 	}
+	
+	public List<Chofer> getChoferesRegistrados() {
+		return this.choferesRegistrados;
+	}
+	
+	public List<Camion> getCamionesRegistrados() {
+		return this.camionesRegistrados;
+	}
 }

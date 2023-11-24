@@ -88,13 +88,12 @@ class CircuitoTest {
 		assertTrue(circuito.incluyeATerminalAntesDeTerminal(terminalA, terminalB));
 	}
 	
-	/*@Test 
-	 *
+	@Test 
+
 	void enUnCircuitoCon1Tramo_ElTiempoQueTardeEnCompletarseElMismo_SeraEquivalenteAlTiempoQueTardaraEseTramoQueTiene() {
 		circuito.addTramo(tramo1);
 		assertEquals(tramo1.getTiempo(), circuito.getTiempoTotal());
 	}
-	*/
 	
 	@Test 
 	void enUnCircuitoCon1Tramo_ElPrecioTotalDelCircuito_SeraEquivalenteAlPrecioDelTramoQueContieneDichoCircuito() {
