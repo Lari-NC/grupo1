@@ -18,7 +18,7 @@ public class BusquedaPorFechaDeLlegada extends Busqueda{
 	}
 
 	@Override
-	public ArrayList<Circuito> buscar(ArrayList<Circuito> lista) {
+	public List<Circuito> buscar(List<Circuito> lista) {
 		
 		return lista.stream()
 				.filter(circuito -> circuito.llegaEnLaFecha(this.terminalGestionada, this.fechaLlegadaDeseada))

@@ -1,6 +1,7 @@
 package grupo1.filtrado;
 
-import java.util.ArrayList;
+import java.util.List;
+
 import grupo1.circuito.Circuito;
 
 public class FiltroNOT extends Busqueda {
@@ -11,10 +12,10 @@ public class FiltroNOT extends Busqueda {
     }
 
     @Override
-    public ArrayList<Circuito> buscar(ArrayList<Circuito> lista) {
+    public List<Circuito> buscar(List<Circuito> lista) {
     	
     	// Saca de mi lista de circuitos, todos los que cumplen la condicion de filtrado
-    	ArrayList<Circuito> resultadoFiltro = filtro.buscar(lista);
+    	List<Circuito> resultadoFiltro = filtro.buscar(lista);
         lista.removeAll(resultadoFiltro);
         return lista;
     }

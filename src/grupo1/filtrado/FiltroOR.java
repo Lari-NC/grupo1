@@ -1,6 +1,7 @@
 package grupo1.filtrado;
 
-import java.util.ArrayList;
+import java.util.*;
+
 import grupo1.circuito.Circuito;
 
 public class FiltroOR extends Binario {
@@ -10,11 +11,11 @@ public class FiltroOR extends Binario {
 	}
 
     @Override
-    public ArrayList<Circuito> buscar(ArrayList<Circuito> lista) {
+    public List<Circuito> buscar(List<Circuito> lista) {
     	
     	// Se hacen copias de la lista para no sobreescribirlas y se filtra una condición a la vez
-    	ArrayList<Circuito> resultadoFiltro1 = getFiltro1().buscar(new ArrayList<>(lista));
-    	ArrayList<Circuito> resultadoFiltro2 = getFiltro2().buscar(new ArrayList<>(lista));
+    	List<Circuito> resultadoFiltro1 = getFiltro1().buscar(new ArrayList<>(lista));
+    	List<Circuito> resultadoFiltro2 = getFiltro2().buscar(new ArrayList<>(lista));
         
     	// Se combinan los resultados de ambas listas resultantes anteriormente
         resultadoFiltro1.addAll(resultadoFiltro2);

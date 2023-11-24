@@ -1,9 +1,10 @@
 package grupo1.filtrado;
 
-import java.util.ArrayList;
+import java.util.List;
+
 import grupo1.circuito.Circuito;
 
 public abstract class Busqueda {
-	public abstract ArrayList<Circuito> buscar(ArrayList<Circuito> lista);
+	public abstract List<Circuito> buscar(List<Circuito> lista);
 }
 

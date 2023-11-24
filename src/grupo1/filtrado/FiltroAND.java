@@ -1,6 +1,7 @@
 package grupo1.filtrado;
 
-import java.util.ArrayList;
+import java.util.List;
+
 import grupo1.circuito.Circuito;
 
 public class FiltroAND extends Binario {
@@ -10,10 +11,10 @@ public class FiltroAND extends Binario {
 	    }
 
     @Override
-    public ArrayList<Circuito> buscar(ArrayList<Circuito> lista) {
+    public List<Circuito> buscar(List<Circuito> lista) {
     	
     	// Filtro los resultados en base a mi primer filtro sobre la lista original
-    	ArrayList<Circuito> resultadoFiltro = getFiltro1().buscar(lista);
+    	List<Circuito> resultadoFiltro = getFiltro1().buscar(lista);
         
     	// Vuelvo a filtrar el resultado del primer filtro en base a mi segundo
         resultadoFiltro = getFiltro2().buscar(resultadoFiltro);
