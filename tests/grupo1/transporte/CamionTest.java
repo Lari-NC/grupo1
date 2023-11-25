@@ -1,6 +1,7 @@
 package grupo1.transporte;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.Mockito.mock;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -15,7 +16,7 @@ class CamionTest {
 	void setUp() throws Exception {
 		
 		camion = new Camion();
-		choferPepe = new Chofer();
+		choferPepe = mock(Chofer.class);
 		
 	}
 	
@@ -27,7 +28,6 @@ class CamionTest {
 	@Test
 	void cuandoAUnCamionRecienCreado_SeLeAsignaElChoferPepe_EseCamionTendraComoChoferAPepe() {
 		camion.asignarChofer(choferPepe);
-		
 		assertNotNull(camion.getChofer());
 		assertEquals(choferPepe, camion.getChofer());
 	}

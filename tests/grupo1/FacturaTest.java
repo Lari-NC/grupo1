@@ -36,6 +36,15 @@ public class FacturaTest {
         this.serviciosFactura.add(this.servicioLavado);
     }
 
+	
+	@Test
+	public void seCreaUnaFactura() {
+		this.factura = new Factura(viajeFactura, serviciosFactura);
+		
+		assertEquals(this.factura.getViaje(), viajeFactura);
+		assertEquals(this.factura.getServicios(), serviciosFactura);
+	}
+	
     @Test
     public void testGetDesgloce() {
     	
