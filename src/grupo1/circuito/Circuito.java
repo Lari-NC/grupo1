@@ -16,7 +16,6 @@ public class Circuito {
     
     public void addTramo(Tramo tramo) {
     	// Se considera que solo se pueden agregar tramos consecuivos y respetando el orden establecido del Array.
-    	// El primer tramo es donde empieza el ciurcuito y el ultimo es el de fin del circuito.
     	this.tramos.add(tramo);
        }
     
@@ -29,18 +28,11 @@ public class Circuito {
     	return this.fechaDeSalida;
     }
 	
-    
 	private Tramo getPrimerTramo() {
 		return this.getTramos().get(0);
 	}
 
-	/* NO SE USA... ELIMINAR??
-	private Tramo getUltimoTramo() {
-		int tamano = getTramos().size();	
-		return this.getTramos().get(tamano -1 );
-	}
-	*/
-
+//Para que se usan??
 	public LocalDate getFechaSalidaTramo(Tramo tramo) {
     	// PRECONDICIÓN: El tramo dado debe existir en el circuito.
     	LocalDate fecha = this.getFechaDeSalida();
@@ -71,8 +63,7 @@ public class Circuito {
 	public List<Terminal> terminalesRecorridas() {
 		
 		List<Terminal> terminalesRecorridas = new ArrayList<>();
-		terminalesRecorridas.add((this.getPrimerTramo()).getTerminalInicio());
-		
+		terminalesRecorridas.add((this.getPrimerTramo()).getTerminalInicio());	
 		for(Tramo tramo : this.getTramos()) {
 			terminalesRecorridas.add(tramo.getTerminalLlegada());
 		}
@@ -189,7 +180,7 @@ public class Circuito {
 		   
 		   *
 		   *
-		  segun chat gpt tira bucle infinito ^^ 
+		 
 		  
 		//bsuco caso borde de que sea la primera terminal de todo el circuito
 	    Terminal primeraTerminal = this.primerTramo().getTerminalInicio();

@@ -1,6 +1,5 @@
 package grupo1.buque.fases;
 
-import grupo1.TerminalGestionada;
 import grupo1.buque.Buque;
 
 public class Working extends Fase{
@@ -20,9 +19,5 @@ public class Working extends Fase{
     }
 
 	@Override
-	public void realizarAccion(Buque buque) {
-		TerminalGestionada t = buque.getTerminal(); 
-		t.decargarBuque(buque);
-		t.cargarBuque(buque);
-	}
+	public void realizarAccion(Buque buque) {}
 }

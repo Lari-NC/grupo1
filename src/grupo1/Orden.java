@@ -23,7 +23,7 @@ public class Orden {
 	private List<Servicio> servicios = new ArrayList<>();
 	
     public Orden(Shipper emisor, Consignee receptor, Container container, Viaje viaje, LocalDate fechaDeSalida, LocalDate fechaDeLlegada, Camion camion, Chofer chofer, List<Servicio> servicios) {
-		// Los servicios son una lista de servicios solicitados por el cliente que realiza la orden, sin contar los establecidos por la terminal.
+		// Los servicios son una lista de servicios solicitados por el cliente que realiza la orden, sin contar el almacenamiento
     	this.shipper        = emisor;
 		this.consignee      = receptor;
 		this.container      = container;
@@ -35,50 +35,40 @@ public class Orden {
 		this.servicios 		= servicios;
     }
 
+    //GETTERS
 	public Shipper getShipper() {
-		return this.shipper;
-	}
+		return this.shipper;	}
 
 	public Consignee getConsignee() {
-		return this.consignee;
-	}
+		return this.consignee;	}
 
 	public Container getContainer() {
-		return this.container;
-	}
+		return this.container;	}
 
-	
 	public Viaje getViaje() {
-		return this.viaje;
-	}
+		return this.viaje;	}
 
 	public LocalDate getFechaDeSalida() {
-		return this.fechaDeSalida;
-	}
-
+		return this.fechaDeSalida;	}
 	
 	public LocalDate getFechaDeLlegada() {
-		return this.fechaDeLlegada;
-	}
-
+		return this.fechaDeLlegada;	}
+	
 	public Camion getCamion() {
-		return this.camion;
-	}
+		return this.camion;	}
 
 	public Chofer getChofer() {
-		return this.chofer;
-	}
+		return this.chofer;	}
 	
 	public List<Servicio> getServicios() {
-		return servicios;
-	}
+		return servicios;	}
 	
 	public Terminal getTerminalDestino() {
-		return this.getViaje().getTerminalDestino();
-	}
+		return this.getViaje().getTerminalDestino();	}
 	
-	public Factura getFactura() {
-		// precioViaje(PrecioCircuito), precioPorServicio, precioTotal.
+	
+	//
+	public Factura crearFactura() {
 		Factura factura = new Factura(this.getViaje(), this.getServicios());
 		return factura;
 	}
