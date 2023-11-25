@@ -4,15 +4,26 @@ import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-class ServicioTest {
+import grupo1.containers.Container;
 
+class ServicioTest {
+	
 	private Pesado servicioPesado;
 	private Almacenamiento servicioAlmacenamiento;
+	private Lavado servicioLavado;
+	private Electricidad servicioElectricidad;
+	private Container container;
+	private Container container1;
 	
 	@BeforeEach
 	void setUp() throws Exception {
+		
 		this.servicioPesado = new Pesado(900);
 		this.servicioAlmacenamiento = new Almacenamiento(1200);
+		this.servicioLavado = new Lavado(1000);
+		servicioElectricidad = new Electricidad(900000000);
+		container = new Container(5,10,5,100);
+		container1 = new Container(2,6,2,70);
 		/* Mock:
 		this.servicioPesado = mock(Pesado.class);
 	    when(this.servicioPesado.getTipoServicio()).thenReturn("Pesado");
@@ -33,6 +44,26 @@ class ServicioTest {
 	void testTipoServicioAlmacenamiento() {
 		String resultado = this.servicioAlmacenamiento.getTipoServicio();
 		assertEquals("Almacenamiento", resultado);
+	}
+	
+	@Test
+	void enUnServicioDePesadoCreadoConUnCostoDe900_SuPrecioSeraDe900() {
+		assertEquals(900, servicioPesado.getPrecio());
+	}
+	
+	@Test
+	void siUnServicioDeLavadoDe1000EsUtilizadoEnUnContainerDe250MetrosCubicos_EntoncesElCostoDeServicioSeraDe2000_PorSuperarElVolumenPermitido() {
+		assertEquals(2000, servicioLavado.getPrecioPara(container));
+	}
+	
+	@Test
+	void siUnServicioDeLavadoDe1000EsUtilizadoEnUnContainerDe24MetrosCubicos_EntoncesElCostoDeServicioSeraDe1000_PorNOSuperarElVolumenPermitido() {
+		assertEquals(1000, servicioLavado.getPrecioPara(container1));
+	}
+	
+	@Test
+	void enUnServicioDeElectricidadCreadoConUnCostoDe900000000_SuPrecioSeraDe900000000() {
+		assertEquals(900000000, servicioElectricidad.getPrecio());
 	}
 
 }
