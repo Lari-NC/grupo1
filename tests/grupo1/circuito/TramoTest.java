@@ -1,27 +1,29 @@
 package grupo1.circuito;
 
-import grupo1.Posicion;
 import grupo1.Terminal;
 import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 class TramoTest {
 	
-	private Posicion posicionDeA;
-	private Posicion posicionDeB;
 	private Terminal terminalA;
 	private Terminal terminalB;
 	private Tramo tramo1;
 	
 	@BeforeEach
 	void setUp() throws Exception {
-		posicionDeA = new Posicion(1,1);
-		posicionDeB = new Posicion(1,2); 
-		terminalA   = new Terminal(posicionDeA);
-		terminalB   = new Terminal(posicionDeB);
-		tramo1      = new Tramo(terminalA,terminalB, 1, 1000);
+		this.terminalA = mock(Terminal.class);
+		this.terminalB = mock(Terminal.class);
+		this.tramo1 = mock(Tramo.class);
+		this.tramo1 = mock(Tramo.class);
+			when(this.tramo1.getTerminalInicio()).thenReturn(terminalA);
+		    when(this.tramo1.getTerminalLlegada()).thenReturn(terminalB);
+		    when(this.tramo1.getTiempo()).thenReturn(1);
+		    when(this.tramo1.getPrecio()).thenReturn(1000);
 	}
 
 	@Test

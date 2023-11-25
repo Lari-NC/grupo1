@@ -2,6 +2,7 @@ package grupo1.circuito;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
 import java.time.LocalDate;
 import java.util.*;
@@ -24,13 +25,23 @@ class CircuitoTest {
 	@BeforeEach
 	void setUp() throws Exception {
 		
-	      terminalA = mock(Terminal.class);
-	      terminalB = mock(Terminal.class);
-	      terminalC = mock(Terminal.class);
-	      tramo1 = new Tramo(terminalA, terminalB, 1, 1000);
-	      tramo2 = new Tramo(terminalB, terminalC, 3, 2000);
-	      // creo que tienen que ser mocks ^^ si testeamso circuito, el resto trien que ser mocks. 
-	      circuito = new Circuito(LocalDate.of(2023, 11, 15));
+	      this.terminalA = mock(Terminal.class);
+	      this.terminalB = mock(Terminal.class);
+	      this.terminalC = mock(Terminal.class);
+	      
+	      this.tramo1 = mock(Tramo.class);
+			when(this.tramo1.getTerminalInicio()).thenReturn(terminalA);
+		    when(this.tramo1.getTerminalLlegada()).thenReturn(terminalB);
+		    when(this.tramo1.getTiempo()).thenReturn(1);
+		    when(this.tramo1.getPrecio()).thenReturn(1000);
+		    
+	      this.tramo2 = mock(Tramo.class);
+	      	when(this.tramo2.getTerminalInicio()).thenReturn(terminalB);
+	      	when(this.tramo2.getTerminalLlegada()).thenReturn(terminalC);
+	      	when(this.tramo2.getTiempo()).thenReturn(3);
+	      	when(this.tramo1.getPrecio()).thenReturn(2000);
+	      	
+	      	this.circuito = new Circuito(LocalDate.of(2023, 11, 15));
 	}
 
 	@Test
@@ -76,7 +87,8 @@ class CircuitoTest {
 	@Test
 	void cuandoAgregamosUnTramoDesdeTermAHastaTermB_AUnCircuitoRecienCreado_LaPosiciónDeTermAEs0() {
 		circuito.addTramo(tramo1);
-		assertEquals(0, circuito.posicionDeTerminalEnRecorrido(terminalA));
+		int resultado = circuito.posicionDeTerminalEnRecorrido(terminalA);
+		assertEquals(0, resultado);
 	}
 	
 	

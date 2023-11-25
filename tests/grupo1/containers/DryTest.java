@@ -16,28 +16,21 @@ class DryTest {
 	}
 
 	@Test
-	void cuandoUnContainerDryEsRecienCreadoConUnAncho5Metros_EntoncesSuAnchoSeraDe5Metros() {
+	void seCreaUnDry() {
+	
 		assertEquals(5, containerDry.getAncho());
-	}
-	
-	@Test
-	void cuandoUnContainerDryEsRecienCreadoConUnLargoDe10Metros_EntoncesSuLargoSeraDe10Metros() {
 		assertEquals(10, containerDry.getLargo());
-	}
-	
-	@Test
-	void cuandoUnContainerDryEsRecienCreadoConUnaAlturaDe10Metros_EntoncesSuAlturaSeraDe10Metros() {
 		assertEquals(5, containerDry.getAlto());
+		assertEquals(100, containerDry.getPesoTotal());
+
 	}
 	
-	@Test
-	void cuandoUnContainerDryEsRecienCreadoConUnPesoDe100Kilos_EntoncesSuPesoSeraDe100Kilos() {
-		assertEquals(100, containerDry.getPesoTotal());
-	}
 	
 	@Test 
 	void cuandoUnContainerDryRecienCreadoConLasDimencionesDe5x10x5_EntoncesTendra250MetrosCubicos() {
 		assertEquals(250, containerDry.metrosCubicos());
 	}
+	
+		
 
 }
