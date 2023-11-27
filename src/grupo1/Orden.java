@@ -8,6 +8,7 @@ import grupo1.cliente.Shipper;
 import grupo1.containers.Container;
 import grupo1.transporte.Camion;
 import grupo1.transporte.Chofer;
+import grupo1.servicios.Almacenamiento;
 import grupo1.servicios.Servicio;
 
 public class Orden {
@@ -73,11 +74,8 @@ public class Orden {
 		return factura;
 	}
 	
-	public void agregarServicioAlmacenamiento(Servicio servicioAlmacenamiento) {
+	public void agregarServicioAlmacenamiento(Almacenamiento servicioAlmacenamiento) {
 		this.getServicios().add(servicioAlmacenamiento);
 	}
 	
-	public void agregarServicioPesado(Servicio servicioPesado) {
-		this.getServicios().add(servicioPesado);
-	}
 }
