@@ -143,7 +143,7 @@ public class Circuito {
 	
 	public int posicionDeTramoConTerminalInicial(Terminal terminalInicial) {
 		for (int i = 0; i < this.getTramos().size(); i++) {
-            if (this.getTramos().get(i).getTerminalInicio() == terminalInicial) {
+            if (this.getTramos().get(i).getTerminalInicio().equals(terminalInicial)) {
                 return i; // Elemento encontrado, devuelve el índice
             }
         }
@@ -152,7 +152,7 @@ public class Circuito {
 	
 	public int posicionDeTramoConTerminalFinal(Terminal terminalFinal) {
 		for (int i = 0; i < this.getTramos().size(); i++) {
-            if (this.getTramos().get(i).getTerminalLlegada() == terminalFinal) {
+            if (this.getTramos().get(i).getTerminalLlegada().equals(terminalFinal)) {
                 return i; // Elemento encontrado, devuelve el índice
             }
         }
