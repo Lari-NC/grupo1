@@ -62,7 +62,7 @@ public class Buque{
     
     public void actualizarFase() {
     	
-    	if (this.getfase().condicionFase(this)) {
+    	if (this.getfase().siguiente().condicionFase(this)) {
     		this.faseActual = this.getfase().siguiente() ;
     		this.realizarAccionFase();
     	}
@@ -79,12 +79,6 @@ public class Buque{
     public void recibirOrdenDepart() {
     	this.ordenDepart = true;
     }
-
-	public void addCargasDe(List<Orden> ordenes) {
-		for(Orden o : ordenes) {
-			this.addCarga(o.getContainer());
-		}
-	}
     
     public void darAvisoInboundATerminal() {
     	this.getTerminal().recibirBuqueAvisoInbound(this);

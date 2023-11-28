@@ -12,10 +12,6 @@ public abstract class Fase {
     
     public abstract Fase siguiente();
     
-    public boolean puedoCambiarFase(Buque buque) {
-    	return buque.getfase().siguiente().condicionFase(buque);
-    }
-    
     public abstract void realizarAccion(Buque buque);
     
 }
