@@ -10,7 +10,7 @@ public class Arrived extends Fase{
     
     @Override
     public boolean condicionFase(Buque buque) {
-    	return buque.getDistancia() == 0;
+    	return buque.getDistanciaATerminalGestionada() == 0;
     }
     
     @Override

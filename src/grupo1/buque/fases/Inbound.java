@@ -10,7 +10,7 @@ public class Inbound extends Fase{
     
     @Override
     public boolean condicionFase(Buque buque) {
-    	return buque.getDistancia() <= 50;
+    	return buque.getDistanciaATerminalGestionada() <= 50;
     }
     
     
