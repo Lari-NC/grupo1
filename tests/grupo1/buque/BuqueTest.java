@@ -1,13 +1,8 @@
 package grupo1.buque;
 
 import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
-
-import java.util.ArrayList;
-import java.util.List;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -16,11 +11,9 @@ import grupo1.Posicion;
 import grupo1.TerminalGestionada;
 import grupo1.buque.fases.Arrived;
 import grupo1.buque.fases.Departing;
-import grupo1.buque.fases.Fase;
 import grupo1.buque.fases.Inbound;
 import grupo1.buque.fases.Outbound;
 import grupo1.buque.fases.Working;
-import grupo1.containers.Container;
 
 class BuqueTest {
 	
