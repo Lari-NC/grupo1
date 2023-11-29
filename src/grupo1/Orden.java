@@ -8,7 +8,6 @@ import grupo1.cliente.Shipper;
 import grupo1.containers.Container;
 import grupo1.transporte.Camion;
 import grupo1.transporte.Chofer;
-import grupo1.servicios.Almacenamiento;
 import grupo1.servicios.Servicio;
 
 public class Orden {
