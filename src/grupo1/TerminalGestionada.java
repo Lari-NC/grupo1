@@ -1,6 +1,7 @@
 package grupo1;
 
 import java.time.LocalDate;
+import java.time.Period;
 import java.util.*;
 
 import grupo1.buque.Buque;
@@ -8,6 +9,7 @@ import grupo1.circuito.Circuito;
 import grupo1.cliente.Consignee;
 import grupo1.cliente.Shipper;
 import grupo1.containers.Container;
+import grupo1.servicios.Almacenamiento;
 import grupo1.servicios.Pesado;
 import grupo1.servicios.Servicio;
 import grupo1.transporte.Camion;
@@ -31,7 +33,7 @@ public class TerminalGestionada extends Terminal{
     private int precioServicioAlmacenamientoPorHoraExtra;
     
    public TerminalGestionada(Posicion p, int precioP, int precioA) { 
-	   super(p); 
+	   super(p);
 	   this.precioServicioPesado = precioP;
 	   this.precioServicioAlmacenamientoPorHoraExtra = precioA;
    }
@@ -52,11 +54,11 @@ public class TerminalGestionada extends Terminal{
 
         this.entraUnCamionALaTerminal(camion);
         this.asegurarseQueElCamionRetireLaOrdenCorrecta(camion, orden);
-        if(fechaRetiro.isAfter(orden.getFechaDeLlegada())) {
+        int diasEntreRetiroYLlegada = (Period.between(orden.getFechaDeLlegada(), fechaRetiro)).getDays();
+        for(int i = diasEntreRetiroYLlegada; i > 0; i--) {
         	this.agregarServicioAlmacenamientoA(orden);
         }
-        
-        this.realizarEntregaCarga(orden);	
+        this.realizarEntregaCarga(orden);
 	}
 
 	private void realizarEntregaCarga(Orden orden) {
@@ -65,12 +67,8 @@ public class TerminalGestionada extends Terminal{
 	
     
     private void agregarServicioAlmacenamientoA(Orden orden) {
-	//no
-		for(Servicio servicio : this.getServiciosAOfrecer()) {
-			if(servicio.getTipoServicio() == "Almacenamiento") {
-				orden.agregarServicioAlmacenamiento(servicio)//;
-			}
-		}
+    	Almacenamiento servicioAlmacenamientoAAsignar = new Almacenamiento(this.getPrecioServicioAlmacenamientoPorHoraExtra());
+    	orden.agregarServicioDeTerminal(servicioAlmacenamientoAAsignar);
 	}
 
     
@@ -154,16 +152,7 @@ public class TerminalGestionada extends Terminal{
     
     
 				// FALTAN:
-			    public Circuito mejorCircuitoHasta_(Terminal terminalDestino) {
-					// 3.Devolver el mejor circuito que une a la terminal con un determinado puerto destino.
-					// mejor circuito en base a que??? NAVIERA STRATEGY
-					
-					return ;
-				}
-			    
-				
-				
-				public LocalDate proximaFechaDePartidaDelBuque_HastaTerminal_ (Buque buque, Terminal terminalDestino) {
+			    public LocalDate proximaFechaDePartidaDelBuque_HastaTerminal_ (Buque buque, Terminal terminalDestino) {
 					// 5. Devolver la próxima fecha de partida de un buque desde la terminal gestionada hasta otra terminal 
 					// de destino.
 					

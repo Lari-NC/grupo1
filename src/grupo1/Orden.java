@@ -78,8 +78,4 @@ public class Orden {
 		this.getServicios().add(servicio);
 	}
 	
-	public void agregarServicioAlmacenamiento(Almacenamiento servicioAlmacenamiento) {
-		this.getServicios().add(servicioAlmacenamiento);
-	}
-	
 }
