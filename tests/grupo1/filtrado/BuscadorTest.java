@@ -18,7 +18,6 @@ import grupo1.circuito.Tramo;
 
 class BuscadorTest {
 	
-	private Busqueda busqueda;
 	private ArrayList<Circuito> ofertaCircuitos = new ArrayList<>();
 	
 	private TerminalGestionada bsAs;
