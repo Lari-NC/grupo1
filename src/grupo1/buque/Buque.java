@@ -37,7 +37,7 @@ public class Buque{
     	this.actualizarFase();
     }
     
-    public Fase getfase() {
+    public Fase getFase() {
     	return this.faseActual;
     }
     
@@ -62,8 +62,8 @@ public class Buque{
     
     public void actualizarFase() {
     	
-    	if (this.getfase().siguiente().condicionFase(this)) {
-    		this.faseActual = this.getfase().siguiente() ;
+    	if (this.getFase().siguiente().condicionFase(this)) {
+    		this.faseActual = this.getFase().siguiente() ;
     		this.realizarAccionFase();
     	}
     }

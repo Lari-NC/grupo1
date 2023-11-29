@@ -56,7 +56,7 @@ class BuqueTest {
 	@Test
 	public void unBuqueSePuedeMoverSinCambiarDeFase() {
 		
-			boolean esOutbound = this.buque.getfase() instanceof Outbound ;
+			boolean esOutbound = this.buque.getFase() instanceof Outbound ;
 			assertTrue(esOutbound);
 			//mover buque
 			Posicion nuevaPosicion = new Posicion(5,5);
@@ -66,7 +66,7 @@ class BuqueTest {
 	     	int distancia = buque.getDistanciaATerminalGestionada();
 	        assertEquals(63, distancia);
 	        //asertar que sigo en outbound
-	        esOutbound = this.buque.getfase() instanceof Outbound ;
+	        esOutbound = this.buque.getFase() instanceof Outbound ;
 	        assertTrue(esOutbound);
 	    }
 	
@@ -80,7 +80,7 @@ class BuqueTest {
 	     	int distancia = buque.getDistanciaATerminalGestionada();
 	        assertEquals(36, distancia);
 	        //assertar si es inbound la nueva fase
-	        boolean esInbound = this.buque.getfase() instanceof Inbound ;
+	        boolean esInbound = this.buque.getFase() instanceof Inbound ;
 	        assertTrue(esInbound);
 	    }
 	
@@ -96,22 +96,97 @@ class BuqueTest {
 	     	int distanciaA = buque.getDistanciaATerminalGestionada();
 	        assertEquals(0, distanciaA);
 	    
-	        boolean esArrived = this.buque.getfase() instanceof Arrived ;
+	        boolean esArrived = this.buque.getFase() instanceof Arrived ;
 	        assertTrue(esArrived);
 	        
 	        
 	    }
-	
-	//a partir de aca no funcionan hay que verlos bien solo estan planteados
-	//seguro es un error super boludo
-	//creo que es tema de mockito pero no se el jueve sisno pregunto
+
 	
 	@Test
-	public void laTermianlDaLaOrdenDeWorrkingAUnBuqueYPasaDeFaseArrivedAWorking() {
+	public void laTerminalDaLaOrdenDeWorkingAUnBuqueYPasaDeFaseArrivedAWorking() {
+		//Por cosas del mock no se puede testear sin una terminal de verdad,
+		//porque verificamos que mandaba el mensaje, pero el buque nunca lo recibia (al final comentado)
+		
+		Posicion posicionTerminal = new Posicion(50,50);
+		TerminalGestionada terminalG_T = new TerminalGestionada(posicionTerminal);
+		Buque buque_T = new Buque(terminalG_T, posicionInicialBuque);
+		
+			Posicion posicionInbound = new Posicion(30,20); //outbound
+	     	buque_T.actualizarPosicion(posicionInbound); //inbound
+	     	buque_T.actualizarPosicion(posicionTerminal); //arrived
+
+	     	terminalG_T.darOrdenWorking(buque_T); 
+	     	
+	     	assertTrue(buque_T.tieneOrdenWorking());
+	     	
+	     	buque_T.actualizarPosicion(posicionTerminal); //actualizamos de vuelta apra que cambie la fase
+	     	
+	     	boolean esWorking = buque_T.getFase() instanceof Working;
+	     	assertTrue(esWorking);
+	     	    
+	    }
+	
+	@Test
+	public void laTermianlDaLaOrdenDeDepartAUnBuqueYPasaDeWorkingADeparting() {
 			
+		Posicion posicionTerminal = new Posicion(50,50);
+		TerminalGestionada terminalG_T = new TerminalGestionada(posicionTerminal);
+		Buque buque_T = new Buque(terminalG_T, posicionInicialBuque);
+		
+			Posicion posicionInbound = new Posicion(30,20);
+	     	buque_T.actualizarPosicion(posicionInbound);
+	     	buque_T.actualizarPosicion(posicionTerminal);
+	     	terminalG_T.darOrdenWorking(buque_T);   	
+	     	buque_T.actualizarPosicion(posicionTerminal);
+	     	
+	     	terminalG_T.darOrdenDepart(buque_T);
+	     	
+	     	assertTrue(buque_T.tieneOrdenDepart());
+	     	buque_T.actualizarPosicion(posicionTerminal);
+	     
+	     	boolean esDeparting = buque_T.getFase() instanceof Departing;
+	     	assertTrue(esDeparting);
+	     	
+	     	    
+	    }
+	
+	@Test
+	public void elBuqueSeVaYPasaDeDepartingAOutboundDeVuelta() {
+			
+		Posicion posicionTerminal = new Posicion(50,50);
+		TerminalGestionada terminalG_T = new TerminalGestionada(posicionTerminal);
+		Buque buque_T = new Buque(terminalG_T, posicionInicialBuque);
+		
+			Posicion posicionInbound = new Posicion(30,20);
+	     	buque_T.actualizarPosicion(posicionInbound);
+	     	buque_T.actualizarPosicion(posicionTerminal);
+	     	terminalG_T.darOrdenWorking(buque_T);   	
+	     	buque_T.actualizarPosicion(posicionTerminal);
+	     	terminalG_T.darOrdenDepart(buque_T);
+	     	buque_T.actualizarPosicion(posicionTerminal);
+	     	
+	     	Posicion posicionSalida = new Posicion(52,50);
+	     	buque_T.actualizarPosicion(posicionSalida);
+	     	
+	     	int distanciaSaliendo = buque_T.getDistanciaATerminalGestionada();
+	        assertEquals(2, distanciaSaliendo);
+	        
+	        boolean esOutbound = buque_T.getFase() instanceof Outbound ;
+	        assertTrue(esOutbound);
+	     	 
+	    }
+	
+	
+	/* TEST que con mock no funcionaban :(
+	 * 
+	 * public void laTermianlDaLaOrdenDeWorrkingAUnBuqueYPasaDeFaseArrivedAWorking() {
+		//Por cosas del mock no se puede testear sin una terminal de verdad,
+		//porque verificamos que mandaba el mensaje, pero el buque nunca lo recibia (al final comentado)
+		
 			Posicion posicionInbound = new Posicion(30,20);
 	     	this.buque.actualizarPosicion(posicionInbound);
-	        Posicion posicionArrived = new Posicion(50,50);
+	     	Posicion posicionArrived = new Posicion(50,50);
 	     	this.buque.actualizarPosicion(posicionArrived);
 	
 	     	this.terminalG.darOrdenWorking(buque);
@@ -120,47 +195,5 @@ class BuqueTest {
 	     	assertTrue(buque.tieneOrdenWorking());
 	     	    //no quiere funcionar asjjdfhdfu
 	    }
-	
-	@Test
-	public void laTermianlDaLaOrdenDeDepartAUnBuqueYPasaDeWorkingADeparting() {
-			
-			Posicion posicionInbound = new Posicion(30,20);
-	     	this.buque.actualizarPosicion(posicionInbound);
-	        Posicion posicionArrived = new Posicion(50,50);
-	     	this.buque.actualizarPosicion(posicionArrived);
-	     	this.terminalG.darOrdenWorking(buque);
-	     	verify(terminalG).darOrdenWorking(buque);
-	     	
-	     	this.terminalG.darOrdenDepart(buque);
-	     	verify(terminalG).darOrdenDepart(buque);
-	     	
-	     	assertTrue(buque.tieneOrdenDepart());
-	     	
-	     	    
-	    }
-	
-	@Test
-	public void elBuqueSeVaYPasaDeDepartingAOutboundDeVuelta() {
-			
-			Posicion posicionInbound = new Posicion(30,20);
-	     	this.buque.actualizarPosicion(posicionInbound);
-	        Posicion posicionArrived = new Posicion(50,50);
-	     	this.buque.actualizarPosicion(posicionArrived);
-	     	this.terminalG.darOrdenWorking(buque);
-	     	verify(terminalG).darOrdenWorking(buque);
-	     	
-	     	this.terminalG.darOrdenDepart(buque);
-	     	verify(terminalG).darOrdenDepart(buque);
-	     	
-	     	Posicion posicionSalida = new Posicion(1,1);
-	     	this.buque.actualizarPosicion(posicionSalida);
-	     	
-	     	int distanciaSaliendo = buque.getDistanciaATerminalGestionada();
-	        assertEquals(0, distanciaSaliendo);
-	     	 
-	    }
-	
-	
-	
-	
+	*/
 }
