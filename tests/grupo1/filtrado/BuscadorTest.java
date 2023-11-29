@@ -18,7 +18,6 @@ import grupo1.circuito.Tramo;
 
 class BuscadorTest {
 	
-	private Busqueda busqueda;
 	private ArrayList<Circuito> ofertaCircuitos = new ArrayList<>();
 	
 	private TerminalGestionada bsAs;
@@ -70,7 +69,7 @@ class BuscadorTest {
 		this.circuitoA.addTramo(tramoUsh_Valp);
 		
 			//CIRCUITO A1
-		this.circuitoA1 = new Circuito(LocalDate.of(2023, 3, 1));
+		this.circuitoA1 = new Circuito(LocalDate.of(2023, 3, 3));
 			this.tramoBsAs1_Ush1 = mock(Tramo.class);
 				when(this.tramoBsAs_Ush.getTerminalInicio()).thenReturn(bsAs);
 				when(this.tramoBsAs1_Ush1.getTerminalLlegada()).thenReturn(ushuaia);
