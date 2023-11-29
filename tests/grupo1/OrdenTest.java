@@ -77,7 +77,7 @@ class OrdenTest {
     @Test
     public void aUnaOrdenYaCreadaSeLePuedeAgregarServiciosDeAlmacenamiento() {
     	Almacenamiento sAlmacenamiento = mock(Almacenamiento.class);
-        this.orden.agregarServicioAlmacenamiento(sAlmacenamiento); 
+        this.orden.agregarServicioDeTerminal(sAlmacenamiento); 
         
     	assertTrue(orden.getServicios().contains(sAlmacenamiento));
     }
