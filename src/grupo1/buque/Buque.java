@@ -11,52 +11,59 @@ import grupo1.containers.Container;
 
 public class Buque{
 
-    private List<Container> cargas = new ArrayList<>();
+   // private List<Container> cargas = new ArrayList<>(); no las necesito creo
     private Fase faseActual;
-    private GPS gps;
+    Posicion posicion;
     private TerminalGestionada terminalG;
     private boolean ordenWorking;
     private boolean ordenDepart;
     
-    public Buque(TerminalGestionada tg) {
+    
+    public Buque(TerminalGestionada tg, Posicion posicion) {
      this.faseActual   = new Outbound();
      this.terminalG    = tg;
+     this.posicion = posicion;
      this.ordenWorking = false;
      this.ordenDepart  = false;
     }
     
     public Posicion getPosicion() {
-    	return (this.gps.getPosicion());
+    	return this.posicion;
     }
     
-    public Fase getfase() {
+    public void actualizarPosicion(Posicion posicionNueva) {
+    	//cuando nos movemos, tambien le preguntamos a la fase se puede actualizar
+    	this.posicion = posicionNueva;
+    	this.actualizarFase();
+    }
+    
+    public Fase getFase() {
     	return this.faseActual;
     }
     
-    public List<Container> getCargas() {
+    /*public List<Container> getCargas() {
         return this.cargas;
      
-    }
+    }*/
     
     public TerminalGestionada getTerminal() {
     	return this.terminalG;
     }
     
-    public int getDistancia() {
-    	Posicion posicionT = this.getTerminal().getPosicion();
-    	return (this.getPosicion()).distanciaHasta(posicionT);
+    public int getDistanciaATerminalGestionada() {
+    	int x = this.getPosicion().getCoordenadaX() - this.getTerminal().getPosicion().getCoordenadaX();
+        int y = this.getPosicion().getCoordenadaY() - this.getTerminal().getPosicion().getCoordenadaY();
+        return (int) Math.sqrt(x*x + y*y);
     }
     
-    public void addCarga(Container carga) {
+/* public void addCarga(Container carga) {
         this.cargas.add(carga);
-    }
+    }*/
     
     public void actualizarFase() {
-    	// Asumimos que este mensaje se manda automáticamente cada cierto tiempo para no tener que aplicar un observer
-    	// (según clase de consulta).
     	
-    	if (this.getfase().condicionFase(this)) {
-    		this.faseActual = this.getfase().siguiente() ;
+    	if (this.getFase().siguiente().condicionFase(this)) {
+    		this.faseActual = this.getFase().siguiente() ;
     		this.realizarAccionFase();
     	}
     }
@@ -72,12 +79,6 @@ public class Buque{
     public void recibirOrdenDepart() {
     	this.ordenDepart = true;
     }
-
-	public void addCargasDe(List<Orden> ordenes) {
-		for(Orden o : ordenes) {
-			this.addCarga(o.getContainer());
-		}
-	}
     
     public void darAvisoInboundATerminal() {
     	this.getTerminal().recibirBuqueAvisoInbound(this);

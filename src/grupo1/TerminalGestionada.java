@@ -56,8 +56,7 @@ public class TerminalGestionada extends Terminal{
         	this.agregarServicioAlmacenamientoA(orden);
         }
         
-        this.realizarEntregaCarga(orden)//;
-        //ver como facturar el servicio almacenamiento		
+        this.realizarEntregaCarga(orden);	
 	}
 
 	private void realizarEntregaCarga(Orden orden) {
