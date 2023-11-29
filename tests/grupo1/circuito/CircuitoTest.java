@@ -39,7 +39,7 @@ class CircuitoTest {
 	      	when(this.tramo2.getTerminalInicio()).thenReturn(terminalB);
 	      	when(this.tramo2.getTerminalLlegada()).thenReturn(terminalC);
 	      	when(this.tramo2.getTiempo()).thenReturn(3);
-	      	when(this.tramo1.getPrecio()).thenReturn(2000);
+	      	when(this.tramo2.getPrecio()).thenReturn(2000);
 	      	
 	      	this.circuito = new Circuito(LocalDate.of(2023, 11, 15));
 	}

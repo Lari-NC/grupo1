@@ -136,7 +136,7 @@ public class Circuito {
 	
 	public Circuito crearCircuitoEspecificoPara_Y_(Terminal terminalInicial, Terminal TerminalFinal) {
 		Circuito circuitoEspecifico = new Circuito(this.fechaDeSalida);
-		List<Tramo> listaDeTramosAcordada = this.getTramos().subList (this.posicionDeTramoConTerminalInicial(terminalInicial), this.posicionDeTramoConTerminalFinal(TerminalFinal));
+		List<Tramo> listaDeTramosAcordada = this.getTramos().subList(this.posicionDeTramoConTerminalInicial(terminalInicial), this.posicionDeTramoConTerminalFinal(TerminalFinal)+1);
 		circuitoEspecifico.getTramos().addAll(listaDeTramosAcordada);
 		return circuitoEspecifico;
 	}
