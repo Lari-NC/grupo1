@@ -1,8 +1,7 @@
 package grupo1;
 
 import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 import java.time.LocalDate;
 
@@ -17,9 +16,15 @@ import grupo1.circuito.Tramo;
 
 class ViajeTest {
 	
-	private Terminal terminalInicial;
-	private Terminal terminalDestino;
-	private Tramo tramo;
+	private Terminal terminalA;
+	private Terminal terminalB;
+	private Terminal terminalC;
+	private Terminal terminalD;
+	private Terminal terminalE;
+	private Tramo tramo1;
+	private Tramo tramo2;
+	private Tramo tramo3;
+	private Tramo tramo4;
 	private Circuito circuito;
 	private Buque buque;
 	private Viaje viaje;
@@ -27,57 +32,56 @@ class ViajeTest {
     @BeforeEach
     public void setUp() {
     	
-    	this.terminalInicial = mock(Terminal.class);
-    	this.terminalDestino = mock(Terminal.class);
-    	
-    	this.tramo = mock(Tramo.class);
-
-			when(this.tramo.getTerminalInicio()).thenReturn(terminalInicial);
-		    when(this.tramo.getTerminalLlegada()).thenReturn(terminalDestino);
-		    when(this.tramo.getTiempo()).thenReturn(1);
-		    when(this.tramo.getPrecio()).thenReturn(1000);
+    	this.terminalA = mock(Terminal.class);
+	      this.terminalB = mock(Terminal.class);
+	      this.terminalC = mock(Terminal.class);
+	      this.terminalD = mock(Terminal.class);
+	      this.terminalE = mock(Terminal.class);
+	      
+	      this.tramo1 = mock(Tramo.class);
+			when(this.tramo1.getTerminalInicio()).thenReturn(terminalA);
+		    when(this.tramo1.getTerminalLlegada()).thenReturn(terminalB);
+		    when(this.tramo1.getTiempo()).thenReturn(1);
+		    when(this.tramo1.getPrecio()).thenReturn(1000);
 		    
-		this.circuito = new Circuito(LocalDate.of(2023, 11, 15));
+	      this.tramo2 = mock(Tramo.class);
+	      	when(this.tramo2.getTerminalInicio()).thenReturn(terminalB);
+	      	when(this.tramo2.getTerminalLlegada()).thenReturn(terminalC);
+	      	when(this.tramo2.getTiempo()).thenReturn(3);
+	      	when(this.tramo2.getPrecio()).thenReturn(2000);
+	      	
+	      	this.tramo3 = mock(Tramo.class);
+	      	when(this.tramo3.getTerminalInicio()).thenReturn(terminalC);
+	      	when(this.tramo3.getTerminalLlegada()).thenReturn(terminalD);
+	      	when(this.tramo3.getTiempo()).thenReturn(3);
+	      	when(this.tramo3.getPrecio()).thenReturn(2000);
+	      	
+	      	this.tramo4 = mock(Tramo.class);
+	      	when(this.tramo4.getTerminalInicio()).thenReturn(terminalD);
+	      	when(this.tramo4.getTerminalLlegada()).thenReturn(terminalE);
+	      	when(this.tramo4.getTiempo()).thenReturn(3);
+	      	when(this.tramo4.getPrecio()).thenReturn(2000);
+	     	
+	    this.circuito = new Circuito(LocalDate.of(2023, 11, 15));
+	    this.circuito.addTramo(tramo1);
+	    this.circuito.addTramo(tramo2);
+	    this.circuito.addTramo(tramo3);
+	    this.circuito.addTramo(tramo4);
 		
 		this.buque = mock(Buque.class);
 				
-    	this.viaje = new Viaje(circuito, buque, terminalInicial, terminalDestino);
+    	this.viaje = new Viaje(circuito, buque, terminalB, terminalD);
     }
     
-
-	@Test
-    void x() {
-    	circuito.addTramo(tramo);
-    	assertEquals(0, circuito.posicionDeTramoConTerminalInicial(terminalInicial));
-    }
-
-    /*
     @Test
-    public void viajeSeCreaCorrectamente() {
+    public void testInstanciacionDeViaje() {
+    	
+    	assertTrue(this.viaje.getCircuito().getTramos().contains(tramo2));
+    	assertTrue(this.viaje.getCircuito().getTramos().contains(tramo3));
+    	assertEquals(4000, viaje.getPrecioViaje());
     	assertEquals(buque, viaje.getBuque());
-    }
-    */
-    
-    /*
-    @Test
-    public void viajeSeCreaCorrectamente1() {
-    	assertEquals(circuito.crearCircuitoEspecificoPara_Y_(terminalInicial, terminalDestino), viaje.getCircuito());
+    	assertEquals(terminalB, viaje.getTerminalInicial());
+    	assertEquals(terminalD, viaje.getTerminalDestino());
     }
     
-    @Test
-    public void viajeSeCreaCorrectamente2() {
-    	assertEquals(terminalInicial, viaje.getTerminalInicial());
-
-    }
-    
-    @Test
-    public void viajeSeCreaCorrectamente3() {
-    	assertEquals(terminalDestino, viaje.getTerminalDestino());
-    }
-    
-    @Test
-    public void elPrecioDeUnViaje_EsEquivalenteAlPrecioDelRecorridoQueHaceElCircuitoDesdeLaTerminalInicialHastaLaTerminalDestino() {
-    	assertEquals(1000, viaje.getPrecioViaje());
-    }
-    */
 }
