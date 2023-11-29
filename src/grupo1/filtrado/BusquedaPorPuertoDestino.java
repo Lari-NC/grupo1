@@ -9,16 +9,16 @@ import grupo1.circuito.Circuito;
 public class BusquedaPorPuertoDestino extends Busqueda{
 	 
 	private Terminal terminalDestino;
-	private Terminal terminalOrigen;
+	
 
-	public BusquedaPorPuertoDestino(Terminal terminalOrigen, Terminal terminalDestino) {
+	public BusquedaPorPuertoDestino(Terminal terminalDestino) {
 		this.terminalDestino = terminalDestino;
-		this.terminalOrigen  = terminalOrigen;
+
 	}
 
 	@Override
-	public List<Circuito> buscar(List<Circuito> lista) {
+	public ArrayList<Circuito> buscar(ArrayList<Circuito> lista) {
 		
-		return lista.stream()				.filter(circuito -> circuito.incluyeATerminalDespuesDeTerminal(this.terminalOrigen, this.terminalDestino))				.collect(Collectors.toCollection(ArrayList::new));
+		return lista.stream()				.filter(circuito -> circuito.incluyeATerminal(this.terminalDestino))				.collect(Collectors.toCollection(ArrayList::new));
 	}
 }
