@@ -2,19 +2,19 @@ package grupo1.filtrado;
 
 
 public abstract class Binario extends Busqueda {
-	 private Busqueda filtro1;
-	 private Busqueda filtro2;
+	 private Busqueda busqueda1;
+	 private Busqueda busqueda2;
 	 
-	   public Binario(Busqueda filtro1, Busqueda filtro2) {
-	        this.filtro1 = filtro1;
-	        this.filtro2 = filtro2;
+	   public Binario(Busqueda busqueda1, Busqueda busqueda2) {
+	        this.busqueda1 = busqueda1;
+	        this.busqueda2 = busqueda2;
 	    }
 
-	public Busqueda getFiltro1() {
-		return filtro1;
+	public Busqueda getBusqueda1() {
+		return busqueda1;
 	}
 
-	public Busqueda getFiltro2() {
-		return filtro2;
+	public Busqueda getBusqueda2() {
+		return busqueda2;
 	}
 }

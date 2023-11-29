@@ -74,6 +74,10 @@ public class Orden {
 		return factura;
 	}
 	
+	public void agregarServicioDeTerminal(Servicio servicio) {
+		this.getServicios().add(servicio);
+	}
+	
 	public void agregarServicioAlmacenamiento(Almacenamiento servicioAlmacenamiento) {
 		this.getServicios().add(servicioAlmacenamiento);
 	}

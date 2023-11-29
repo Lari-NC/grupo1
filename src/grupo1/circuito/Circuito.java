@@ -126,12 +126,12 @@ public class Circuito {
 						  this.getFechaSalidaTramo(tramo).equals(fecha));
 	}
 	
-	public boolean llegaEnLaFecha(Terminal terminalGestionada, LocalDate fecha) {
+	public boolean llegaEnLaFecha(Terminal terminalDestino, LocalDate fecha) {
 		// En nuestro caso la terminal de origen siempre debería ser la gestionada.
 		// NOTA: Usé streams para evitar el miedo al booleano con un if addentro de 
 		// un for que retorne directamente true o false.
 		return tramos.stream()
-                .anyMatch(tramo -> this.getFechaLlegadaTramo(tramo).equals(fecha));
+                .anyMatch(tramo -> (this.getFechaLlegadaTramo(tramo).isBefore(fecha))&&(tramo.getTerminalLlegada().equals(terminalDestino)));
 	}
 	
 	public Circuito crearCircuitoEspecificoPara_Y_(Terminal terminalInicial, Terminal TerminalFinal) {

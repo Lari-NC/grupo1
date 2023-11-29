@@ -8,6 +8,7 @@ import grupo1.circuito.Circuito;
 import grupo1.cliente.Consignee;
 import grupo1.cliente.Shipper;
 import grupo1.containers.Container;
+import grupo1.servicios.Pesado;
 import grupo1.servicios.Servicio;
 import grupo1.transporte.Camion;
 import grupo1.transporte.Chofer;
@@ -26,8 +27,14 @@ public class TerminalGestionada extends Terminal{
     private List<Orden> ordenesExpo 			= new ArrayList<>();
     private List<Orden> ordenesImpo 			= new ArrayList<>();
     private List<Servicio> serviciosAOfrecer	= new ArrayList<>();
+    private int precioServicioPesado;
+    private int precioServicioAlmacenamientoPorHoraExtra;
     
-   public TerminalGestionada(Posicion p) { super(p); }
+   public TerminalGestionada(Posicion p, int precioP, int precioA) { 
+	   super(p); 
+	   this.precioServicioPesado = precioP;
+	   this.precioServicioAlmacenamientoPorHoraExtra = precioA;
+   }
 
    
     // IMPORTACIÓN:
@@ -116,8 +123,10 @@ public class TerminalGestionada extends Terminal{
 	
     
     //EXPORTACIÓN:
-    public void registrarExportacion (Shipper emisor, Consignee receptor, Container container, Viaje viaje, LocalDate fechaDeSalida, LocalDate fechaDeLlegada, Camion camion, Chofer chofer,List<Servicio> servicios) {
+    public void registrarExportacion (Shipper emisor, Consignee receptor, Container container, Viaje viaje, LocalDate fechaDeSalida, LocalDate fechaDeLlegada, Camion camion, Chofer chofer, List<Servicio> servicios) {
     	Orden ordenARegistar = new Orden(emisor, receptor, container, viaje, fechaDeSalida, fechaDeLlegada, camion, chofer, servicios);
+    	Pesado servicioPesadoAAsignar = new Pesado(this.getPrecioServicioPesado());
+    	ordenARegistar.agregarServicioDeTerminal(servicioPesadoAAsignar);
     	this.ordenesExpo.add(ordenARegistar);
     }
     
@@ -138,14 +147,15 @@ public class TerminalGestionada extends Terminal{
     
     //Otras cositas :)
     public int cantidadDeTiempoQueTardaLaNaviera_EnLlegarA_(Naviera naviera, Terminal terminalDestino) {
-		//4. Devuelve cuanto tarda una naviera en llegar desde la terminal gestionada hacia otra terminal, independientemente de las fechas de los viajes programados.
+		// 4. Devuelve cuanto tarda una naviera en llegar desde la terminal gestionada hacia otra terminal, independientemente 
+    	// de las fechas de los viajes programados.
 		return naviera.tiempoDeViajeDesdeHastaTerminal(this, terminalDestino);
 	}
     
     
 				// FALTAN:
 			    public Circuito mejorCircuitoHasta_(Terminal terminalDestino) {
-					//3.Devolver el mejor circuito que une a la terminal con un determinado puerto destino.
+					// 3.Devolver el mejor circuito que une a la terminal con un determinado puerto destino.
 					// mejor circuito en base a que??? NAVIERA STRATEGY
 					
 					return ;
@@ -154,7 +164,8 @@ public class TerminalGestionada extends Terminal{
 				
 				
 				public LocalDate proximaFechaDePartidaDelBuque_HastaTerminal_ (Buque buque, Terminal terminalDestino) {
-					//5. Devolver la próxima fecha de partida de un buque desde la terminal gestionada hasta otra terminal de destino.
+					// 5. Devolver la próxima fecha de partida de un buque desde la terminal gestionada hasta otra terminal 
+					// de destino.
 					
 					return ;
 				}
@@ -193,42 +204,67 @@ public class TerminalGestionada extends Terminal{
         }
     }
     
+    public void modificarPrecioServicioPesado(int precio) {
+    	this.precioServicioPesado = precio;
+    }
+    
+    public void modificarPrecioServicioAlmacenamientoPorHoraExtra(int precio) {
+    	this.precioServicioAlmacenamientoPorHoraExtra = precio;
+    }
+    
+    
     // GETTERS:
 	public List<Orden> getOrdenesExportacion() {
-		return this.ordenesExpo; }
+		return this.ordenesExpo; 
+	}
 	
 	public List<Orden> getOrdenesImportacion() {
-		return this.ordenesImpo; }
+		return this.ordenesImpo; 
+	}
 	
 	public List<Chofer> getChoferesPermitidos() {
-        return choferesPermitidos; }
+        return choferesPermitidos; 
+    }
 
     public List<Camion> getCamionesPermitidos() {
-        return camionesPermitidos; }
-	
+        return camionesPermitidos; 
+    }
 	
 	public List<Servicio> getServiciosAOfrecer() {
-		return serviciosAOfrecer; }
+		return serviciosAOfrecer; 
+	}
+	
+	public int getPrecioServicioPesado() {
+		return this.precioServicioPesado;
+	}
+	
+	public int getPrecioServicioAlmacenamientoPorHoraExtra() {
+		return this.precioServicioAlmacenamientoPorHoraExtra;
+	}
 	
 	
 	//ERRORES:
     private void chequearSiElCamionEstaRegistrado(Camion camion) {
     	if (!this.getCamionesPermitidos().contains(camion)) {
         	throw new IllegalArgumentException("El camion no tiene el ingreso permitido a la terminal");
-        }  }
+        }  
+    }
 
     private void chequearSiElChoferEstaRegistrado(Chofer chofer) {
     	if (!this.getChoferesPermitidos().contains(chofer)) {
         	throw new IllegalArgumentException("El chofer no tiene el ingreso permitido a la terminal");
-    	} }
+    	} 
+    }
  
 	public void chequearSiElChoferEstaDeclaradoEnLaOrden(Chofer chofer, Orden orden) {
 		if (!(orden.getChofer()==chofer)) {
         	throw new IllegalArgumentException("El chofer no es el declarado en la orden");
-    	} }
+    	} 
+	}
 
 	public void chequearSiElCamionEstaDeclaradoEnLaOrden(Camion camion, Orden orden) {
 		if (!(orden.getCamion()==camion)) {
         	throw new IllegalArgumentException("El camion no es el declarado en la orden");
-    	} }
+    	} 
+	}
 }
