@@ -28,8 +28,6 @@ class BuqueTest {
     private Posicion posicionInicialBuque;
     private Posicion posicionTerminal;
     private TerminalGestionada terminalG;
-    private boolean ordenWorking;
-    private boolean ordenDepart;
     
     
 	@BeforeEach
