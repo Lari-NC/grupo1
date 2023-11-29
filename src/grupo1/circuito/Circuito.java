@@ -109,13 +109,6 @@ public class Circuito {
 	}
 	
 	
-	public boolean incluyeATerminalDespuesDeTerminal(Terminal terminalA, Terminal terminalB) {	
-		// En nuestro caso la terminalA siempre debería ser la gestionada.
-		return incluyeATerminal(terminalA) && 
-			   incluyeATerminal(terminalB) && 
-			   (posicionDeTerminalEnRecorrido(terminalA) > posicionDeTerminalEnRecorrido(terminalB));
-	}
-	
 	public boolean saleDeTerminalEnLaFecha(Terminal terminalSalida, LocalDate fecha) {
 		// En nuestro caso la terminal de origen siempre debería ser la gestionada.
 		// NOTA: Usé streams para evitar que con un for siga iterando a pedar de haber 
