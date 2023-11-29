@@ -32,7 +32,6 @@ public class Circuito {
 		return this.getTramos().get(0);
 	}
 
-//Para que se usan??
 	public LocalDate getFechaSalidaTramo(Tramo tramo) {
     	// PRECONDICIÓN: El tramo dado debe existir en el circuito.
     	LocalDate fecha = this.getFechaDeSalida();
@@ -160,58 +159,4 @@ public class Circuito {
 	}
  }
 
-	
-
-/* ELIMINADOS (?:
-
-	public boolean incluyeATerminal(Terminal terminal) {
-		Recorrido buscando la terminal parametrizada en nuestros tramos de llegada, analizando el caso borde
-		de que la terminal sea la terminal de partida del circuito 
-	   
-		Terminal primeraTerminal = this.primerTramo().getTerminalInicio();
-		boolean resultado = primeraTerminal.equals(terminal);
-	   
-		while(!resultado) {
-			for(Tramo t : tramos ) {
-				resultado = t.getTerminalLlegada().equals(terminal);
-			}
-		}  
-		   return resultado;
-		   
-		   *
-		   *
-		 
-		  
-		//bsuco caso borde de que sea la primera terminal de todo el circuito
-	    Terminal primeraTerminal = this.primerTramo().getTerminalInicio();
-	    boolean resultado = primeraTerminal.equals(terminal);
-	}
-
-	public boolean incluyeATerminal(Terminal terminal) {
-	    // Recorrido buscando la terminal en los tramos de llegada
-	    for (Tramo t : this.getTramos()) {
-	        // Verificar si la terminal es la terminal de llegada en algún tramo
-	        if (t.getTerminalLlegada().equals(terminal)) {
-	            resultado = true;
-	        }
-	    }
-
-	    return resultado;
-	}
-	
-	public boolean incluyeATerminalDespuesDeTerminal(Terminal terminalA, Terminal terminalB) {
-		
-		boolean encontreGestionada = false;
-	    boolean estaDestinoDespuesDeGestionada = false;
-	    
-	    for (Tramo tramo : this.getTramos()) {
-	    	//chequeo si encuentro la terminalA(primero)
-	        encontreGestionada = tramo.getTerminalInicio().equals(terminalA);
-	        //chequeo  si ya encontre la termnalA y ahora encuento la terminalB
-	        estaDestinoDespuesDeGestionada = encontreGestionada && (tramo.getTerminalInicio().equals(terminalB) || tramo.getTerminalLlegada().equals(terminalB));
-	    }
-	    return estaDestinoDespuesDeGestionada;
-	}
-   
- */
 
