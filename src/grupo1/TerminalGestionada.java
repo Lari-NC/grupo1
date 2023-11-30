@@ -158,7 +158,7 @@ public class TerminalGestionada extends Terminal{
 		
 		for(Circuito c : this.getCircuitosDeInteres()) {
 			if(c.incluyeATerminalDespuesDeTerminal(terminalDestino, this)) {
-				
+				 //vghvhk
 			}
 		}
 		return ;
