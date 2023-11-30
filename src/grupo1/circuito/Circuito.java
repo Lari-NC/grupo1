@@ -95,6 +95,18 @@ public class Circuito {
 		}
 		return tiempoTotal;
 	}
+	
+	public Tramo getTramoConSalidaDesde(Terminal terminalSalida) {
+		// PRECONDICIÓN: Existe un tramo con salida desde esta terminal.
+		for(Tramo tramo : this.getTramos()) {
+			if(tramo.getTerminalInicio().equals(terminalSalida)) {
+				return tramo;
+			}
+		}
+		return this.getPrimerTramo(); // Esto no debe suceder, si el retorno resulta ser el primer tramo es 
+									  // casualidad pero debe haberse dado en la rama del if.
+	}
+	
 
 	// TESTING:
 	public boolean incluyeATerminal(Terminal terminal) {
