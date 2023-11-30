@@ -12,12 +12,10 @@ public class Electricidad extends Servicio{
     
     public double getPrecioPara(Container container) {
     	//se asume que solo se le aplica a reefers
-    	//habria que ver una como la de el amacenamiento que cuente las horas que est
-    	//y le aplique esa cantidad de "servicios" pero franco no lo hizo asiq ue finjamos demencia??
+    	//se aplica como el almacenamiento, uno por dia que esta en la terminal esperando el retiro
     	
         Reefer reefer = (Reefer) container; //dowcastear para poder pedirle el consumo
-        double consumo = reefer.getConsumo();
-        
-        return consumo * getPrecio(); 
+        double consumo = reefer.getConsumo(); 
+        return consumo * getPrecio() * 24; 
     }
 }

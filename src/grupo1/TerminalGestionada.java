@@ -10,6 +10,7 @@ import grupo1.cliente.Consignee;
 import grupo1.cliente.Shipper;
 import grupo1.containers.Container;
 import grupo1.servicios.Almacenamiento;
+import grupo1.servicios.Electricidad;
 import grupo1.servicios.Pesado;
 import grupo1.servicios.Servicio;
 import grupo1.transporte.Camion;
@@ -30,12 +31,14 @@ public class TerminalGestionada extends Terminal{
     private List<Orden> ordenesImpo 			= new ArrayList<>();
     private List<Servicio> serviciosAOfrecer	= new ArrayList<>();
     private int precioServicioPesado;
-    private int precioServicioAlmacenamientoPorHoraExtra;
+    private int precioServicioAlmacenamientoPorDiaExtra;
+    private int precioServicioElectricidadPorDiaExtra;
     
-   public TerminalGestionada(Posicion p, int precioP, int precioA) { 
+   public TerminalGestionada(Posicion p, int precioP, int precioA, int precioE) { 
 	   super(p);
 	   this.precioServicioPesado = precioP;
-	   this.precioServicioAlmacenamientoPorHoraExtra = precioA;
+	   this.precioServicioAlmacenamientoPorDiaExtra = precioA;
+	   this.precioServicioElectricidadPorDiaExtra = precioE;
    }
 
    
@@ -55,9 +58,15 @@ public class TerminalGestionada extends Terminal{
         this.entraUnCamionALaTerminal(camion);
         this.asegurarseQueElCamionRetireLaOrdenCorrecta(camion, orden);
         int diasEntreRetiroYLlegada = (Period.between(orden.getFechaDeLlegada(), fechaRetiro)).getDays();
+        
         for(int i = diasEntreRetiroYLlegada; i > 0; i--) {
         	this.agregarServicioAlmacenamientoA(orden);
         }
+        
+        for(int i = diasEntreRetiroYLlegada; i > 0; i--) {
+        	this.agregarServicioElectricidadA(orden);
+        }
+        
         this.realizarEntregaCarga(orden);
 	}
 
@@ -67,8 +76,13 @@ public class TerminalGestionada extends Terminal{
 	
     
     private void agregarServicioAlmacenamientoA(Orden orden) {
-    	Almacenamiento servicioAlmacenamientoAAsignar = new Almacenamiento(this.getPrecioServicioAlmacenamientoPorHoraExtra());
+    	Almacenamiento servicioAlmacenamientoAAsignar = new Almacenamiento(this.getPrecioServicioAlmacenamientoPorDiaExtra());
     	orden.agregarServicioDeTerminal(servicioAlmacenamientoAAsignar);
+	}
+    
+    private void agregarServicioElectricidadA(Orden orden) {
+    	Electricidad servicioElectricidadAAsignar = new Electricidad(this.getPrecioServicioElectricidadPorDiaExtra());
+    	orden.agregarServicioDeTerminal(servicioElectricidadAAsignar);
 	}
 
     
@@ -209,7 +223,7 @@ public class TerminalGestionada extends Terminal{
     }
     
     public void modificarPrecioServicioAlmacenamientoPorHoraExtra(int precio) {
-    	this.precioServicioAlmacenamientoPorHoraExtra = precio;
+    	this.precioServicioAlmacenamientoPorDiaExtra = precio;
     }
     
     
@@ -238,8 +252,12 @@ public class TerminalGestionada extends Terminal{
 		return this.precioServicioPesado;
 	}
 	
-	public int getPrecioServicioAlmacenamientoPorHoraExtra() {
-		return this.precioServicioAlmacenamientoPorHoraExtra;
+	public int getPrecioServicioAlmacenamientoPorDiaExtra() {
+		return this.precioServicioAlmacenamientoPorDiaExtra;
+	}
+	
+	public int getPrecioServicioElectricidadPorDiaExtra() {
+		return this.precioServicioElectricidadPorDiaExtra;
 	}
 	
 	public List<Circuito> getCircuitosDeInteres(){
