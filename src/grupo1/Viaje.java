@@ -11,8 +11,8 @@ public class Viaje {
     private Terminal terminalDestino;
 
     public Viaje(Circuito c, Buque b, Terminal terminalInicial, Terminal terminalDestino) {
-        this.circuito = c.crearCircuitoEspecificoPara_Y_(terminalInicial, terminalDestino);
-        this.buque 	  = b;
+        this.circuito 		 = c.crearCircuitoEspecificoPara_Y_(terminalInicial, terminalDestino);
+        this.buque 	  		 = b;
         this.terminalInicial = terminalInicial;
         this.terminalDestino = terminalDestino;
     }

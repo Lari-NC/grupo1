@@ -17,9 +17,9 @@ public class Naviera {
     }
     
     public void addCircuito(Circuito circuito) {
-        this.circuitos.add(circuito);
+    	this.circuitos.add(circuito);
     }
-
+    
     public List<Circuito> circuitosQuePasanPorTerminal(Terminal terminal){
         List<Circuito> circuitosQuePasanPorLaTeminalDada = new ArrayList<>();
         for (Circuito circuito : this.getCircuitos()) {

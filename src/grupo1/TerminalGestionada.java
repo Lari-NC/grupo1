@@ -151,33 +151,44 @@ public class TerminalGestionada extends Terminal{
 	}
     
     
-				// FALTAN:
-			    public LocalDate proximaFechaDePartidaDelBuque_HastaTerminal_ (Buque buque, Terminal terminalDestino) {
-					// 5. Devolver la próxima fecha de partida de un buque desde la terminal gestionada hasta otra terminal 
-					// de destino.
-					
-					return ;
-				}
+	// FALTAN:
+	public LocalDate proximaFechaDePartidaATerminal(Terminal terminalDestino) {
+		// 5. Devolver la próxima fecha de partida de un buque desde la terminal gestionada hasta otra terminal 
+		// de destino.
+		
+		for(Circuito c : this.getCircuitosDeInteres()) {
+			if(c.incluyeATerminalDespuesDeTerminal(terminalDestino, this)) {
+				
+			}
+		}
+		return ;
+	}
 
     
     // REGISTRAR(setters): 
     public void registrarNaviera(Naviera naviera) {
-        this.navieras.add(naviera); }
+        this.navieras.add(naviera); 
+    }
 
     public void registrarShipper(Shipper shipper) {
-        this.shippers.add(shipper); }
+        this.shippers.add(shipper); 
+    }
 
     public void registrarConsignee(Consignee consignee) {
-        this.consignees.add(consignee); }
+        this.consignees.add(consignee); 
+    }
     
     public void registrarEmpresaTranportista(EmpresaTransportista empresa) {
-        this.empresas.add(empresa); }
+        this.empresas.add(empresa); 
+    }
 
     public void registrarCamion(Camion camion) {
-        this.camionesPermitidos.add(camion); }
+        this.camionesPermitidos.add(camion); 
+    }
 
     public void registrarChofer(Chofer chofer) {
-        this.choferesPermitidos.add(chofer); }
+        this.choferesPermitidos.add(chofer); 
+    }
     
     public void registrarServiciosAOfrecer(List<Servicio> servicios) {
     	this.getServiciosAOfrecer().addAll(servicios);
@@ -229,6 +240,10 @@ public class TerminalGestionada extends Terminal{
 	
 	public int getPrecioServicioAlmacenamientoPorHoraExtra() {
 		return this.precioServicioAlmacenamientoPorHoraExtra;
+	}
+	
+	public List<Circuito> getCircuitosDeInteres(){
+		return this.circuitosDeInteres;
 	}
 	
 	

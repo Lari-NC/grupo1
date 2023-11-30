@@ -5,11 +5,10 @@ import grupo1.TerminalGestionada;
 import grupo1.buque.fases.Fase;
 import grupo1.buque.fases.Outbound;
 
-public class Buque{
+public class Buque {
 
-   // private List<Container> cargas = new ArrayList<>(); no las necesito creo
-    private Fase faseActual;
-    Posicion posicion;
+	Posicion posicion;
+	private Fase faseActual;
     private TerminalGestionada terminalG;
     private boolean ordenWorking;
     private boolean ordenDepart;
@@ -18,7 +17,7 @@ public class Buque{
     public Buque(TerminalGestionada tg, Posicion posicion) {
      this.faseActual   = new Outbound();
      this.terminalG    = tg;
-     this.posicion = posicion;
+     this.posicion 	   = posicion;
      this.ordenWorking = false;
      this.ordenDepart  = false;
     }
