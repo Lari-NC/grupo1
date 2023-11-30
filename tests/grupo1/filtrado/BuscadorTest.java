@@ -62,19 +62,23 @@ class BuscadorTest {
 			this.tramoBsAs_Ush = mock(Tramo.class);
 				when(this.tramoBsAs_Ush.getTerminalInicio()).thenReturn(bsAs);
 				when(this.tramoBsAs_Ush.getTerminalLlegada()).thenReturn(ushuaia);
+				when(this.tramoBsAs_Ush.getTiempo()).thenReturn(9);
 			this.tramoUsh_Valp = mock(Tramo.class);
 				when(this.tramoUsh_Valp.getTerminalLlegada()).thenReturn(valparaiso);
-				
+				when(this.tramoUsh_Valp.getTiempo()).thenReturn(10);
+		
 		this.circuitoA.addTramo(tramoBsAs_Ush);
 		this.circuitoA.addTramo(tramoUsh_Valp);
 		
 			//CIRCUITO A1
 		this.circuitoA1 = new Circuito(LocalDate.of(2023, 3, 3));
 			this.tramoBsAs1_Ush1 = mock(Tramo.class);
-				when(this.tramoBsAs_Ush.getTerminalInicio()).thenReturn(bsAs);
+				when(this.tramoBsAs1_Ush1.getTerminalInicio()).thenReturn(bsAs);
 				when(this.tramoBsAs1_Ush1.getTerminalLlegada()).thenReturn(ushuaia);
+				when(this.tramoBsAs1_Ush1.getTiempo()).thenReturn(8);
 			this.tramoUsh1_Valp1 = mock(Tramo.class);
 				when(this.tramoUsh1_Valp1.getTerminalLlegada()).thenReturn(valparaiso);
+				when(this.tramoUsh1_Valp1.getTiempo()).thenReturn(8);
 			
 		this.circuitoA1.addTramo(tramoBsAs1_Ush1);
 		this.circuitoA1.addTramo(tramoUsh1_Valp1);
@@ -86,9 +90,12 @@ class BuscadorTest {
 			this.tramoBsAS_PChi = mock(Tramo.class);
 				when(this.tramoBsAS_PChi.getTerminalInicio()).thenReturn(bsAs);
 				when(this.tramoBsAS_PChi.getTerminalLlegada()).thenReturn(puertoChile);
+				when(this.tramoBsAS_PChi.getTiempo()).thenReturn(23);
+				
 			this.tramoPChi_Syd = mock(Tramo.class);
 				when(this.tramoPChi_Syd.getTerminalLlegada()).thenReturn(sidney);
-		
+				when(this.tramoPChi_Syd.getTiempo()).thenReturn(20);
+				
 		this.circuitoB.addTramo(tramoBsAS_PChi);
 		this.circuitoB.addTramo(tramoPChi_Syd);
 		
@@ -98,12 +105,16 @@ class BuscadorTest {
 			this.tramoBsAS_PChi2 = mock(Tramo.class);
 				when(this.tramoBsAS_PChi2.getTerminalInicio()).thenReturn(bsAs);
 				when(this.tramoBsAS_PChi2.getTerminalLlegada()).thenReturn(puertoChile);
+				when(this.tramoBsAS_PChi2.getTiempo()).thenReturn(20);
 				
 			this.tramoPChi_Valp = mock(Tramo.class);
 				when(this.tramoPChi_Valp.getTerminalLlegada()).thenReturn(valparaiso);
+				when(this.tramoPChi_Valp.getTiempo()).thenReturn(9);
 				
 			this.tramoValp_Peru = mock(Tramo.class);
 				when(this.tramoValp_Peru.getTerminalLlegada()).thenReturn(peru);
+				when(this.tramoValp_Peru.getTiempo()).thenReturn(8);
+		
 		
 		this.circuitoC.addTramo(tramoBsAS_PChi2);
 		this.circuitoC.addTramo(tramoPChi_Valp);
@@ -121,7 +132,7 @@ class BuscadorTest {
 	void casoPruebaLlegaAValparaisoOalPeurtoDeChileAntesdel22demarzo() {
 		// (PuertoDestino = Valparaiso AND fechaLlegadaValpaiso < 22/3/23) OR (PuertoDestino = PuertoChile AND fechaLlegadaPuertoChile < 22/3/23) AND
 		LocalDate llegada = LocalDate.of(2023, 3, 22);
-		//configurar mocks
+		
 		
 		Busqueda busquedaValparaiso = new BusquedaPorPuertoDestino(this.valparaiso);
 		Busqueda busquedaPuertoChile = new BusquedaPorPuertoDestino(this.puertoChile);
@@ -147,7 +158,7 @@ class BuscadorTest {
 	void casoPruebaLlegaAlPuertoChilePeroNOAValparaisoYsaleEl1DeMarzo() {
 		// PuertoDestino = puertoChile AND NOT(PuertoDestino = Valpaiso) AND fechaSalida == 1/3/23)
 		LocalDate salida = LocalDate.of(2023, 3, 1); 
-		//configurar mocks
+		
 		
 		Busqueda busquedaPuertoChile = new BusquedaPorPuertoDestino(this.puertoChile);
 		Busqueda busquedaValparaiso = new BusquedaPorPuertoDestino(this.valparaiso);

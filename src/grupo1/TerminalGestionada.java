@@ -242,8 +242,25 @@ public class TerminalGestionada extends Terminal{
 		return this.precioServicioAlmacenamientoPorHoraExtra;
 	}
 	
+<<<<<<< HEAD
 	public List<Circuito> getCircuitosDeInteres(){
 		return this.circuitosDeInteres;
+=======
+	public List<Naviera> getNavieras() {
+		return this.navieras;
+	}
+	
+	public List<Shipper> getShippers() {
+		return this.shippers;
+	}
+	
+	public List<Consignee> getConsignees() {
+		return this.consignees;
+	}
+	
+	public List<EmpresaTransportista> getEmpresasTransportistas() {
+		return this.empresas;
+>>>>>>> branch 'main' of https://github.com/Lari-NC/grupo1.git
 	}
 	
 	
