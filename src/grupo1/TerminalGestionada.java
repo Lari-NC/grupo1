@@ -169,13 +169,24 @@ public class TerminalGestionada extends Terminal{
 	public LocalDate proximaFechaDePartidaATerminal(Terminal terminalDestino) {
 		// 5. Devolver la próxima fecha de partida de un buque desde la terminal gestionada hasta otra terminal 
 		// de destino.
-		
-		for(Circuito c : this.getCircuitosDeInteres()) {
-			if(c.incluyeATerminalDespuesDeTerminal(terminalDestino, this)) {
-				 
+		List<Circuito> circuitosATerminalDestino = this.circuitosATerminal(terminalDestino);
+		LocalDate fechaMinimaAlMomento = circuitosATerminalDestino.get(0).getFechaDeSalida(); 
+		for(Circuito c : circuitosATerminalDestino) {
+			if(c.getFechaDeSalida().isBefore(fechaMinimaAlMomento)) {
+				fechaMinimaAlMomento = c.getFechaDeSalida();
 			}
 		}
-		return ;
+		return fechaMinimaAlMomento;
+	}
+	
+	public List<Circuito> circuitosATerminal(Terminal terminalDestino){
+		List<Circuito> cs = new ArrayList<>();
+		for(Circuito c : this.getCircuitosDeInteres()) {
+			if(c.incluyeATerminalAntesDeTerminal(this, terminalDestino)) {
+				 cs.add(c);
+			}
+		}
+		return cs;
 	}
 
     
@@ -224,6 +235,10 @@ public class TerminalGestionada extends Terminal{
     
     public void modificarPrecioServicioAlmacenamientoPorHoraExtra(int precio) {
     	this.precioServicioAlmacenamientoPorDiaExtra = precio;
+    }
+    
+    public void modificarPrecioServicioElectricidadPorDiaExtra(int precio) {
+    	this.precioServicioElectricidadPorDiaExtra = precio;
     }
     
     
