@@ -33,6 +33,7 @@ public class Orden {
 		this.camion         = camion;
 		this.chofer         = chofer;
 		this.servicios 		= servicios;
+		
     }
 
     //GETTERS
