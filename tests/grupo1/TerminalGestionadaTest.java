@@ -33,23 +33,24 @@ class TerminalGestionadaTest {
 	@BeforeEach
 	void setUp() throws Exception {
 		
-		this.naviera = mock(Naviera.class);
-		this.shipper = mock(Shipper.class);
-		this.consignee = mock(Consignee.class);
+		this.naviera 			 = mock(Naviera.class);
+		this.shipper 			 = mock(Shipper.class);
+		this.consignee 			 = mock(Consignee.class);
 		this.empresaTranportista = mock(EmpresaTransportista.class);
-		this.camion = mock(Camion.class);
-		this.chofer = mock(Chofer.class);
-		this.circuito = mock(Circuito.class);
+		this.camion 			 = mock(Camion.class);
+		this.chofer 			 = mock(Chofer.class);
+		this.circuito 			 = mock(Circuito.class);
 		
 		this.posicionTerminalGestionada = mock(Posicion.class);
-		this.terminalGestionada = new TerminalGestionada(posicionTerminalGestionada, 5000, 7000, 200);
+		this.terminalGestionada 	    = new TerminalGestionada(posicionTerminalGestionada, 5000, 7000, 200);
 		
 	}
 
 	@Test
 	void siEnUnaTerminalGestionadaRecienCreadaRegistroAUnaNaviera_EntoncesEsaNavieraFormaraParteDeLaTerminal() {
 		this.terminalGestionada.registrarNaviera(naviera);
-		//erdon guille fijate que el agregamos el precio de el servicio de electricidad apra reacer lo necesario
+		// NOTA CANDE: Perdon Guille fijate que le agregamos el precio del servicio de electricidad para reahcer lo necesario
+		// NOTA LARA: Así funciona todo pero cubre nomás el 31% 💔 
 		assertTrue//(this.terminalGestionada.getNavieras().contains(naviera));
 	}
 	

@@ -6,6 +6,7 @@ import java.util.*;
 
 import grupo1.buque.Buque;
 import grupo1.circuito.Circuito;
+import grupo1.circuito.Tramo;
 import grupo1.cliente.Consignee;
 import grupo1.cliente.Shipper;
 import grupo1.containers.Container;
@@ -165,21 +166,23 @@ public class TerminalGestionada extends Terminal{
 	}
     
     
-	// FALTAN:
 	public LocalDate proximaFechaDePartidaATerminal(Terminal terminalDestino) {
 		// 5. Devolver la próxima fecha de partida de un buque desde la terminal gestionada hasta otra terminal 
 		// de destino.
-		List<Circuito> circuitosATerminalDestino = this.circuitosATerminal(terminalDestino);
-		LocalDate fechaMinimaAlMomento = circuitosATerminalDestino.get(0).getFechaDeSalida(); 
+		
+		List<Circuito> circuitosATerminalDestino = this.circuitosQueIncluyenTramoATerminal(terminalDestino);
+		LocalDate fechaMinimaAlMomento = LocalDate.MAX;
 		for(Circuito c : circuitosATerminalDestino) {
-			if(c.getFechaDeSalida().isBefore(fechaMinimaAlMomento)) {
-				fechaMinimaAlMomento = c.getFechaDeSalida();
+			Tramo tramoDesdeTerminalGestionada = c.getTramoConSalidaDesde(this);
+			LocalDate fechaSalidaTramo = c.getFechaSalidaTramo(tramoDesdeTerminalGestionada);
+			if(fechaSalidaTramo.isBefore(fechaMinimaAlMomento)) {
+				fechaMinimaAlMomento = fechaSalidaTramo;
 			}
 		}
-		return fechaMinimaAlMomento;
+		return fechaMinimaAlMomento;     
 	}
 	
-	public List<Circuito> circuitosATerminal(Terminal terminalDestino){
+	public List<Circuito> circuitosQueIncluyenTramoATerminal(Terminal terminalDestino){
 		List<Circuito> cs = new ArrayList<>();
 		for(Circuito c : this.getCircuitosDeInteres()) {
 			if(c.incluyeATerminalAntesDeTerminal(this, terminalDestino)) {
