@@ -38,7 +38,7 @@ class NavieraTest {
 		tramo3      = new Tramo(terminalC,terminalB, 1, 1000);
 		circuito    = new Circuito(LocalDate.of(2023, 11, 24));
 		circuito1   = new Circuito(LocalDate.of(2023, 11, 24));
-		buscador   	= new MenorTiempo();;
+		buscador   	= mock(MenorTiempo.class);
 		naviera     = new Naviera(buscador);
 		
 	}

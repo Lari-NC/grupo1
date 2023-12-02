@@ -17,6 +17,8 @@ import grupo1.circuito.Tramo;
 import grupo1.cliente.Consignee;
 import grupo1.cliente.Shipper;
 import grupo1.containers.Container;
+import grupo1.mejorCircuito.BuscadorMejorCircuito;
+import grupo1.mejorCircuito.MenorTiempo;
 import grupo1.mejorCircuito.Naviera;
 import grupo1.servicios.Lavado;
 import grupo1.servicios.Pesado;
@@ -28,6 +30,7 @@ import grupo1.transporte.EmpresaTransportista;
 class TerminalGestionadaTest {
 	
 	private Naviera naviera;
+	private BuscadorMejorCircuito buscador;
     private Shipper shipper;
     private Consignee consignee;
     private EmpresaTransportista empresaTranportista;
@@ -62,7 +65,8 @@ class TerminalGestionadaTest {
 	@BeforeEach
 	void setUp() throws Exception {
 		
-		this.naviera 			 = new Naviera();
+		this.buscador   		= mock(MenorTiempo.class);
+		this.naviera     		= new Naviera(buscador);
 		this.shipper 			 = mock(Shipper.class);
 		this.consignee 			 = mock(Consignee.class);
 		this.empresaTranportista = mock(EmpresaTransportista.class);
