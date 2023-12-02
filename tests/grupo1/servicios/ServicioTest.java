@@ -5,6 +5,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import grupo1.containers.Container;
+import grupo1.containers.Reefer;
 
 class ServicioTest {
 	
@@ -14,6 +15,7 @@ class ServicioTest {
 	private Electricidad servicioElectricidad;
 	private Container container;
 	private Container container1;
+	private Reefer containerReefer;
 	
 	@BeforeEach
 	void setUp() throws Exception {
@@ -32,6 +34,7 @@ class ServicioTest {
 	    when(this.servicioAlmacenamiento.getTipoServicio()).thenReturn("Almacenamiento");
 	    when(this.servicioAlmacenamiento.getPrecio()).thenReturn(1200);
 	    */
+		this.containerReefer = new Reefer(2,6,2,70,100);
 	}
 
 	@Test
@@ -65,5 +68,16 @@ class ServicioTest {
 	void enUnServicioDeElectricidadCreadoConUnCostoDe900000000_SuPrecioSeraDe900000000() {
 		assertEquals(900000000, servicioElectricidad.getPrecio());
 	}
-
+	
+	
+	@Test
+	void alMomentoDePreguntarPorElDelServicioDeElectricidadParaUnContainerEnEspecifico_NosDaraComoResultado() {
+		assertEquals(2.16E12, this.servicioElectricidad.getPrecioPara(containerReefer));
+	}
+	/*
+	@Test
+	void alMomentoDePreguntarPorElDelServicioDeElectricidadParaUnContainerEnEspecifico_NosDaraComoResultado() {
+		assertEquals((this.containerReefer.getConsumo()*this.servicioElectricidad.getPrecio()*24), this.servicioElectricidad.getPrecioPara(containerReefer));
+	}
+	*/
 }

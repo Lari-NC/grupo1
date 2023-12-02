@@ -2,6 +2,8 @@ package grupo1;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -11,6 +13,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import grupo1.circuito.Circuito;
+import grupo1.circuito.Tramo;
 import grupo1.cliente.Consignee;
 import grupo1.cliente.Shipper;
 import grupo1.containers.Container;
@@ -47,17 +50,25 @@ class TerminalGestionadaTest {
     private Chofer chofer1;
     private Camion camion1;
     private Orden ordenDePruebaEnErroresDeChekeos;
-
+    
+    private Terminal terminalA;
+    private Terminal terminalB;
+    private Tramo tramo1;
+    private Tramo tramo2;
+    
+    private Posicion posicionTerminalA;
+    private Posicion posicionTerminalB;
+    
 	@BeforeEach
 	void setUp() throws Exception {
 		
-		this.naviera 			 = mock(Naviera.class);
+		this.naviera 			 = new Naviera();
 		this.shipper 			 = mock(Shipper.class);
 		this.consignee 			 = mock(Consignee.class);
 		this.empresaTranportista = mock(EmpresaTransportista.class);
 		this.camion 			 = mock(Camion.class);
 		this.chofer 			 = mock(Chofer.class);
-		this.circuito 			 = mock(Circuito.class);
+		this.circuito 			 = new Circuito(LocalDate.of(2023, 11, 15));
 		
 		this.posicionTerminalGestionada = mock(Posicion.class);
 		this.terminalGestionada 	    = new TerminalGestionada(posicionTerminalGestionada, 5000, 7000, 200);
@@ -78,6 +89,14 @@ class TerminalGestionadaTest {
 		this.chofer1 = mock(Chofer.class);
 		this.ordenDePruebaEnErroresDeChekeos = new Orden(shipper, consignee, container, viaje, fechaSalida, fechaLlegada, camion1, chofer, servicios);
 		
+		
+		this.posicionTerminalA = mock(Posicion.class);
+		this.posicionTerminalB = mock(Posicion.class);
+		this.terminalA   = new Terminal(posicionTerminalA);
+		this.terminalB   = new Terminal(posicionTerminalB);
+		this.tramo1      = new Tramo(terminalA, this.terminalGestionada, 1, 1000);
+		this.tramo2      = new Tramo(this.terminalGestionada, terminalB, 1, 1000);
+	
 	}
 
 	@Test
@@ -129,11 +148,6 @@ class TerminalGestionadaTest {
 		
 		assertTrue(this.terminalGestionada.getOrdenesImportacion().contains(orden));
 	}
-	
-	/*
-	@Test
-	void siUnaTerminalGestionadaNotificaAlClienteRetiroDeCarga
-	*/
 	
 	@Test
 	void siUnaTerminalGestionadaRealizaUnRetiroDeCargaDeUnaOrdenDeImportacion_EntoncesEsaOrdenPodraSerRemovidaDeLasOrdenesImportacionDeLaTerminal() {
@@ -218,4 +232,52 @@ class TerminalGestionadaTest {
 		
 		assertThrows(IllegalArgumentException.class, () -> {this.terminalGestionada.realizarRetiroDeCargaDeOrden(ordenDePruebaEnErroresDeChekeos, camion);});
 	}
+	
+	@Test
+	void enUnaTerminalGestionadaRecienCreada_NoHabraNingunCircuitoDeInteres_YaQueNoTendraNavierasTodavia() {
+		this.terminalGestionada.registrarCircuitosDeInteres();
+		
+		assertEquals(0, this.terminalGestionada.getCircuitosDeInteres().size());
+	}
+	
+
+	@Test
+	void cuandoUnaTerminalGestionadaQuiereRegistrarRegistrarCircuitosDeInteres_YSoloTieneUnaSolaNavieraQueTieneUnSoloCircuitoQuePasaPorLaTerminalGestionada_EntoncesLaTerminalSoloVaATener1SoloCircuitoDeInteres() {
+		this.circuito.addTramo(tramo1);
+		this.naviera.addCircuito(circuito);
+		this.terminalGestionada.registrarNaviera(naviera);
+		this.terminalGestionada.registrarCircuitosDeInteres();
+		
+		assertEquals(1, this.terminalGestionada.getCircuitosDeInteres().size());
+	}
+
+	
+
+	@Test
+	void siUnaTerminalGestionadaNotificaAlClienteRetiroDeCarga_SeImprimiraElMensajeCorrespondienteEnConsignee() {
+		this.terminalGestionada.notificarAlClienteRetiroDeCarga(consignee);
+		verify(this.consignee, times(1)).recibirMailParaRetiro();
+	}
+	
+	@Test
+	void cuandoUnaTerminalGestionadaQuiereSaberCuandoTiempoTardaUnaNavieraEnLlegarAUnaTerminalDada_ElTiempoSeraEquivalenteAlTiempoQueLleveIrDesdeLaTerminalGestionadaHastaLaTerminalDadaDentroDeAlgunosDeLosCircuitosDeLaNaviera() {
+		this.circuito.addTramo(tramo1);
+		this.circuito.addTramo(tramo2);
+		this.naviera.addCircuito(circuito);
+		this.terminalGestionada.registrarNaviera(naviera);
+		
+		assertEquals(this.tramo2.getTiempo(),this.terminalGestionada.cantidadDeTiempoQueTardaLaNaviera_EnLlegarA_(naviera, terminalB));
+	}
+	
+	@Test
+	void testLaProximaFechaDePartidaDeUnBuqueDesdeLaTerminalGestionadaHastaTerminalB() {
+		this.circuito.addTramo(tramo1);
+		this.circuito.addTramo(tramo2);
+		this.naviera.addCircuito(circuito);
+		this.terminalGestionada.registrarNaviera(naviera);
+		this.terminalGestionada.registrarCircuitosDeInteres();
+
+		assertEquals(LocalDate.of(2023, 11, 16),this.terminalGestionada.proximaFechaDePartidaATerminal(terminalB));
+	}
+
 }
