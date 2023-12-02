@@ -12,6 +12,13 @@ import org.junit.jupiter.api.Test;
 
 import grupo1.Terminal;
 import grupo1.TerminalGestionada;
+import grupo1.buscador.Busqueda;
+import grupo1.buscador.BusquedaAND;
+import grupo1.buscador.BusquedaNOT;
+import grupo1.buscador.BusquedaOR;
+import grupo1.buscador.BusquedaPorFechaDeLlegada;
+import grupo1.buscador.BusquedaPorFechaDeSalida;
+import grupo1.buscador.BusquedaPorPuertoDestino;
 import grupo1.circuito.Circuito;
 import grupo1.circuito.Tramo;
 

@@ -14,6 +14,7 @@ import grupo1.circuito.Circuito;
 import grupo1.cliente.Consignee;
 import grupo1.cliente.Shipper;
 import grupo1.containers.Container;
+import grupo1.mejorCircuito.Naviera;
 import grupo1.servicios.Lavado;
 import grupo1.servicios.Pesado;
 import grupo1.servicios.Servicio;

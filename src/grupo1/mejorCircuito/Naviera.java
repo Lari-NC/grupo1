@@ -1,19 +1,25 @@
-package grupo1;
+package grupo1.mejorCircuito;
 
 import java.util.*;
 
+import grupo1.Terminal;
 import grupo1.circuito.Circuito;
 
 public class Naviera {
 
     private List<Circuito> circuitos = new ArrayList<>();
+    private BuscadorMejorCircuito buscadorNaviera;
     
-    public Naviera(){
-    	
+    public Naviera(BuscadorMejorCircuito buscadorNaviera){
+    	 this.buscadorNaviera = buscadorNaviera;
     }
     
     public List<Circuito> getCircuitos(){
     	return this.circuitos;
+    }
+    
+    public void setBuscador(BuscadorMejorCircuito buscador) {
+        this.buscadorNaviera = buscador;
     }
     
     public void addCircuito(Circuito circuito) {

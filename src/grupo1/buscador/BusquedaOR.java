@@ -1,4 +1,4 @@
-package grupo1.filtrado;
+package grupo1.buscador;
 
 import java.util.*;
 

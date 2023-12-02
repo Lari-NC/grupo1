@@ -10,6 +10,7 @@ import grupo1.circuito.Tramo;
 import grupo1.cliente.Consignee;
 import grupo1.cliente.Shipper;
 import grupo1.containers.Container;
+import grupo1.mejorCircuito.Naviera;
 import grupo1.servicios.Almacenamiento;
 import grupo1.servicios.Electricidad;
 import grupo1.servicios.Pesado;

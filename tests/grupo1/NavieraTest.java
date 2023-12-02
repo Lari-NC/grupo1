@@ -10,6 +10,9 @@ import org.junit.jupiter.api.Test;
 
 import grupo1.circuito.Circuito;
 import grupo1.circuito.Tramo;
+import grupo1.mejorCircuito.BuscadorMejorCircuito;
+import grupo1.mejorCircuito.MenorTiempo;
+import grupo1.mejorCircuito.Naviera;
 
 class NavieraTest {
 	
@@ -22,6 +25,7 @@ class NavieraTest {
 	private Circuito circuito;
 	private Circuito circuito1;
 	private Naviera naviera;
+	private BuscadorMejorCircuito buscador;
 	
 	@BeforeEach
 	void setUp() throws Exception {
@@ -34,7 +38,8 @@ class NavieraTest {
 		tramo3      = new Tramo(terminalC,terminalB, 1, 1000);
 		circuito    = new Circuito(LocalDate.of(2023, 11, 24));
 		circuito1   = new Circuito(LocalDate.of(2023, 11, 24));
-		naviera     = new Naviera();
+		buscador   	= new MenorTiempo();;
+		naviera     = new Naviera(buscador);
 		
 	}
 

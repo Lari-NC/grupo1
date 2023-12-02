@@ -1,4 +1,4 @@
-package grupo1.filtrado;
+package grupo1.buscador;
 
 
 public abstract class Binario extends Busqueda {
