@@ -3,6 +3,7 @@ package grupo1;
 import static org.junit.Assert.assertEquals;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
 import java.time.LocalDate;
 import java.util.*;
@@ -34,6 +35,7 @@ class OrdenTest {
 	private List<Servicio> servicios = new ArrayList<>();
 	private Lavado servicioLavado;
 	private Pesado servicioPesado;
+	private Terminal terminal;
 	 
     @BeforeEach
     public void setUp() {
@@ -42,6 +44,7 @@ class OrdenTest {
         this.consignee = mock(Consignee.class);
         this.container = mock(Container.class);
         this.viaje = mock(Viaje.class);
+        	when(this.viaje.getTerminalDestino()).thenReturn(terminal);
         this.camion = mock(Camion.class);
         this.chofer = mock(Chofer.class);
         this.servicioLavado = mock(Lavado.class);
@@ -55,6 +58,8 @@ class OrdenTest {
         
         this.orden = 	new Orden(shipper,consignee,container,viaje,
 						fechaSalida,fechaLlegada,camion,chofer,servicios);
+        
+       this.terminal = mock(Terminal.class);
     }
 
     @Test
@@ -81,5 +86,15 @@ class OrdenTest {
         
     	assertTrue(orden.getServicios().contains(sAlmacenamiento));
     }
-
+    
+    @Test
+    void seCreaUnFacturaParaLaOrden() {
+    	assertEquals(viaje,this.orden.crearFactura().getViaje());
+    	assertEquals(servicios,this.orden.crearFactura().getServicios());
+    }
+    
+    @Test
+    void laTerminalDestinoDelViajeDeLaOrden_DebeSerLaMismaQueLaTerminalDestinoDeLaOrden() {
+    	assertEquals(this.viaje.getTerminalDestino(), this.orden.getTerminalDestino());
+    }
 }
