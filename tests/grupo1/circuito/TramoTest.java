@@ -13,9 +13,11 @@ class TramoTest {
 	private Terminal terminalA;
 	private Terminal terminalB;
 	private Tramo tramo1;
+	private Tramo tramo2;
 	
 	@BeforeEach
 	void setUp() throws Exception {
+		
 		this.terminalA = mock(Terminal.class);
 		this.terminalB = mock(Terminal.class);
 		this.tramo1 = mock(Tramo.class);
@@ -23,6 +25,7 @@ class TramoTest {
 		    when(this.tramo1.getTerminalLlegada()).thenReturn(terminalB);
 		    when(this.tramo1.getTiempo()).thenReturn(1);
 		    when(this.tramo1.getPrecio()).thenReturn(1000);
+		this.tramo2 = new Tramo(terminalA, terminalB, 1, 1000);
 	}
 
 	@Test
@@ -37,7 +40,7 @@ class TramoTest {
 	
 	@Test
 	void cuandoUnTramoEsCreadoConUnPrecioFijoDe1000_ElPrecioDeEseTramoEsDe1000() {
-		assertEquals(1000, tramo1.getPrecio());
+		assertEquals(1000, tramo2.getPrecio());
 	}
 	
 	@Test
