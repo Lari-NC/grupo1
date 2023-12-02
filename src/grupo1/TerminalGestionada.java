@@ -226,7 +226,7 @@ public class TerminalGestionada extends Terminal{
     	this.getServiciosAOfrecer().add(servicio);
     }
     
-    public void registarCircuitosDeInteres() {
+    public void registrarCircuitosDeInteres() {
         for(Naviera naviera : this.navieras) {
         	this.circuitosDeInteres.addAll(naviera.circuitosQuePasanPorTerminal(this));
         }
