@@ -13,11 +13,19 @@ import grupo1.Terminal;
 import grupo1.TerminalGestionada;
 import grupo1.circuito.Circuito;
 import grupo1.circuito.Tramo;
+import grupo1.mejorCircuito.BuscadorMejorCircuito;
+import grupo1.mejorCircuito.MenorCantidadTerminales;
+import grupo1.mejorCircuito.MenorPrecio;
+import grupo1.mejorCircuito.MenorTiempo;
 import grupo1.mejorCircuito.Naviera;
 
 class mejorCircuitoTest {
 	
 	private Naviera naviera;
+	private MenorTiempo buscadorMenorTiempo;
+	private MenorPrecio buscadorMenorPrecio;
+	private MenorCantidadTerminales buscadorMenorCantidadTerminales;
+	
 	private Terminal bsAs;
 	private Terminal ush;
 	private Terminal valp;
@@ -30,7 +38,7 @@ class mejorCircuitoTest {
 	private Circuito circuitoA; //bsAs-india mas rapido a sydney
 		private Tramo tramoBsAs_Ush; 	//bsAs
 		private Tramo tramoUsh_Valp;
-		private Tramo tramoUsh_Syd; 	//syd
+		private Tramo tramoValp_SydA; 	//syd
 		private Tramo tramoSyd_Ind;
 
 	private Circuito circuitoB; //bra-sydney mas corto
@@ -59,7 +67,7 @@ class mejorCircuitoTest {
         	
         	this.tramoBsAs_Ush = new Tramo(bsAs,ush,5,10000);
 	        this.tramoUsh_Valp = new Tramo(ush,valp,5,10000);
-	        this.tramoValp_Syd = new Tramo(valp,syd,5,15000);
+	        this.tramoValp_SydA = new Tramo(valp,syd,5,15000);
 	        this.tramoSyd_Ind = new Tramo(syd,ind,8,16000);
 	        //mas rapido
 	        //15 dias entre bs a sydney
@@ -68,7 +76,7 @@ class mejorCircuitoTest {
 	        
 			    this.circuitoA.addTramo(tramoBsAs_Ush);
 			    this.circuitoA.addTramo(tramoUsh_Valp);
-			    this.circuitoA.addTramo(tramoValp_Syd);
+			    this.circuitoA.addTramo(tramoValp_SydA);
 			    this.circuitoA.addTramo(tramoSyd_Ind);
 	     
         this.circuitoB = mock(Circuito.class);
@@ -95,6 +103,12 @@ class mejorCircuitoTest {
 		        this.circuitoC.addTramo(tramoBsAS_Uru);
 		        this.circuitoC.addTramo(tramoUru_SudAf);
 		        this.circuitoC.addTramo(tramoSudAf_Syd);
+		        
+		 this.buscadorMenorTiempo = new MenorTiempo();
+		 this.buscadorMenorPrecio = new MenorPrecio();
+		 this.buscadorMenorCantidadTerminales = new MenorCantidadTerminales();
+		 
+		 this.naviera = new Naviera(buscadorMenorTiempo);
         
 	}
 

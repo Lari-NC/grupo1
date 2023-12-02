@@ -33,17 +33,21 @@ public class Naviera {
     
     public Circuito buscarMejorCircuitoQueConecta(Terminal terminalA, Terminal terminalB) {
  
-    	return this.getBuscador().mejorCircuito(this.getCircuitosQueConectanTerminalAyTerminalB(terminalA, terminalB)); 
+    	return this.getBuscador().mejorCircuito(this.getCircuitosQueConectanTerminalAYTerminalB(terminalA, terminalB)); 
     }
     
     
     
-    private ArrayList<Circuito> getCircuitosQueConectanTerminalAyTerminalB(Terminal terminalA, Terminal terminalB) {
-    	
-        return 	getCircuitos().stream()
+
+    public ArrayList<Circuito> getCircuitosQueConectanTerminalAYTerminalB(Terminal terminalA, Terminal terminalB) {
+       
+        return getCircuitos().stream()
                 .filter(circuito -> circuito.incluyeATerminalAntesDeTerminalB(terminalA, terminalB))
-                .collect(Collectors.toCollection(ArrayList::new));
-	}
+                .map(circuito -> {
+                    	circuito.crearCircuitoEspecificoPara_Y_(terminalA, terminalB);
+                    	return circuito;	})
+                .collect(Collectors.toCollection(ArrayList::new));	
+    }
 
 	public List<Circuito> circuitosQuePasanPorTerminal(Terminal terminal){
 		return 	getCircuitos().stream()
