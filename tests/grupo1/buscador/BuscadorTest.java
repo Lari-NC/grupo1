@@ -1,4 +1,4 @@
-package grupo1.filtrado;
+package grupo1.buscador;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.mock;
