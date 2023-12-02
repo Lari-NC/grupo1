@@ -97,7 +97,7 @@ class CircuitoTest {
 	void unCircuitoConUnTramoDesdeTermAHastaTermB_TieneUnRecorridoDeTerminalesDondePrimeroApareceTermAYLuegoTermB() {
 		circuito.addTramo(tramo1);
 		circuito.addTramo(tramo2);
-		assertTrue(circuito.incluyeATerminalAntesDeTerminal(terminalA, terminalB));
+		assertTrue(circuito.incluyeATerminalAntesDeTerminalB(terminalA, terminalB));
 	}
 	
 	@Test 

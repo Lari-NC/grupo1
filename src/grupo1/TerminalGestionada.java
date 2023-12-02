@@ -186,7 +186,7 @@ public class TerminalGestionada extends Terminal{
 	public List<Circuito> circuitosQueIncluyenTramoATerminal(Terminal terminalDestino){
 		List<Circuito> cs = new ArrayList<>();
 		for(Circuito c : this.getCircuitosDeInteres()) {
-			if(c.incluyeATerminalAntesDeTerminal(this, terminalDestino)) {
+			if(c.incluyeATerminalAntesDeTerminalB(this, terminalDestino)) {
 				 cs.add(c);
 			}
 		}

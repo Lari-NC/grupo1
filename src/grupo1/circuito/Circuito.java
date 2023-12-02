@@ -113,7 +113,7 @@ public class Circuito {
 		return this.terminalesRecorridas().contains(terminal);
 	}
 
-	public boolean incluyeATerminalAntesDeTerminal(Terminal terminalA, Terminal terminalB) {
+	public boolean incluyeATerminalAntesDeTerminalB(Terminal terminalA, Terminal terminalB) {
 
 		return incluyeATerminal(terminalA) && 
 			   incluyeATerminal(terminalB) && 
