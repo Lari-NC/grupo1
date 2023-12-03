@@ -87,8 +87,8 @@ class TerminalGestionadaTest {
 		this.fechaSalida  = LocalDate.of(2023, 1, 1);
         this.fechaLlegada = LocalDate.of(2023, 1, 15);
 		this.orden 		  = new Orden(shipper, consignee, container, viaje, fechaSalida, fechaLlegada, camion, camion.getChofer(), servicios);
-		//en orden no sé si esta bien que haya hecho camion.getchofer, esque antes tenía solo chofer, pero no funcionaba;
-		this.camion1 	  = mock(Camion.class);
+		
+		this.camion1 	  = mock(Camion.class); 
 		this.chofer1 	  = mock(Chofer.class);
 		this.ordenDePruebaEnErroresDeChekeos = new Orden(shipper, consignee, container, viaje, fechaSalida, fechaLlegada, camion1, chofer, servicios);
 		
@@ -149,7 +149,7 @@ class TerminalGestionadaTest {
 		this.terminalGestionada.registrarCamion(camion);
 		this.terminalGestionada.registrarChofer(camion.getChofer());
 		this.terminalGestionada.agregarOrdenImportacion(orden);
-		this.terminalGestionada.realizarRetiroDeCargaDeOrden(orden, camion);
+		this.terminalGestionada.realizarRetiroDeCargaDeOrden(orden, camion, LocalDate.of(2023, 1, 15));
 		
 		assertFalse(this.terminalGestionada.getOrdenesImportacion().contains(orden));
 	}
@@ -192,13 +192,13 @@ class TerminalGestionadaTest {
 	
 	@Test 
 	void siUnaTerminalGestionadaRealizaUnRetiroDeCarga_PeroElCamionNoEstaRegistradoNosSaldraUnError() {
-		assertThrows(IllegalArgumentException.class, () -> {this.terminalGestionada.realizarRetiroDeCargaDeOrden(orden, camion);});
+		assertThrows(IllegalArgumentException.class, () -> {this.terminalGestionada.realizarRetiroDeCargaDeOrden(orden, camion,LocalDate.of(2023, 1, 15));});
 	}
 	
 	@Test 
 	void siUnaTerminalGestionadaRealizaUnRetiroDeCarga_PeroElChoferNoEstaRegistradoNosSaldraUnError() {
 		this.terminalGestionada.registrarCamion(camion);
-		assertThrows(IllegalArgumentException.class, () -> {this.terminalGestionada.realizarRetiroDeCargaDeOrden(orden, camion);});
+		assertThrows(IllegalArgumentException.class, () -> {this.terminalGestionada.realizarRetiroDeCargaDeOrden(orden, camion,LocalDate.of(2023, 1, 15));});
 	}
 	
 	@Test 
@@ -208,7 +208,7 @@ class TerminalGestionadaTest {
 		this.terminalGestionada.registrarChofer(camion1.getChofer());
 		this.terminalGestionada.agregarOrdenImportacion(ordenDePruebaEnErroresDeChekeos);
 		
-		assertThrows(IllegalArgumentException.class, () -> {this.terminalGestionada.realizarRetiroDeCargaDeOrden(ordenDePruebaEnErroresDeChekeos, camion1);});
+		assertThrows(IllegalArgumentException.class, () -> {this.terminalGestionada.realizarRetiroDeCargaDeOrden(ordenDePruebaEnErroresDeChekeos, camion1, LocalDate.of(2023, 1, 15));});
 	}
 	
 	@Test 
@@ -218,7 +218,7 @@ class TerminalGestionadaTest {
 		this.terminalGestionada.registrarChofer(camion.getChofer());
 		this.terminalGestionada.agregarOrdenImportacion(ordenDePruebaEnErroresDeChekeos);
 		
-		assertThrows(IllegalArgumentException.class, () -> {this.terminalGestionada.realizarRetiroDeCargaDeOrden(ordenDePruebaEnErroresDeChekeos, camion);});
+		assertThrows(IllegalArgumentException.class, () -> {this.terminalGestionada.realizarRetiroDeCargaDeOrden(ordenDePruebaEnErroresDeChekeos, camion, LocalDate.of(2023, 1, 15));});
 	}
 	
 	@Test
@@ -265,8 +265,5 @@ class TerminalGestionadaTest {
 		assertEquals(LocalDate.of(2023, 11, 16),this.terminalGestionada.proximaFechaDePartidaATerminal(terminalB));
 	}
 	
-	/*
-	@Test
-	void revisarFacturacionEnOrdenes
-	*/
+
 }

@@ -53,10 +53,9 @@ public class TerminalGestionada extends Terminal{
 		consignee.recibirMailParaRetiro();
 	}
 	
-	public void realizarRetiroDeCargaDeOrden(Orden orden, Camion camion) { //throws IllegalArgumentException { → ya no? 
+	public void realizarRetiroDeCargaDeOrden(Orden orden, Camion camion, LocalDate fechaRetiro) { 
 		// Entra el camion, si tarda más de 24 hs el retiro de la carga se le agrega a la orden 
 		// de la misma un servicio de almacenamiento por día que de retraso
-		LocalDate fechaRetiro = LocalDate.now();
 
         this.entraUnCamionALaTerminal(camion);
         this.asegurarseQueElCamionRetireLaOrdenCorrecta(camion, orden);
