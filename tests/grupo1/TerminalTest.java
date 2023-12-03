@@ -23,5 +23,4 @@ class TerminalTest {
 	void cuandoUnaTerminalEsCredaConLaPosicion1_1_EntoncesSuPosicionSera1_1() {
 		assertEquals(posicionDeTerminal, terminal.getPosicion());
 	}
-
 }

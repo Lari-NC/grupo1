@@ -36,7 +36,6 @@ public class FacturaTest {
         this.serviciosFactura.add(this.servicioLavado);
     }
 
-	
 	@Test
 	public void seCreaUnaFactura() {
 		this.factura = new Factura(viajeFactura, serviciosFactura);
@@ -47,7 +46,6 @@ public class FacturaTest {
 	
     @Test
     public void testGetDesgloce() {
-    	
     	this.factura = new Factura(viajeFactura, serviciosFactura);
         String resultado = this.factura.getDesgloce();
         String resultadoEsperado = "Viaje Completo\t$10000\n\nServicios:\nAlmacenamiento\t$400\nLavado\t$500\n";

@@ -8,13 +8,15 @@ import org.junit.jupiter.api.Test;
 class PosicionTest {
 
 	@BeforeEach
-	void setUp() throws Exception {}
+	void setUp() throws Exception {
+		
+	}
+	
 	@Test
-	   public void seCreaUnaPosicionYObtenerSusCoordenadas() {
-	      Posicion posicion = new Posicion(3, 5);
+	public void seCreaUnaPosicionYObtenerSusCoordenadas() {
+		Posicion posicion = new Posicion(3, 5);
 	        
-	      assertEquals(3, posicion.getCoordenadaX());
-	      assertEquals(5, posicion.getCoordenadaY());
-	    }
-
-		}
+		assertEquals(3, posicion.getCoordenadaX());
+		assertEquals(5, posicion.getCoordenadaY());
+	}
+}

@@ -65,8 +65,8 @@ class TerminalGestionadaTest {
 	@BeforeEach
 	void setUp() throws Exception {
 		
-		this.buscador   		= mock(MenorTiempo.class);
-		this.naviera     		= new Naviera(buscador);
+		this.buscador   		 = mock(MenorTiempo.class);
+		this.naviera     		 = new Naviera(buscador);
 		this.shipper 			 = mock(Shipper.class);
 		this.consignee 			 = mock(Consignee.class);
 		this.empresaTranportista = mock(EmpresaTransportista.class);
@@ -77,79 +77,69 @@ class TerminalGestionadaTest {
 		this.posicionTerminalGestionada = mock(Posicion.class);
 		this.terminalGestionada 	    = new TerminalGestionada(posicionTerminalGestionada, 5000, 7000, 200);
 		
-		
 		this.servicioLavado = mock(Lavado.class);
         this.servicioPesado = mock(Pesado.class);
         
         servicios.add(servicioLavado);
         servicios.add(servicioPesado);
-        this.container = mock(Container.class);
-		this.viaje = mock(Viaje.class);
-		this.fechaSalida = LocalDate.of(2023, 1, 1);
+        this.container    = mock(Container.class);
+		this.viaje 		  = mock(Viaje.class);
+		this.fechaSalida  = LocalDate.of(2023, 1, 1);
         this.fechaLlegada = LocalDate.of(2023, 1, 15);
-		this.orden = new Orden(shipper, consignee, container, viaje, fechaSalida, fechaLlegada, camion, camion.getChofer(), servicios);
-		//en orden nose si esta bien que haya hecho camion.getchoferr, esque antes tenía solo chofer, pero no funcionaba;
-		this.camion1 = mock(Camion.class);
-		this.chofer1 = mock(Chofer.class);
+		this.orden 		  = new Orden(shipper, consignee, container, viaje, fechaSalida, fechaLlegada, camion, camion.getChofer(), servicios);
+		//en orden no sé si esta bien que haya hecho camion.getchofer, esque antes tenía solo chofer, pero no funcionaba;
+		this.camion1 	  = mock(Camion.class);
+		this.chofer1 	  = mock(Chofer.class);
 		this.ordenDePruebaEnErroresDeChekeos = new Orden(shipper, consignee, container, viaje, fechaSalida, fechaLlegada, camion1, chofer, servicios);
-		
 		
 		this.posicionTerminalA = mock(Posicion.class);
 		this.posicionTerminalB = mock(Posicion.class);
-		this.terminalA   = new Terminal(posicionTerminalA);
-		this.terminalB   = new Terminal(posicionTerminalB);
-		this.tramo1      = new Tramo(terminalA, this.terminalGestionada, 1, 1000);
-		this.tramo2      = new Tramo(this.terminalGestionada, terminalB, 1, 1000);
+		this.terminalA = new Terminal(posicionTerminalA);
+		this.terminalB = new Terminal(posicionTerminalB);
+		this.tramo1    = new Tramo(terminalA, this.terminalGestionada, 1, 1000);
+		this.tramo2    = new Tramo(this.terminalGestionada, terminalB, 1, 1000);
 	
 	}
 
 	@Test
 	void siEnUnaTerminalGestionadaRecienCreadaRegistroAUnaNaviera_EntoncesEsaNavieraFormaraParteDeLaTerminal() {
 		this.terminalGestionada.registrarNaviera(naviera);
-		// NOTA CANDE: Perdon Guille fijate que le agregamos el precio del servicio de electricidad para reahcer lo necesario
-		// NOTA LARA: Así funciona todo pero cubre nomás el 31% 💔 
 		assertTrue(this.terminalGestionada.getNavieras().contains(naviera));
 	}
 	
 	@Test
 	void siEnUnaTerminalGestionadaRecienCreadaRegistroAUnShipper_EntoncesEseShipperFormaraParteDeLaTerminal() {
 		this.terminalGestionada.registrarShipper(shipper);
-		
 		assertTrue(this.terminalGestionada.getShippers().contains(shipper));
 	}
 	
 	@Test
 	void siEnUnaTerminalGestionadaRecienCreadaRegistroAUnConsignee_EntoncesEseConsigneeFormaraParteDeLaTerminal() {
 		this.terminalGestionada.registrarConsignee(consignee);
-		
 		assertTrue(this.terminalGestionada.getConsignees().contains(consignee));
 	}
 	
 	@Test
 	void siEnUnaTerminalGestionadaRecienCreadaRegistroAUnaEmpresaTransportista_EntoncesEsaEmpresaFormaraParteDeLaTerminal() {
 		this.terminalGestionada.registrarEmpresaTranportista(empresaTranportista);
-		
 		assertTrue(this.terminalGestionada.getEmpresasTransportistas().contains(empresaTranportista));
 	}
 	
 	@Test 
 	void siEnUnaTerminalGestionadaRecienCreadaRegistroAUnCamion_EntoncesEseCamionFormaraParteDeLaTerminal() {
 		this.terminalGestionada.registrarCamion(camion);
-		
 		assertTrue(this.terminalGestionada.getCamionesPermitidos().contains(camion));
 	}
 	
 	@Test
 	void siEnUnaTerminalGestionadaRecienCreadaRegistroAUnChofer_EntoncesEseChoferFormaraParteDeLaTerminal() {
 		this.terminalGestionada.registrarChofer(chofer);
-		
 		assertTrue(this.terminalGestionada.getChoferesPermitidos().contains(chofer));
 	}
 	
 	@Test
 	void siEnUnaTerminalGestionadaRecienCreadaAgregoUnaNuevaOrdenDeImportacion_EntoncesEsaOrdenEsaOrdenEstaraAlmacenadaDentroDeLaTerminal() {
 		this.terminalGestionada.agregarOrdenImportacion(orden);
-		
 		assertTrue(this.terminalGestionada.getOrdenesImportacion().contains(orden));
 	}
 	
@@ -174,11 +164,6 @@ class TerminalGestionadaTest {
 		assertTrue(this.terminalGestionada.getServiciosAOfrecer().contains(servicioPesado));
 	}
 	
-	/*
-	@Test
-	void revisarFacturacionEnOrdenes
-	*/
-	
 	@Test
 	void siUnaTerminalGestionadaRelizaUnRegistroDeExportacion_EntoncesEsaExportacionEstaraAlmacenadaComoUnaOrdenDentroDeLasOrdenesDeExportacionDeLaTerminal() {
 		this.terminalGestionada.registrarExportacion(shipper, consignee, container, viaje, fechaSalida, fechaLlegada, camion, camion.getChofer(), servicios);
@@ -192,7 +177,6 @@ class TerminalGestionadaTest {
 		assertEquals(camion, this.terminalGestionada.getOrdenesExportacion().get(0).getCamion());
 		assertEquals(camion.getChofer(), this.terminalGestionada.getOrdenesExportacion().get(0).getChofer());
 		assertEquals(servicios, this.terminalGestionada.getOrdenesExportacion().get(0).getServicios());
-		
 	}
 	
 	@Test
@@ -244,7 +228,6 @@ class TerminalGestionadaTest {
 		assertEquals(0, this.terminalGestionada.getCircuitosDeInteres().size());
 	}
 	
-
 	@Test
 	void cuandoUnaTerminalGestionadaQuiereRegistrarRegistrarCircuitosDeInteres_YSoloTieneUnaSolaNavieraQueTieneUnSoloCircuitoQuePasaPorLaTerminalGestionada_EntoncesLaTerminalSoloVaATener1SoloCircuitoDeInteres() {
 		this.circuito.addTramo(tramo1);
@@ -254,8 +237,6 @@ class TerminalGestionadaTest {
 		
 		assertEquals(1, this.terminalGestionada.getCircuitosDeInteres().size());
 	}
-
-	
 
 	@Test
 	void siUnaTerminalGestionadaNotificaAlClienteRetiroDeCarga_SeImprimiraElMensajeCorrespondienteEnConsignee() {
@@ -283,5 +264,9 @@ class TerminalGestionadaTest {
 
 		assertEquals(LocalDate.of(2023, 11, 16),this.terminalGestionada.proximaFechaDePartidaATerminal(terminalB));
 	}
-
+	
+	/*
+	@Test
+	void revisarFacturacionEnOrdenes
+	*/
 }

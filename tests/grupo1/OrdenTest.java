@@ -40,31 +40,28 @@ class OrdenTest {
     @BeforeEach
     public void setUp() {
         
-        this.shipper = mock(Shipper.class);
-        this.consignee = mock(Consignee.class);
-        this.container = mock(Container.class);
-        this.viaje = mock(Viaje.class);
-        	when(this.viaje.getTerminalDestino()).thenReturn(terminal);
-        this.camion = mock(Camion.class);
-        this.chofer = mock(Chofer.class);
+        this.shipper   		= mock(Shipper.class);
+        this.consignee 		= mock(Consignee.class);
+        this.container 		= mock(Container.class);
+        this.viaje     		= mock(Viaje.class);
+        	             	  when(this.viaje.getTerminalDestino()).thenReturn(terminal);
+        this.camion    		= mock(Camion.class);
+        this.chofer    		= mock(Chofer.class);
         this.servicioLavado = mock(Lavado.class);
         this.servicioPesado = mock(Pesado.class);
         
         servicios.add(servicioLavado);
         servicios.add(servicioPesado);
         
-        this.fechaSalida = LocalDate.of(2023, 1, 1);
+        this.fechaSalida  = LocalDate.of(2023, 1, 1);
         this.fechaLlegada = LocalDate.of(2023, 1, 15);
         
-        this.orden = 	new Orden(shipper,consignee,container,viaje,
-						fechaSalida,fechaLlegada,camion,chofer,servicios);
-        
-       this.terminal = mock(Terminal.class);
+        this.orden    = new Orden(shipper, consignee, container, viaje, fechaSalida, fechaLlegada, camion, chofer, servicios);
+        this.terminal = mock(Terminal.class);
     }
 
     @Test
     public void unaOrdenSePuedeCrear() {
-    	
     	assertEquals(orden.getShipper(),shipper);
     	assertEquals(orden.getConsignee(),consignee);
     	assertEquals(orden.getContainer(),container);
@@ -74,10 +71,7 @@ class OrdenTest {
     	assertEquals(orden.getCamion(),camion);
     	assertEquals(orden.getChofer(),chofer);
     	assertEquals(orden.getServicios(),servicios);
- 
     }
-
-   
 
     @Test
     public void aUnaOrdenYaCreadaSeLePuedeAgregarServiciosDeAlmacenamiento() {
