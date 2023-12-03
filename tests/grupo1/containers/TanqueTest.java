@@ -11,28 +11,19 @@ class TanqueTest {
 	
 	@BeforeEach
 	void setUp() throws Exception {
-		
 		containerTanque = new Tanque(5,10,5,100);
 	}
 
 	@Test
 	void seCreaUnTanque() {
-	
 		assertEquals(5, containerTanque.getAncho());
 		assertEquals(10, containerTanque.getLargo());
 		assertEquals(5, containerTanque.getAlto());
 		assertEquals(100, containerTanque.getPesoTotal());
-	
-
 	}
-	
 	
 	@Test 
 	void cuandoUnContainerTanqueRecienCreadoConLasDimencionesDe5x10x5_EntoncesTendra250MetrosCubicos() {
 		assertEquals(250, containerTanque.metrosCubicos());
 	}
-	
-		
-
-
 }

@@ -182,9 +182,7 @@ class BuscadorTest {
 		!!?//configurar mocks
 		
 		Busqueda busquedaFechaSalida = new BusquedaPorFechaDeSalida(salida);
-		
 		Busqueda no1DeMarzo = new BusquedaNOT(busquedaFechaSalida);
-		
 		
 		ArrayList<Circuito> resultadoBusqueda = no1DeMarzo.buscar(this.ofertaCircuitos);
 		

@@ -17,9 +17,9 @@ class TramoTest {
 	
 	@BeforeEach
 	void setUp() throws Exception {
-		
 		this.terminalA = mock(Terminal.class);
 		this.terminalB = mock(Terminal.class);
+		
 		this.tramo1 = mock(Tramo.class);
 			when(this.tramo1.getTerminalInicio()).thenReturn(terminalA);
 		    when(this.tramo1.getTerminalLlegada()).thenReturn(terminalB);

@@ -24,24 +24,22 @@ class CircuitoTest {
 
 	@BeforeEach
 	void setUp() throws Exception {
-		
-	      this.terminalA = mock(Terminal.class);
-	      this.terminalB = mock(Terminal.class);
-	      this.terminalC = mock(Terminal.class);
+		this.terminalA = mock(Terminal.class);
+	    this.terminalB = mock(Terminal.class);
+	    this.terminalC = mock(Terminal.class);
 	      
-	      this.tramo1 = mock(Tramo.class);
+	    this.tramo1 = mock(Tramo.class);
 			when(this.tramo1.getTerminalInicio()).thenReturn(terminalA);
 		    when(this.tramo1.getTerminalLlegada()).thenReturn(terminalB);
 		    when(this.tramo1.getTiempo()).thenReturn(1);
 		    when(this.tramo1.getPrecio()).thenReturn(1000);
-		    
-	      this.tramo2 = mock(Tramo.class);
+		this.tramo2 = mock(Tramo.class);
 	      	when(this.tramo2.getTerminalInicio()).thenReturn(terminalB);
 	      	when(this.tramo2.getTerminalLlegada()).thenReturn(terminalC);
 	      	when(this.tramo2.getTiempo()).thenReturn(3);
 	      	when(this.tramo2.getPrecio()).thenReturn(2000);
-	      	
-	      	this.circuito = new Circuito(LocalDate.of(2023, 11, 15));
+	   
+	    this.circuito = new Circuito(LocalDate.of(2023, 11, 15));
 	}
 
 	@Test
@@ -70,7 +68,6 @@ class CircuitoTest {
 	
 	@Test
 	void unCircuitoconoceTodasLasTerminalesQueRecorre() {
-		
 		circuito.addTramo(tramo1);
 		circuito.addTramo(tramo2);
 		
@@ -82,16 +79,12 @@ class CircuitoTest {
 		assertEquals(terminalesRecorridasEsperadas, circuito.terminalesRecorridas());
 	}
 
-
-	
 	@Test
 	void cuandoAgregamosUnTramoDesdeTermAHastaTermB_AUnCircuitoRecienCreado_LaPosiciónDeTermAEs0() {
 		circuito.addTramo(tramo1);
 		int resultado = circuito.posicionDeTerminalEnRecorrido(terminalA);
 		assertEquals(0, resultado);
 	}
-	
-	
 	
 	@Test 
 	void unCircuitoConUnTramoDesdeTermAHastaTermB_TieneUnRecorridoDeTerminalesDondePrimeroApareceTermAYLuegoTermB() {
@@ -100,8 +93,7 @@ class CircuitoTest {
 		assertTrue(circuito.incluyeATerminalAntesDeTerminalB(terminalA, terminalB));
 	}
 	
-	@Test 
-
+	@Test
 	void enUnCircuitoCon1Tramo_ElTiempoQueTardeEnCompletarseElMismo_SeraEquivalenteAlTiempoQueTardaraEseTramoQueTiene() {
 		circuito.addTramo(tramo1);
 		assertEquals(tramo1.getTiempo(), circuito.getTiempoTotal());
@@ -120,7 +112,4 @@ class CircuitoTest {
 		int precioEsperado = tramo1.getPrecio() + tramo2.getPrecio();
 		assertEquals(precioEsperado, circuito.getPrecioTotalDeCircuito());
 	}
-	
-	
-
 }

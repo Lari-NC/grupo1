@@ -14,11 +14,9 @@ class EmpresaTransportistaTest {
 
 	@BeforeEach
 	void setUp() throws Exception {
-		
 		empresaTransportista = new EmpresaTransportista();
 		camion = mock(Camion.class);
 		chofer = mock(Chofer.class);
-		
 	}
 
 	@Test
@@ -34,15 +32,12 @@ class EmpresaTransportistaTest {
 	@Test
 	void cuandoUnaEmpresaTransportistaEsRecienCreada_YAgregaUnNuevoChofer_EsaEmpresaTieneUnSoloChoferRegistradoEnTotal() {
 		empresaTransportista.addChofer(chofer);
-		
 		assertEquals(1, empresaTransportista.getChoferesRegistrados().size());
 	}
 	
 	@Test
 	void cuandoUnaEmpresaTransportistaEsRecienCreada_YAgregaUnNuevoCamion_EsaEmpresaTieneUnSoloCamionRegistradoEnTotal() {
 		empresaTransportista.addCamion(camion);
-		
 		assertEquals(1, empresaTransportista.getCamionesRegistrados().size());
 	}
-
 }

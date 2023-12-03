@@ -11,13 +11,10 @@ class CamionTest {
 	private Camion camion;
 	private Chofer choferPepe;
 
-
 	@BeforeEach
 	void setUp() throws Exception {
-		
 		camion = new Camion();
 		choferPepe = mock(Chofer.class);
-		
 	}
 	
 	@Test
@@ -31,5 +28,4 @@ class CamionTest {
 		assertNotNull(camion.getChofer());
 		assertEquals(choferPepe, camion.getChofer());
 	}
-
 }

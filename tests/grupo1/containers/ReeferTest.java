@@ -11,28 +11,20 @@ class ReeferTest {
 
 	@BeforeEach
 	void setUp() throws Exception {
-		
 		containerReefer = new Reefer(5,10,5,100,180);
-		
 	}
 
 	@Test
 	void seCreaUnReefer() {
-	
 		assertEquals(5, containerReefer.getAncho());
 		assertEquals(10, containerReefer.getLargo());
 		assertEquals(5, containerReefer.getAlto());
 		assertEquals(100, containerReefer.getPesoTotal());
 		assertEquals(180, containerReefer.getConsumo());
-
 	}
-	
 	
 	@Test 
 	void cuandoUnContainerReeferRecienCreadoConLasDimencionesDe5x10x5_EntoncesTendra250MetrosCubicos() {
 		assertEquals(250, containerReefer.metrosCubicos());
 	}
-	
-		
-
 }

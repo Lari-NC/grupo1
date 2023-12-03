@@ -19,22 +19,21 @@ class ServicioTest {
 	
 	@BeforeEach
 	void setUp() throws Exception {
-		
-		this.servicioPesado = new Pesado(900);
+		this.servicioPesado 		= new Pesado(900);
 		this.servicioAlmacenamiento = new Almacenamiento(1200);
-		this.servicioLavado = new Lavado(1000);
-		servicioElectricidad = new Electricidad(900000000);
-		container = new Container(5,10,5,100);
-		container1 = new Container(2,6,2,70);
-		/* Mock:
-		this.servicioPesado = mock(Pesado.class);
-	    when(this.servicioPesado.getTipoServicio()).thenReturn("Pesado");
-	    when(this.servicioPesado.getPrecio()).thenReturn(900);
+		this.servicioLavado 		= new Lavado(1000);
+		this.servicioElectricidad 	= new Electricidad(900000000);
+		this.container 				= new Container(5,10,5,100);
+		this.container1 			= new Container(2,6,2,70);
+		/* Mocks:
+		this.servicioPesado 		= mock(Pesado.class);
+	    	when(this.servicioPesado.getTipoServicio()).thenReturn("Pesado");
+	    	when(this.servicioPesado.getPrecio()).thenReturn(900);
 	    this.servicioAlmacenamiento = mock(Almacenamiento.class);
-	    when(this.servicioAlmacenamiento.getTipoServicio()).thenReturn("Almacenamiento");
-	    when(this.servicioAlmacenamiento.getPrecio()).thenReturn(1200);
+	    	when(this.servicioAlmacenamiento.getTipoServicio()).thenReturn("Almacenamiento");
+	    	when(this.servicioAlmacenamiento.getPrecio()).thenReturn(1200);
 	    */
-		this.containerReefer = new Reefer(2,6,2,70,100);
+		this.containerReefer 		= new Reefer(2,6,2,70,100);
 	}
 
 	@Test
@@ -69,11 +68,11 @@ class ServicioTest {
 		assertEquals(900000000, servicioElectricidad.getPrecio());
 	}
 	
-	
 	@Test
 	void alMomentoDePreguntarPorElDelServicioDeElectricidadParaUnContainerEnEspecifico_NosDaraComoResultado() {
 		assertEquals(2.16E12, this.servicioElectricidad.getPrecioPara(containerReefer));
 	}
+	
 	/*
 	@Test
 	void alMomentoDePreguntarPorElDelServicioDeElectricidadParaUnContainerEnEspecifico_NosDaraComoResultado() {
