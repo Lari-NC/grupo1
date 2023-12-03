@@ -12,5 +12,4 @@ public class Reefer extends Container {
 	public int getConsumo() {
 		return consumo;
 	}
-	
 }

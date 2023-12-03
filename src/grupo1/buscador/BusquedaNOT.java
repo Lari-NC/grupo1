@@ -13,11 +13,9 @@ public class BusquedaNOT extends Busqueda {
 
     @Override
     public ArrayList<Circuito> buscar(ArrayList<Circuito> lista) {
-    	
-    	// Saca de mi lista de circuitos, todos los que cumplen la condicion de filtrado
+    	// Remueve de mi lista de circuitos, todos los que cumplen la condicion de filtrado
     	ArrayList<Circuito> resultadoBusqueda = filtro.buscar(lista);
         lista.removeAll(resultadoBusqueda);
         return lista;
     }
-	
 }

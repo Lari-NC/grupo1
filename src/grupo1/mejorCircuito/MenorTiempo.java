@@ -13,5 +13,4 @@ public class MenorTiempo implements BuscadorMejorCircuito {
 		        .min(Comparator.comparingInt(circuito -> circuito.getTiempoTotal()))
 		        .orElse(null);
 	}
-	
 }

@@ -1,6 +1,5 @@
 package grupo1.buscador;
 
-
 public abstract class Binario extends Busqueda {
 	 private Busqueda busqueda1;
 	 private Busqueda busqueda2;

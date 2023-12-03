@@ -2,11 +2,11 @@ package grupo1.containers;
 
 public class Container {
 
+//INITIALIZE:
     private int ancho;
     private int largo;
     private int alto;
     private int pesoTotal;
-
 
     public Container(int ancho, int largo, int alto, int peso) {
         this.ancho     = ancho;
@@ -15,6 +15,8 @@ public class Container {
         this.pesoTotal = peso; 
     }
 
+   
+    //GETTERS:
     public int getAncho() {
         return this.ancho;
     }

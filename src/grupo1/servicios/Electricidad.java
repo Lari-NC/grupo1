@@ -9,10 +9,9 @@ public class Electricidad extends Servicio{
         super(precio);
     }
     
-    
     public double getPrecioPara(Container container) {
-    	//se asume que solo se le aplica a reefers
-    	//se aplica como el almacenamiento, uno por dia que esta en la terminal esperando el retiro
+    	// PRECONDICIÓN: Sólo aplica a Reefers
+    	// OBSERVACIÓN: Se aplica como el almacenamiento (uno por dia que está en la terminal esperando el retiro).
     	
         Reefer reefer = (Reefer) container; //dowcastear para poder pedirle el consumo
         double consumo = reefer.getConsumo(); 

@@ -13,5 +13,4 @@ public class MenorCantidadTerminales implements BuscadorMejorCircuito {
 	            .min(Comparator.comparing(circuito -> circuito.getTramos().size()))
 	            .orElse(null);
 	}
-	
 }

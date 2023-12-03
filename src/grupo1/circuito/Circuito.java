@@ -7,19 +7,16 @@ import grupo1.Terminal;
 
 public class Circuito {
 
+//INITIALIZE:
 	private List<Tramo> tramos = new ArrayList<>();
 	private LocalDate fechaDeSalida;
    
 	public Circuito(LocalDate fechaSalida) {
 		this.fechaDeSalida = fechaSalida;
 	}
-    
-    public void addTramo(Tramo tramo) {
-    	// Se considera que solo se pueden agregar tramos consecuivos y respetando el orden establecido del Array.
-    	this.tramos.add(tramo);
-       }
-    
-    // GETTERS: 
+
+	
+	// GETTERS: 
     public List<Tramo> getTramos(){
     	return this.tramos;
     }
@@ -87,7 +84,6 @@ public class Circuito {
    		return precioTotal;
    	}
 	
-
 	public int getTiempoTotal() {
 		int tiempoTotal = 0;
 		for (Tramo t : tramos) {
@@ -105,6 +101,38 @@ public class Circuito {
 		}
 		return this.getPrimerTramo(); // Esto no debe suceder, si el retorno resulta ser el primer tramo es 
 									  // casualidad pero debe haberse dado en la rama del if.
+	}
+	
+	public int posicionDeTramoConTerminalInicial(Terminal terminalInicial) {
+		for (int i = 0; i < this.getTramos().size(); i++) {
+            if (this.getTramos().get(i).getTerminalInicio().equals(terminalInicial)) {
+                return i; // Elemento encontrado, devuelve el índice
+            }
+        }
+        return -1; // Elemento no encontrado
+	}
+	
+	public int posicionDeTramoConTerminalFinal(Terminal terminalFinal) {
+		for (int i = 0; i < this.getTramos().size(); i++) {
+            if (this.getTramos().get(i).getTerminalLlegada().equals(terminalFinal)) {
+                return i; // Elemento encontrado, devuelve el índice
+            }
+        }
+        return -1; // Elemento no encontrado
+	}
+	
+	
+	//ACTION:
+    public void addTramo(Tramo tramo) {
+    	// Se considera que solo se pueden agregar tramos consecuivos y respetando el orden establecido del Array.
+    	this.tramos.add(tramo);
+       }
+    
+	public Circuito crearCircuitoEspecificoPara_Y_(Terminal terminalInicial, Terminal TerminalFinal) {
+		Circuito circuitoEspecifico = new Circuito(this.fechaDeSalida);
+		List<Tramo> listaDeTramosAcordada = this.getTramos().subList(this.posicionDeTramoConTerminalInicial(terminalInicial), this.posicionDeTramoConTerminalFinal(TerminalFinal)+1);
+		circuitoEspecifico.getTramos().addAll(listaDeTramosAcordada);
+		return circuitoEspecifico;
 	}
 	
 
@@ -136,31 +164,4 @@ public class Circuito {
 		return tramos.stream()
                 .anyMatch(tramo -> (this.getFechaLlegadaTramo(tramo).isBefore(fecha))&&(tramo.getTerminalLlegada().equals(terminalDestino)));
 	}
-	
-	public Circuito crearCircuitoEspecificoPara_Y_(Terminal terminalInicial, Terminal TerminalFinal) {
-		Circuito circuitoEspecifico = new Circuito(this.fechaDeSalida);
-		List<Tramo> listaDeTramosAcordada = this.getTramos().subList(this.posicionDeTramoConTerminalInicial(terminalInicial), this.posicionDeTramoConTerminalFinal(TerminalFinal)+1);
-		circuitoEspecifico.getTramos().addAll(listaDeTramosAcordada);
-		return circuitoEspecifico;
-	}
-	
-	public int posicionDeTramoConTerminalInicial(Terminal terminalInicial) {
-		for (int i = 0; i < this.getTramos().size(); i++) {
-            if (this.getTramos().get(i).getTerminalInicio().equals(terminalInicial)) {
-                return i; // Elemento encontrado, devuelve el índice
-            }
-        }
-        return -1; // Elemento no encontrado
-	}
-	
-	public int posicionDeTramoConTerminalFinal(Terminal terminalFinal) {
-		for (int i = 0; i < this.getTramos().size(); i++) {
-            if (this.getTramos().get(i).getTerminalLlegada().equals(terminalFinal)) {
-                return i; // Elemento encontrado, devuelve el índice
-            }
-        }
-        return -1; // Elemento no encontrado
-	}
- }
-
-
+}

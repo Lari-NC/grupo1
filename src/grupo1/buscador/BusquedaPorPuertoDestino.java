@@ -18,7 +18,7 @@ public class BusquedaPorPuertoDestino extends Busqueda{
 
 	@Override
 	public ArrayList<Circuito> buscar(ArrayList<Circuito> lista) {
-		
+		// Denota de los circuitos dados, los que pasan por la terminal de destino deseada
 		return lista.stream()				.filter(circuito -> circuito.incluyeATerminal(this.terminalDestino))				.collect(Collectors.toCollection(ArrayList::new));
 	}
 }

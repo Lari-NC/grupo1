@@ -3,7 +3,8 @@ package grupo1.circuito;
 import grupo1.Terminal;
 
 public class Tramo {
-    
+
+//INITIALIZE:
 	private Terminal terminalInicio;
 	private Terminal terminalFin;
 	private int tiempo; 
@@ -15,7 +16,8 @@ public class Tramo {
         this.precio 		= precio;
         this.tiempo 		= tiempo;
     }
-  
+ 
+    //GETTERS:
     public Terminal getTerminalInicio() {
     	return this.terminalInicio;
     }
@@ -31,5 +33,4 @@ public class Tramo {
     public int getTiempo() {
     	return this.tiempo;
     }
-
 }

@@ -16,9 +16,9 @@ public class BusquedaPorFechaDeSalida extends Busqueda{
 
 	@Override
 	public ArrayList<Circuito> buscar(ArrayList<Circuito> lista) {
-		//circuitos que salen de la terminal gestionada en la fecha de salida deseada
+		// Denota de los circuitos dados, los que salen de la terminal gestionada en la fecha de salida deseada
 		return lista.stream()
-				.filter(circuito -> circuito.getFechaDeSalida().isEqual(fechaSalidaDeseada))
+				.filter(circuito -> circuito.getFechaDeSalida().isEqual(this.fechaSalidaDeseada))
 				.collect(Collectors.toCollection(ArrayList::new));
 	}
 }

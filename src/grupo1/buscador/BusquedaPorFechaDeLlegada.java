@@ -19,7 +19,7 @@ public class BusquedaPorFechaDeLlegada extends Busqueda{
 
 	@Override
 	public ArrayList<Circuito> buscar(ArrayList<Circuito> lista) {
-		//circuitos que llegan a la terminal destino antes de la fecha deseada
+		// Denota de los circuitos dados, los que llegan a la terminal destino antes de la fecha deseada
 		return lista.stream()
 				.filter(circuito -> circuito.llegaEnLaFecha(this.terminalDestino, this.fechaLlegadaDeseada))
 				.collect(Collectors.toCollection(ArrayList::new));

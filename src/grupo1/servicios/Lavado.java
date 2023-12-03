@@ -21,13 +21,11 @@ public class Lavado extends Servicio{
     }
     
     public int getPrecioPara(Container container) {
-    	
-    	if(container.metrosCubicos() > this.volumenAptoPrecioMinimo()) {
+    	if (container.metrosCubicos() > this.volumenAptoPrecioMinimo()) {
     		return this.precioSiSuperaElVolumen();
     	}
     	else {
     		return this.precioSiNoSuperaElVolumen();
     	}
     }
-    
 }
