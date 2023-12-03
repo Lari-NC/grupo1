@@ -4,12 +4,13 @@ import grupo1.buque.Buque;
 import grupo1.circuito.Circuito;
 
 public class Viaje {
-	
+
+//INITIALIZE:
     private Buque buque;
     private Circuito circuito;
     private Terminal terminalInicial;
     private Terminal terminalDestino;
-
+    
     public Viaje(Circuito c, Buque b, Terminal terminalInicial, Terminal terminalDestino) {
         this.circuito 		 = c.crearCircuitoEspecificoPara_Y_(terminalInicial, terminalDestino);
         this.buque 	  		 = b;
@@ -17,6 +18,8 @@ public class Viaje {
         this.terminalDestino = terminalDestino;
     }
     
+
+    //GETTERS:
 	public Buque getBuque() {
 		return buque;
 	}

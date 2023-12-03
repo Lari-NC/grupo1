@@ -1,45 +1,39 @@
 package grupo1.buque;
 
+//import java.util.*;
+
 import grupo1.Posicion;
 import grupo1.TerminalGestionada;
 import grupo1.buque.fases.Fase;
 import grupo1.buque.fases.Outbound;
+//import grupo1.containers.Container;
 
 public class Buque {
 
+//INITIALIZE:
 	Posicion posicion;
 	private Fase faseActual;
     private TerminalGestionada terminalG;
     private boolean ordenWorking;
     private boolean ordenDepart;
     
-    
     public Buque(TerminalGestionada tg, Posicion posicion) {
-     this.faseActual   = new Outbound();
-     this.terminalG    = tg;
-     this.posicion 	   = posicion;
-     this.ordenWorking = false;
-     this.ordenDepart  = false;
+    	this.faseActual   = new Outbound();
+    	this.terminalG    = tg;
+    	this.posicion 	  = posicion;
+    	this.ordenWorking = false;
+    	this.ordenDepart  = false;
     }
-    
+
+
+    //GETTERS:
     public Posicion getPosicion() {
     	return this.posicion;
-    }
-    
-    public void actualizarPosicion(Posicion posicionNueva) {
-    	//cuando nos movemos, tambien le preguntamos a la fase se puede actualizar
-    	this.posicion = posicionNueva;
-    	this.actualizarFase();
     }
     
     public Fase getFase() {
     	return this.faseActual;
     }
-    
-    /*public List<Container> getCargas() {
-        return this.cargas;
-     
-    }*/
     
     public TerminalGestionada getTerminal() {
     	return this.terminalG;
@@ -51,12 +45,16 @@ public class Buque {
         return (int) Math.sqrt(x*x + y*y);
     }
     
-/* public void addCarga(Container carga) {
-        this.cargas.add(carga);
-    }*/
     
+    public void actualizarPosicion(Posicion posicionNueva) {
+    	// Cuando nos movemos, tambien le preguntamos a la fase si se puede actualizar
+    	this.posicion = posicionNueva;
+    	this.actualizarFase();
+    }
+    
+    
+    //ACTION:
     public void actualizarFase() {
-    	
     	if (this.getFase().siguiente().condicionFase(this)) {
     		this.faseActual = this.getFase().siguiente() ;
     		this.realizarAccionFase();
@@ -88,6 +86,7 @@ public class Buque {
     }
 
 
+    //TESTING:
     public boolean tieneOrdenWorking() {
     	return this.ordenWorking;
     }
@@ -95,5 +94,15 @@ public class Buque {
     public boolean tieneOrdenDepart() {
     	return this.ordenDepart;
     }
-    
 }
+
+/* YA NO TIENE CARGAS: (todo lo comentado que no se usa es por esto)
+ 
+	public List<Container> getCargas() {
+        return this.cargas;
+    }
+    
+    public void addCarga(Container carga) {
+        this.cargas.add(carga);
+    }
+*/

@@ -5,7 +5,8 @@ import java.util.*;
 import grupo1.servicios.Servicio;
 
 public class Factura {
-//aaaa
+	
+//INITIALIZE:
 	private Viaje viaje;
 	private List<Servicio> servicios = new ArrayList<>();
 	
@@ -13,7 +14,9 @@ public class Factura {
 		this.viaje 		= viaje;
 		this.servicios 	= serviciosACobrar;
 	}
-
+	
+	
+	//GETTERS:
 	public Viaje getViaje() {
 		return this.viaje;
 	}
@@ -21,7 +24,6 @@ public class Factura {
 	public List<Servicio> getServicios() {
 		return this.servicios;
 	}
-	
 	
     public String getDesgloce() {
         StringBuilder desgloce = new StringBuilder();
@@ -44,5 +46,3 @@ public class Factura {
     }
 
 }
-	
-

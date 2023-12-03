@@ -1,6 +1,5 @@
 package grupo1;
 
-import static org.junit.Assert.assertEquals;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.mock;
 
@@ -9,7 +8,7 @@ import java.time.LocalDate;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import grupo1.Terminal;
+//import grupo1.Terminal; SE SACA??
 import grupo1.circuito.Circuito;
 import grupo1.circuito.Tramo;
 import grupo1.mejorCircuito.MenorCantidadTerminales;

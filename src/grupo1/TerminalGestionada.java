@@ -20,8 +20,8 @@ import grupo1.transporte.Chofer;
 import grupo1.transporte.EmpresaTransportista;
 
 public class TerminalGestionada extends Terminal{
-	
-	
+
+//INITIALIZE:	
     private List<Naviera> navieras 				= new ArrayList<>();
     private List<Shipper> shippers 				= new ArrayList<>();
     private List<Consignee> consignees 			= new ArrayList<>();
@@ -36,12 +36,12 @@ public class TerminalGestionada extends Terminal{
     private int precioServicioAlmacenamientoPorDiaExtra;
     private int precioServicioElectricidadPorDiaExtra;
     
-   public TerminalGestionada(Posicion p, int precioP, int precioA, int precioE) { 
-	   super(p);
-	   this.precioServicioPesado = precioP;
-	   this.precioServicioAlmacenamientoPorDiaExtra = precioA;
-	   this.precioServicioElectricidadPorDiaExtra = precioE;
-   }
+    public TerminalGestionada(Posicion p, int precioP, int precioA, int precioE) { 
+    	super(p);
+    	this.precioServicioPesado = precioP;
+    	this.precioServicioAlmacenamientoPorDiaExtra = precioA;
+    	this.precioServicioElectricidadPorDiaExtra = precioE;
+    }
 
    
     // IMPORTACIÓN:
@@ -53,8 +53,9 @@ public class TerminalGestionada extends Terminal{
 		consignee.recibirMailParaRetiro();
 	}
 	
-	public void realizarRetiroDeCargaDeOrden(Orden orden, Camion camion) throws IllegalArgumentException {
-		//entra el camion, si tardo mas de 24 hs se le agrega un servicio de almacenamiento por dia que tardo, se elimina la orden de nuestras ordenes de importacion
+	public void realizarRetiroDeCargaDeOrden(Orden orden, Camion camion) { //throws IllegalArgumentException { → ya no? 
+		// Entra el camion, si tarda más de 24 hs el retiro de la carga se le agrega a la orden 
+		// de la misma un servicio de almacenamiento por día que de retraso
 		LocalDate fechaRetiro = LocalDate.now();
 
         this.entraUnCamionALaTerminal(camion);
@@ -76,7 +77,6 @@ public class TerminalGestionada extends Terminal{
 		this.getOrdenesImportacion().remove(orden);
 	}
 	
-    
     private void agregarServicioAlmacenamientoA(Orden orden) {
     	Almacenamiento servicioAlmacenamientoAAsignar = new Almacenamiento(this.getPrecioServicioAlmacenamientoPorDiaExtra());
     	orden.agregarServicioDeTerminal(servicioAlmacenamientoAAsignar);
@@ -87,9 +87,8 @@ public class TerminalGestionada extends Terminal{
     	orden.agregarServicioDeTerminal(servicioElectricidadAAsignar);
 	}
 
-    
 	public void recibirBuqueAvisoInbound(Buque buque) {
-		// dar aviso a todas nuestras ordenes de importación que tienen al buque que dio el aviso
+		// Da aviso a todos los clientes de nuestras ordenes de importación que tienen al buque que dió el aviso
 		for(Orden o : this.ordenesImpo) {
 			if(o.getViaje().getBuque() == buque) {
 				this.notificarAlClienteRetiroDeCarga(o.getConsignee());
@@ -98,7 +97,7 @@ public class TerminalGestionada extends Terminal{
 	}
 	
 	public void recibirBuqueAvisoOutbound(Buque buque) {
-		// dar aviso a todas nuestras ordenes de importación que tienen al buque que dio el aviso
+		// Da aviso a todos los clientes de nuestras ordenes de importación que tienen al buque que dió el aviso
 		for(Orden o : this.getOrdenesImportacion()) {
 			if(o.getViaje().getBuque() == buque) {
 				this.facturarOrden(o);
@@ -113,20 +112,20 @@ public class TerminalGestionada extends Terminal{
 	}
     
     
-    //SEGURIDAD
+    //SEGURIDAD:
 	private void entraUnCamionALaTerminal(Camion camion) {
-		//chequea si el camion y el chofer estan registrados en la terminal
+		// Chequea si el camion y el chofer estan registrados en la terminal
         this.chequearSiElCamionEstaRegistrado(camion);
         this.chequearSiElChoferEstaRegistrado(camion.getChofer());
     }
     private void asegurarseQueElCamionRetireLaOrdenCorrecta(Camion camion, Orden orden) {
-    	//chequea si el camion y el chofer son los declarados en al orden
+    	// Chequea si el camion y el chofer son los declarados en al orden
     	chequearSiElCamionEstaDeclaradoEnLaOrden(camion, orden);
     	chequearSiElChoferEstaDeclaradoEnLaOrden(camion.getChofer(), orden);
     	
 	}
     
-    //MANEJO BUQUES
+    //MANEJO BUQUES:
     public void darOrdenWorking(Buque buque) {
     	buque.recibirOrdenWorking();
     }
@@ -145,7 +144,7 @@ public class TerminalGestionada extends Terminal{
     }
     
 	public void recibirBuqueAvisoDepart(Buque buque) {
-		// dar aviso a todas nuestras ordenes de importación que tienen al buque que dio la orden
+		// Da aviso a todos los clientes de nuestras ordenes de importación que tienen al buque que dió el aviso
 		for(Orden o : this.ordenesExpo) {
 			if(o.getViaje().getBuque() == buque) {
 				this.notificarAlClienteSalidaDeCarga(o.getShipper());
@@ -158,43 +157,7 @@ public class TerminalGestionada extends Terminal{
 	}
     
     
-    
-    //Otras cositas :)
-    public int cantidadDeTiempoQueTardaLaNaviera_EnLlegarA_(Naviera naviera, Terminal terminalDestino) {
-		// 4. Devuelve cuanto tarda una naviera en llegar desde la terminal gestionada hacia otra terminal, independientemente 
-    	// de las fechas de los viajes programados.
-		return naviera.tiempoDeViajeDesdeHastaTerminal(this, terminalDestino);
-	}
-    
-    
-	public LocalDate proximaFechaDePartidaATerminal(Terminal terminalDestino) {
-		// 5. Devolver la próxima fecha de partida de un buque desde la terminal gestionada hasta otra terminal 
-		// de destino.
-		
-		List<Circuito> circuitosATerminalDestino = this.circuitosQueIncluyenTramoATerminal(terminalDestino);
-		LocalDate fechaMinimaAlMomento = LocalDate.MAX;
-		for(Circuito c : circuitosATerminalDestino) {
-			Tramo tramoDesdeTerminalGestionada = c.getTramoConSalidaDesde(this);
-			LocalDate fechaSalidaTramo = c.getFechaSalidaTramo(tramoDesdeTerminalGestionada);
-			if(fechaSalidaTramo.isBefore(fechaMinimaAlMomento)) {
-				fechaMinimaAlMomento = fechaSalidaTramo;
-			}
-		}
-		return fechaMinimaAlMomento;     
-	}
-	
-	public List<Circuito> circuitosQueIncluyenTramoATerminal(Terminal terminalDestino){
-		List<Circuito> cs = new ArrayList<>();
-		for(Circuito c : this.getCircuitosDeInteres()) {
-			if(c.incluyeATerminalAntesDeTerminalB(this, terminalDestino)) {
-				 cs.add(c);
-			}
-		}
-		return cs;
-	}
-
-    
-    // REGISTRAR(setters): 
+ // REGISTRAR(setters): 
     public void registrarNaviera(Naviera naviera) {
         this.navieras.add(naviera); 
     }
@@ -297,6 +260,40 @@ public class TerminalGestionada extends Terminal{
 	
 	public List<EmpresaTransportista> getEmpresasTransportistas() {
 		return this.empresas;
+	}
+	
+	
+    //Otros getters :)
+    public int cantidadDeTiempoQueTardaLaNaviera_EnLlegarA_(Naviera naviera, Terminal terminalDestino) {
+		// 4. Devuelve cuanto tarda una naviera en llegar desde la terminal gestionada hacia otra terminal, independientemente 
+    	// de las fechas de los viajes programados.
+		return naviera.tiempoDeViajeDesdeHastaTerminal(this, terminalDestino);
+	}
+    
+	public LocalDate proximaFechaDePartidaATerminal(Terminal terminalDestino) {
+		// 5. Devolver la próxima fecha de partida de un buque desde la terminal gestionada hasta otra terminal 
+		// de destino.
+		
+		List<Circuito> circuitosATerminalDestino = this.circuitosQueIncluyenTramoATerminal(terminalDestino);
+		LocalDate fechaMinimaAlMomento = LocalDate.MAX;
+		for(Circuito c : circuitosATerminalDestino) {
+			Tramo tramoDesdeTerminalGestionada = c.getTramoConSalidaDesde(this);
+			LocalDate fechaSalidaTramo = c.getFechaSalidaTramo(tramoDesdeTerminalGestionada);
+			if(fechaSalidaTramo.isBefore(fechaMinimaAlMomento)) {
+				fechaMinimaAlMomento = fechaSalidaTramo;
+			}
+		}
+		return fechaMinimaAlMomento;     
+	}
+	
+	public List<Circuito> circuitosQueIncluyenTramoATerminal(Terminal terminalDestino){
+		List<Circuito> cs = new ArrayList<>();
+		for(Circuito c : this.getCircuitosDeInteres()) {
+			if(c.incluyeATerminalAntesDeTerminalB(this, terminalDestino)) {
+				 cs.add(c);
+			}
+		}
+		return cs;
 	}
 	
 	

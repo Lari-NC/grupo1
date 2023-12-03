@@ -1,6 +1,8 @@
 package grupo1;
 
 public class Posicion {
+	
+//INITIALIZE:
 	private int coordenadaX;
 	private int coordenadaY;
 	
@@ -9,6 +11,8 @@ public class Posicion {
 		this.coordenadaY = y;
 	}
 
+	
+	//GETTERS:
 	public int getCoordenadaX() {
 		return this.coordenadaX;
 	}

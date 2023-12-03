@@ -13,7 +13,6 @@ public class Inbound extends Fase{
     	return buque.getDistanciaATerminalGestionada() <= 50;
     }
     
-    
     @Override
     public Fase siguiente() {
     	return new Arrived();

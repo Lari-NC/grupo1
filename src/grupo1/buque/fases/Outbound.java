@@ -21,9 +21,5 @@ public class Outbound extends Fase{
 	@Override
 	public void realizarAccion(Buque buque) {
 		buque.darAvisoOutboundATerminal();
-	}
-
-    
-    
-    
+	}  
 }

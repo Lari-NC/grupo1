@@ -12,6 +12,7 @@ import grupo1.servicios.Servicio;
 
 public class Orden {
     
+//INITIALIZE:
 	private Shipper shipper;
 	private Consignee consignee;
 	private Container container;
@@ -36,39 +37,50 @@ public class Orden {
 		
     }
 
+    
     //GETTERS
 	public Shipper getShipper() {
-		return this.shipper;	}
+		return this.shipper;	
+	}
 
 	public Consignee getConsignee() {
-		return this.consignee;	}
+		return this.consignee;	
+	}
 
 	public Container getContainer() {
-		return this.container;	}
+		return this.container;	
+	}
 
 	public Viaje getViaje() {
-		return this.viaje;	}
+		return this.viaje;	
+	}
 
 	public LocalDate getFechaDeSalida() {
-		return this.fechaDeSalida;	}
+		return this.fechaDeSalida;	
+	}
 	
 	public LocalDate getFechaDeLlegada() {
-		return this.fechaDeLlegada;	}
+		return this.fechaDeLlegada;	
+	}
 	
 	public Camion getCamion() {
-		return this.camion;	}
+		return this.camion;	
+	}
 
 	public Chofer getChofer() {
-		return this.chofer;	}
+		return this.chofer;	
+	}
 	
 	public List<Servicio> getServicios() {
-		return servicios;	}
+		return servicios;	
+	}
 	
 	public Terminal getTerminalDestino() {
-		return this.getViaje().getTerminalDestino();	}
+		return this.getViaje().getTerminalDestino();	
+	}
 	
 	
-	//
+	//ACTION:
 	public Factura crearFactura() {
 		Factura factura = new Factura(this.getViaje(), this.getServicios());
 		return factura;

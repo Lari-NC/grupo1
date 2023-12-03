@@ -19,5 +19,7 @@ public class Working extends Fase{
     }
 
 	@Override
-	public void realizarAccion(Buque buque) {}
+	public void realizarAccion(Buque buque) {
+		
+	}
 }
