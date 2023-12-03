@@ -179,7 +179,6 @@ class BuscadorTest {
 	void casoPruebaNoSaleEl1erMarzo() {
 		// NOT (fechaSalida = 1/3/23)
 		LocalDate salida = LocalDate.of(2023, 3, 1); 
-		!!?//configurar mocks
 		
 		Busqueda busquedaFechaSalida = new BusquedaPorFechaDeSalida(salida);
 		Busqueda no1DeMarzo = new BusquedaNOT(busquedaFechaSalida);
