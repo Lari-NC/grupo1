@@ -103,7 +103,8 @@ class importacionCompletaTest {
 
 	@Test
 	void testCompleto() {
-		
+			
+			
 			//buque outbound en camino
 			boolean esOutbound = this.buqueImp.getFase() instanceof Outbound;
 			assertTrue(esOutbound);

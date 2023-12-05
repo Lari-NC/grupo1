@@ -8,6 +8,8 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -20,20 +22,23 @@ import grupo1.buque.fases.Outbound;
 import grupo1.buque.fases.Working;
 import grupo1.cliente.Consignee;
 import grupo1.cliente.Shipper;
+import grupo1.containers.Container;
+import grupo1.containers.Dry;
+import grupo1.containers.Tanque;
 import grupo1.servicios.Almacenamiento;
+import grupo1.servicios.Lavado;
+import grupo1.servicios.Servicio;
 import grupo1.transporte.Camion;
 import grupo1.transporte.Chofer;
 
-class exportacionCompleta {
+class exportacionCompletaTest {
 	
 	private TerminalGestionada terminalGestionada;
 	private Posicion posicionT;
 	private Buque buqueExpo;
-	private Buque otroBuque;
 	private Posicion posicionInicialB;
-	private Orden exportacion1;
+	private Orden exportacion;
 	private Orden exportacion2;
-	private Viaje viaje1;
 	private Viaje viaje;
 	private Consignee pepe;
 	private Consignee pepita;
@@ -41,10 +46,10 @@ class exportacionCompleta {
 	private Shipper anna;
 	private Chofer mario;
 	private Camion camion;
+	private Dry container;
+	private Lavado lavado;
+	private ArrayList<Servicio> servicios = new ArrayList<>();
 	
-	
-	
-	 
 	@BeforeEach
 	void setUp() throws Exception {
 		this.posicionT = new Posicion(50,50);
@@ -52,12 +57,8 @@ class exportacionCompleta {
 		this.posicionInicialB = new Posicion(0,0);
 		this.buqueExpo = new Buque(terminalGestionada, posicionInicialB);
 		
-		this.otroBuque = mock(Buque.class);
-		
-		this.pepe = mock(Consignee.class);
 		this.pepita = mock(Consignee.class);
 		
-		this.percy = mock(Shipper.class);
 		this.anna = mock(Shipper.class);
 		
 		this.mario = mock(Chofer.class);
@@ -69,24 +70,11 @@ class exportacionCompleta {
 		this.viaje = mock(Viaje.class);
 			when(this.viaje.getBuque()).thenReturn(buqueExpo);
 		
-			
-		this.exportacion1 = mock(Orden.class);
-			when(this.exportacion1.getViaje()).thenReturn(viaje);
-			when(this.exportacion1.getConsignee()).thenReturn(pepe);
-			when(this.exportacion1.getShipper()).thenReturn(percy);
-			when(this.exportacion1.getCamion()).thenReturn(camion);
-			when(this.exportacion1.getChofer()).thenReturn(mario);
-			
-		this.exportacion2 = mock(Orden.class);
-			when(this.exportacion2.getViaje()).thenReturn(viaje);
-			when(this.exportacion2.getConsignee()).thenReturn(pepita);
-			when(this.exportacion2.getShipper()).thenReturn(anna);
-			when(this.exportacion2.getCamion()).thenReturn(camion);
-			when(this.exportacion2.getChofer()).thenReturn(mario);
-			
-			
-		terminalGestionada.registrarExportacion(exportacion1);
-		terminalGestionada.registrarExportacion(exportacion2);
+		this.servicios.add(lavado);
+		
+		terminalGestionada.registrarExportacion(anna, pepita, container, viaje, LocalDate.of(2023, 1, 1), LocalDate.of(2023, 5, 15), camion, mario, servicios);
+		
+		this.exportacion = this.terminalGestionada.getOrdenesExportacion().get(0);
 		
 		terminalGestionada.registrarCamion(camion);
 		terminalGestionada.registrarChofer(mario);
@@ -95,10 +83,8 @@ class exportacionCompleta {
 	@Test
 	void testCompleto() {
 		
-        terminalGestionada.recibirCargaAExportar(exportacion1,camion);
-        
-		terminalGestionada.recibirCargaAExportar(exportacion2,camion);
-        
+        	this.terminalGestionada.entraUnCamionALaTerminalConUnaOrden(camion, exportacion);
+        	
 			//buque outbound en camino
 			boolean esOutbound = this.buqueExpo.getFase() instanceof Outbound;
 			assertTrue(esOutbound);
@@ -138,8 +124,7 @@ class exportacionCompleta {
 	     	buqueExpo.actualizarPosicion(posicionSalida);
 	        
 	        boolean esOutboundPartida = buqueExpo.getFase() instanceof Outbound;
-	        assertTrue(esOutboundPartida);
-	        verify(percy).recibirMailCargaEnviada();	      
+	        assertTrue(esOutboundPartida);      
 	        verify(anna).recibirMailCargaEnviada();	  
 	       
 	}

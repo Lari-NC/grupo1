@@ -82,6 +82,7 @@ class TerminalGestionadaTest {
         
         servicios.add(servicioLavado);
         servicios.add(servicioPesado);
+        
         this.container    = mock(Container.class);
 		this.viaje 		  = mock(Viaje.class);
 		this.fechaSalida  = LocalDate.of(2023, 1, 1);
@@ -155,17 +156,18 @@ class TerminalGestionadaTest {
 	}
 	
 	@Test
-	void siEnUnaTerminalGestionadaRecienCreadaSeRegistranNuevosServiciosAOfrecer_EntoncesEsosServiciosSonLosUnicosQueOfreceraLaTerminalPorElMomento() {
+	void //siEnUnaTerminalGestionadaRecienCreadaSeRegistranNuevosServiciosAOfrecer_EntoncesEsosServiciosSonLosUnicosQueOfreceraLaTerminalPorElMomento() {
 		this.servicios.remove(servicioLavado);
 		this.terminalGestionada.registrarServicioAOfrecer(servicioLavado);
 		this.terminalGestionada.registrarServiciosAOfrecer(servicios);
-		
+		// me parece que por el refactoring no tiene de sentido esto de que la terminal tenga servicios? hablar
 		assertTrue(this.terminalGestionada.getServiciosAOfrecer().contains(servicioLavado));
 		assertTrue(this.terminalGestionada.getServiciosAOfrecer().contains(servicioPesado));
 	}
 	
 	@Test
 	void siUnaTerminalGestionadaRelizaUnRegistroDeExportacion_EntoncesEsaExportacionEstaraAlmacenadaComoUnaOrdenDentroDeLasOrdenesDeExportacionDeLaTerminal() {
+		
 		this.terminalGestionada.registrarExportacion(shipper, consignee, container, viaje, fechaSalida, fechaLlegada, camion, camion.getChofer(), servicios);
 		
 		assertEquals(shipper, this.terminalGestionada.getOrdenesExportacion().get(0).getShipper());

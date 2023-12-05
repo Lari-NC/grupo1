@@ -57,8 +57,7 @@ public class TerminalGestionada extends Terminal{
 		// Entra el camion, si tarda más de 24 hs el retiro de la carga se le agrega a la orden 
 		// de la misma un servicio de almacenamiento por día que de retraso
 
-        this.entraUnCamionALaTerminal(camion);
-        this.asegurarseQueElCamionRetireLaOrdenCorrecta(camion, orden);
+        this.entraUnCamionALaTerminalConUnaOrden(camion, orden);
         int diasEntreRetiroYLlegada = (Period.between(orden.getFechaDeLlegada(), fechaRetiro)).getDays();
         
         for(int i = diasEntreRetiroYLlegada; i > 0; i--) {
@@ -112,17 +111,13 @@ public class TerminalGestionada extends Terminal{
     
     
     //SEGURIDAD:
-	private void entraUnCamionALaTerminal(Camion camion) {
+	public void entraUnCamionALaTerminalConUnaOrden(Camion camion, Orden orden) {
 		// Chequea si el camion y el chofer estan registrados en la terminal
         this.chequearSiElCamionEstaRegistrado(camion);
         this.chequearSiElChoferEstaRegistrado(camion.getChofer());
+        this.chequearSiElCamionEstaDeclaradoEnLaOrden(camion, orden);
+    	this.chequearSiElChoferEstaDeclaradoEnLaOrden(camion.getChofer(), orden);
     }
-    private void asegurarseQueElCamionRetireLaOrdenCorrecta(Camion camion, Orden orden) {
-    	// Chequea si el camion y el chofer son los declarados en al orden
-    	chequearSiElCamionEstaDeclaradoEnLaOrden(camion, orden);
-    	chequearSiElChoferEstaDeclaradoEnLaOrden(camion.getChofer(), orden);
-    	
-	}
     
     //MANEJO BUQUES:
     public void darOrdenWorking(Buque buque) {
@@ -296,7 +291,7 @@ public class TerminalGestionada extends Terminal{
 	}
 	
 	
-	//ERRORES:
+	//Errores seguridad:
     private void chequearSiElCamionEstaRegistrado(Camion camion) {
     	if (!this.getCamionesPermitidos().contains(camion)) {
         	throw new IllegalArgumentException("El camion no tiene el ingreso permitido a la terminal");
