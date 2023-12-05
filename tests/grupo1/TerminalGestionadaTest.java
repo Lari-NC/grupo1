@@ -156,7 +156,7 @@ class TerminalGestionadaTest {
 	}
 	
 	@Test
-	void //siEnUnaTerminalGestionadaRecienCreadaSeRegistranNuevosServiciosAOfrecer_EntoncesEsosServiciosSonLosUnicosQueOfreceraLaTerminalPorElMomento() {
+	void siEnUnaTerminalGestionadaRecienCreadaSeRegistranNuevosServiciosAOfrecer_EntoncesEsosServiciosSonLosUnicosQueOfreceraLaTerminalPorElMomento() {
 		this.servicios.remove(servicioLavado);
 		this.terminalGestionada.registrarServicioAOfrecer(servicioLavado);
 		this.terminalGestionada.registrarServiciosAOfrecer(servicios);
