@@ -21,7 +21,6 @@ import grupo1.mejorCircuito.BuscadorMejorCircuito;
 import grupo1.mejorCircuito.MenorTiempo;
 import grupo1.mejorCircuito.Naviera;
 import grupo1.servicios.Lavado;
-import grupo1.servicios.Pesado;
 import grupo1.servicios.Servicio;
 import grupo1.transporte.Camion;
 import grupo1.transporte.Chofer;
@@ -44,7 +43,6 @@ class TerminalGestionadaTest {
     
     private List<Servicio> servicios = new ArrayList<>();
 	private Lavado servicioLavado;
-	private Pesado servicioPesado;
 	private Container container;
     private Viaje viaje;
 	private LocalDate fechaSalida;
@@ -78,10 +76,8 @@ class TerminalGestionadaTest {
 		this.terminalGestionada 	    = new TerminalGestionada(posicionTerminalGestionada, 5000, 7000);
 		
 		this.servicioLavado = mock(Lavado.class);
-        this.servicioPesado = mock(Pesado.class);
         
         servicios.add(servicioLavado);
-        servicios.add(servicioPesado);
         
         this.container    = mock(Container.class);
 		this.viaje 		  = mock(Viaje.class);
@@ -155,15 +151,6 @@ class TerminalGestionadaTest {
 		assertFalse(this.terminalGestionada.getOrdenesImportacion().contains(orden));
 	}
 	
-	@Test
-	void siEnUnaTerminalGestionadaRecienCreadaSeRegistranNuevosServiciosAOfrecer_EntoncesEsosServiciosSonLosUnicosQueOfreceraLaTerminalPorElMomento() {
-		this.servicios.remove(servicioLavado);
-		this.terminalGestionada.registrarServicioAOfrecer(servicioLavado);
-		this.terminalGestionada.registrarServiciosAOfrecer(servicios);
-		// me parece que por el refactoring no tiene de sentido esto de que la terminal tenga servicios? hablar
-		assertTrue(this.terminalGestionada.getServiciosAOfrecer().contains(servicioLavado));
-		assertTrue(this.terminalGestionada.getServiciosAOfrecer().contains(servicioPesado));
-	}
 	
 	@Test
 	void siUnaTerminalGestionadaRelizaUnRegistroDeExportacion_EntoncesEsaExportacionEstaraAlmacenadaComoUnaOrdenDentroDeLasOrdenesDeExportacionDeLaTerminal() {
@@ -185,11 +172,9 @@ class TerminalGestionadaTest {
 	void siUnaTerminalGestiondaModificaLosPreciosDeLosServiciosDePesadoAlmacenamientoYElectricidad_EntoncesLosPreciosDeclaradosAlMomentoDeCrearEsaTerminalSeModificaranPorLosNuevos() {
 		this.terminalGestionada.modificarPrecioServicioPesado(6000);
 		this.terminalGestionada.modificarPrecioServicioAlmacenamientoPorHoraExtra(8000);
-		this.terminalGestionada.modificarPrecioServicioElectricidadPorDiaExtra(300);
 		
 		assertEquals(6000, this.terminalGestionada.getPrecioServicioPesado());
 		assertEquals(8000, this.terminalGestionada.getPrecioServicioAlmacenamientoPorDiaExtra());
-		assertEquals(300, this.terminalGestionada.getPrecioServicioElectricidadPorDiaExtra());
 	}
 	
 	@Test 

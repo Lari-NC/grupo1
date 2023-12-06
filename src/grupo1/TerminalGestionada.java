@@ -12,7 +12,6 @@ import grupo1.cliente.Shipper;
 import grupo1.containers.Container;
 import grupo1.mejorCircuito.Naviera;
 import grupo1.servicios.Almacenamiento;
-import grupo1.servicios.Electricidad;
 import grupo1.servicios.Pesado;
 import grupo1.servicios.Servicio;
 import grupo1.transporte.Camion;
@@ -31,15 +30,12 @@ public class TerminalGestionada extends Terminal{
     private List<Circuito> circuitosDeInteres 	= new ArrayList<>();
     private List<Orden> ordenesExpo 			= new ArrayList<>();
     private List<Orden> ordenesImpo 			= new ArrayList<>();
-    private List<Servicio> serviciosAOfrecer	= new ArrayList<>();
     private int precioServicioPesado;
     private int precioServicioAlmacenamientoPorDiaExtra;
-    private int precioServicioElectricidadPorDiaExtra;
     
     public TerminalGestionada(Posicion p, int precioP, int precioA) { 
     	super(p);
     	this.precioServicioPesado = precioP;
-    	this.precioServicioAlmacenamientoPorDiaExtra = precioA;
 
     }
     // IMPORTACIÓN:
@@ -165,13 +161,6 @@ public class TerminalGestionada extends Terminal{
         this.choferesPermitidos.add(chofer); 
     }
     
-    public void registrarServiciosAOfrecer(List<Servicio> servicios) {
-    	this.getServiciosAOfrecer().addAll(servicios);
-    }
-    
-    public void registrarServicioAOfrecer(Servicio servicio) {
-    	this.getServiciosAOfrecer().add(servicio);
-    }
     
     public void registrarCircuitosDeInteres() {
         for(Naviera naviera : this.navieras) {
@@ -187,9 +176,6 @@ public class TerminalGestionada extends Terminal{
     	this.precioServicioAlmacenamientoPorDiaExtra = precio;
     }
     
-    public void modificarPrecioServicioElectricidadPorDiaExtra(int precio) {
-    	this.precioServicioElectricidadPorDiaExtra = precio;
-    }
     
     
     // GETTERS:
@@ -209,9 +195,6 @@ public class TerminalGestionada extends Terminal{
         return camionesPermitidos; 
     }
 	
-	public List<Servicio> getServiciosAOfrecer() {
-		return serviciosAOfrecer; 
-	}
 	
 	public int getPrecioServicioPesado() {
 		return this.precioServicioPesado;
@@ -219,10 +202,6 @@ public class TerminalGestionada extends Terminal{
 	
 	public int getPrecioServicioAlmacenamientoPorDiaExtra() {
 		return this.precioServicioAlmacenamientoPorDiaExtra;
-	}
-	
-	public int getPrecioServicioElectricidadPorDiaExtra() {
-		return this.precioServicioElectricidadPorDiaExtra;
 	}
 	
 	public List<Circuito> getCircuitosDeInteres(){

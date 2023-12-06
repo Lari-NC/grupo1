@@ -22,18 +22,10 @@ class ServicioTest {
 		this.servicioPesado 		= new Pesado(900);
 		this.servicioAlmacenamiento = new Almacenamiento(1200);
 		this.servicioLavado 		= new Lavado(1000);
-		this.servicioElectricidad 	= new Electricidad(900000000);
+		this.servicioElectricidad 	= new Electricidad(1000);
 		this.container 				= new Container(5,10,5,100);
 		this.container1 			= new Container(2,6,2,70);
-		/* Mocks:
-		this.servicioPesado 		= mock(Pesado.class);
-	    	when(this.servicioPesado.getTipoServicio()).thenReturn("Pesado");
-	    	when(this.servicioPesado.getPrecio()).thenReturn(900);
-	    this.servicioAlmacenamiento = mock(Almacenamiento.class);
-	    	when(this.servicioAlmacenamiento.getTipoServicio()).thenReturn("Almacenamiento");
-	    	when(this.servicioAlmacenamiento.getPrecio()).thenReturn(1200);
-	    */
-		this.containerReefer 		= new Reefer(2,6,2,70,100);
+		this.containerReefer 		= new Reefer(2,6,2,70,2);
 	}
 
 	@Test
@@ -50,7 +42,7 @@ class ServicioTest {
 	
 	@Test
 	void enUnServicioDePesadoCreadoConUnCostoDe900_SuPrecioSeraDe900() {
-		assertEquals(900, servicioPesado.getPrecio());
+		assertEquals(900, servicioPesado.getPrecioPara(container));
 	}
 	
 	@Test
@@ -64,19 +56,13 @@ class ServicioTest {
 	}
 	
 	@Test
-	void enUnServicioDeElectricidadCreadoConUnCostoDe900000000_SuPrecioSeraDe900000000() {
-		assertEquals(900000000, servicioElectricidad.getPrecio());
+	void enUnServicioDeElectricidadCreadoConUnCostoDe1000_SuPrecioSeraDe1000() {
+		assertEquals(1000, servicioElectricidad.getPrecio());
 	}
 	
 	@Test
 	void alMomentoDePreguntarPorElDelServicioDeElectricidadParaUnContainerEnEspecifico_NosDaraComoResultado() {
-		assertEquals(2.16E12, this.servicioElectricidad.getPrecioPara(containerReefer));
+		assertEquals(48000, this.servicioElectricidad.getPrecioPara(containerReefer));
 	}
-	
-	/*
-	@Test
-	void alMomentoDePreguntarPorElDelServicioDeElectricidadParaUnContainerEnEspecifico_NosDaraComoResultado() {
-		assertEquals((this.containerReefer.getConsumo()*this.servicioElectricidad.getPrecio()*24), this.servicioElectricidad.getPrecioPara(containerReefer));
-	}
-	*/
+
 }
