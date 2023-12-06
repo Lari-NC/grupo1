@@ -49,7 +49,7 @@ class importacionCompletaTest {
 	@BeforeEach
 	void setUp() throws Exception {
 		this.posicionT = new Posicion(50,50);
-		this.terminalGestionada = new TerminalGestionada(posicionT,300,200,100);
+		this.terminalGestionada = new TerminalGestionada(posicionT,300,200);
 		this.posicionInicialB = new Posicion(0,0);
 		this.buqueImp = new Buque(terminalGestionada, posicionInicialB);
 		

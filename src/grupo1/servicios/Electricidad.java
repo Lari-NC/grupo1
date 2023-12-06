@@ -11,7 +11,8 @@ public class Electricidad extends Servicio{
     
     public int getPrecioPara(Container container) {
     	// PRECONDICIÓN: Sólo aplica a Reefers
-    	// OBSERVACIÓN: Se aplica como el almacenamiento (uno por dia que está en la terminal esperando el retiro).
+    	// OBSERVACIÓN: el cliente DEBE declarar cuantos dias quiere su container conectado en la orden
+    	//representado como la cantidad de servicios que se le aplican al container.
     	
         Reefer reefer = (Reefer) container; //dowcastear para poder pedirle el consumo
         

@@ -36,14 +36,12 @@ public class TerminalGestionada extends Terminal{
     private int precioServicioAlmacenamientoPorDiaExtra;
     private int precioServicioElectricidadPorDiaExtra;
     
-    public TerminalGestionada(Posicion p, int precioP, int precioA, int precioE) { 
+    public TerminalGestionada(Posicion p, int precioP, int precioA) { 
     	super(p);
     	this.precioServicioPesado = precioP;
     	this.precioServicioAlmacenamientoPorDiaExtra = precioA;
-    	this.precioServicioElectricidadPorDiaExtra = precioE;
-    }
 
-   
+    }
     // IMPORTACIÓN:
 	public void agregarOrdenImportacion(Orden orden) {
 		this.ordenesImpo.add(orden);
@@ -64,10 +62,6 @@ public class TerminalGestionada extends Terminal{
         	this.agregarServicioAlmacenamientoA(orden);
         }
         
-        for(int i = diasEntreRetiroYLlegada; i > 0; i--) {
-        	this.agregarServicioElectricidadA(orden);
-        }
-        
         this.realizarEntregaCarga(orden);
 	}
 
@@ -78,11 +72,6 @@ public class TerminalGestionada extends Terminal{
     private void agregarServicioAlmacenamientoA(Orden orden) {
     	Almacenamiento servicioAlmacenamientoAAsignar = new Almacenamiento(this.getPrecioServicioAlmacenamientoPorDiaExtra());
     	orden.agregarServicioDeTerminal(servicioAlmacenamientoAAsignar);
-	}
-    
-    private void agregarServicioElectricidadA(Orden orden) {
-    	Electricidad servicioElectricidadAAsignar = new Electricidad(this.getPrecioServicioElectricidadPorDiaExtra());
-    	orden.agregarServicioDeTerminal(servicioElectricidadAAsignar);
 	}
 
 	public void recibirBuqueAvisoInbound(Buque buque) {

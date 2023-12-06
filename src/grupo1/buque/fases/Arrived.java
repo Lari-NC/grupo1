@@ -2,7 +2,7 @@ package grupo1.buque.fases;
 
 import grupo1.buque.Buque;
 
-public class Arrived extends Fase{
+public class Arrived implements Fase{
     
     public Arrived() {
         super();

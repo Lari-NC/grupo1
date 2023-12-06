@@ -38,11 +38,8 @@ class exportacionCompletaTest {
 	private Buque buqueExpo;
 	private Posicion posicionInicialB;
 	private Orden exportacion;
-	private Orden exportacion2;
 	private Viaje viaje;
-	private Consignee pepe;
 	private Consignee pepita;
-	private Shipper percy;
 	private Shipper anna;
 	private Chofer mario;
 	private Camion camion;
@@ -53,7 +50,7 @@ class exportacionCompletaTest {
 	@BeforeEach
 	void setUp() throws Exception {
 		this.posicionT = new Posicion(50,50);
-		this.terminalGestionada = new TerminalGestionada(posicionT,300,200,100);
+		this.terminalGestionada = new TerminalGestionada(posicionT,300,200);
 		this.posicionInicialB = new Posicion(0,0);
 		this.buqueExpo = new Buque(terminalGestionada, posicionInicialB);
 		

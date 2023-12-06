@@ -75,7 +75,7 @@ class TerminalGestionadaTest {
 		this.circuito 			 = new Circuito(LocalDate.of(2023, 11, 15));
 		
 		this.posicionTerminalGestionada = mock(Posicion.class);
-		this.terminalGestionada 	    = new TerminalGestionada(posicionTerminalGestionada, 5000, 7000, 200);
+		this.terminalGestionada 	    = new TerminalGestionada(posicionTerminalGestionada, 5000, 7000);
 		
 		this.servicioLavado = mock(Lavado.class);
         this.servicioPesado = mock(Pesado.class);

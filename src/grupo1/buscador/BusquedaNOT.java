@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 import grupo1.circuito.Circuito;
 
-public class BusquedaNOT extends Busqueda {
+public class BusquedaNOT implements Busqueda {
 	private Busqueda filtro;
 
     public BusquedaNOT(Busqueda filtro) {

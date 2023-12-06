@@ -2,11 +2,7 @@ package grupo1.buque.fases;
 
 import grupo1.buque.Buque;
 
-public abstract class Fase {
-	
-	public Fase() {
-    	
-    }
+public interface Fase {
     
     public abstract boolean condicionFase(Buque buque);
     

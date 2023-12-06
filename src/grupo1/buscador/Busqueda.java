@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 import grupo1.circuito.Circuito;
 
-public abstract class Busqueda {
-	public abstract ArrayList<Circuito> buscar(ArrayList<Circuito> lista);
+public interface Busqueda {
+	public ArrayList<Circuito> buscar(ArrayList<Circuito> lista);
 }
 

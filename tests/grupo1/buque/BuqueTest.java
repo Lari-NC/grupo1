@@ -111,7 +111,7 @@ class BuqueTest {
 		//porque verificamos que mandaba el mensaje pero el buque nunca lo recibia (al final comentado)
 		
 		Posicion posicionTerminal = new Posicion(50,50);
-		TerminalGestionada terminalG_T = new TerminalGestionada(posicionTerminal,1,1,1);
+		TerminalGestionada terminalG_T = new TerminalGestionada(posicionTerminal,1,1);
 		Buque buque_T = new Buque(terminalG_T, posicionInicialBuque);
 		
 			Posicion posicionInbound = new Posicion(30,20); //outbound
@@ -131,7 +131,7 @@ class BuqueTest {
 	@Test
 	public void laTermianlDaLaOrdenDeDepartAUnBuqueYPasaDeWorkingADeparting() {
 		Posicion posicionTerminal = new Posicion(50,50);
-		TerminalGestionada terminalG_T = new TerminalGestionada(posicionTerminal,1,1,1);
+		TerminalGestionada terminalG_T = new TerminalGestionada(posicionTerminal,1,1);
 		Buque buque_T = new Buque(terminalG_T, posicionInicialBuque);
 		
 			Posicion posicionInbound = new Posicion(30,20);
@@ -152,7 +152,7 @@ class BuqueTest {
 	@Test
 	public void elBuqueSeVaYNOPasaDeDepartingAOutboundDeVuelta() {
 		Posicion posicionTerminal = new Posicion(50,50);
-		TerminalGestionada terminalG_T = new TerminalGestionada(posicionTerminal,1,1,1);
+		TerminalGestionada terminalG_T = new TerminalGestionada(posicionTerminal,1,1);
 		Buque buque_T = new Buque(terminalG_T, posicionInicialBuque);
 		
 			Posicion posicionInbound = new Posicion(30,20);
@@ -178,7 +178,7 @@ class BuqueTest {
 	@Test
 	public void elBuqueSeVaYPasaDeDepartingAOutboundDeVuelta() {
 		Posicion posicionTerminal = new Posicion(50,50);
-		TerminalGestionada terminalG_T = new TerminalGestionada(posicionTerminal,1,1,1);
+		TerminalGestionada terminalG_T = new TerminalGestionada(posicionTerminal,1,1);
 		Buque buque_T = new Buque(terminalG_T, posicionInicialBuque);
 		
 			Posicion posicionInbound = new Posicion(30,20);

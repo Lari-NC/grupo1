@@ -6,7 +6,7 @@ import java.util.stream.Collectors;
 
 import grupo1.circuito.Circuito;
 
-public class BusquedaPorFechaDeSalida extends Busqueda{
+public class BusquedaPorFechaDeSalida implements Busqueda{
 	 
 	private LocalDate fechaSalidaDeseada;
 
