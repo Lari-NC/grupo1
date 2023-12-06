@@ -11,15 +11,12 @@ import java.util.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import grupo1.cliente.Consignee;
-import grupo1.cliente.Shipper;
-import grupo1.containers.Container;
-import grupo1.servicios.Almacenamiento;
-import grupo1.servicios.Lavado;
-import grupo1.servicios.Pesado;
-import grupo1.servicios.Servicio;
-import grupo1.transporte.Chofer;
-import grupo1.transporte.Camion;
+import grupo1.cliente.*;
+import grupo1.containers.*;
+import grupo1.transporte.*;
+import grupo1.servicios.*;
+
+
 
 class OrdenTest {
 
