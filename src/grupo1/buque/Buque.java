@@ -95,14 +95,3 @@ public class Buque {
     	return this.ordenDepart;
     }
 }
-
-/* YA NO TIENE CARGAS: (todo lo comentado que no se usa es por esto)
- 
-	public List<Container> getCargas() {
-        return this.cargas;
-    }
-    
-    public void addCarga(Container carga) {
-        this.cargas.add(carga);
-    }
-*/
