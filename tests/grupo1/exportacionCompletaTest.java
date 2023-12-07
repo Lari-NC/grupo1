@@ -1,15 +1,13 @@
 package grupo1;
 
 import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.ArgumentMatchers.any;
+
 import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.List;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -22,10 +20,7 @@ import grupo1.buque.fases.Outbound;
 import grupo1.buque.fases.Working;
 import grupo1.cliente.Consignee;
 import grupo1.cliente.Shipper;
-import grupo1.containers.Container;
 import grupo1.containers.Dry;
-import grupo1.containers.Tanque;
-import grupo1.servicios.Almacenamiento;
 import grupo1.servicios.Lavado;
 import grupo1.servicios.Servicio;
 import grupo1.transporte.Camion;

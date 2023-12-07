@@ -12,17 +12,11 @@ import java.time.LocalDate;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import grupo1.buque.Buque;
-import grupo1.buque.fases.Arrived;
-import grupo1.buque.fases.Departing;
-import grupo1.buque.fases.Inbound;
-import grupo1.buque.fases.Outbound;
-import grupo1.buque.fases.Working;
-import grupo1.cliente.Consignee;
-import grupo1.cliente.Shipper;
+import grupo1.buque.*;
+import grupo1.buque.fases.*;
+import grupo1.cliente.*;
 import grupo1.servicios.Almacenamiento;
-import grupo1.transporte.Camion;
-import grupo1.transporte.Chofer;
+import grupo1.transporte.*;
 
 class importacionCompletaTest {
 	
@@ -42,8 +36,6 @@ class importacionCompletaTest {
 	private Shipper anna;
 	private Chofer mario;
 	private Camion camion;
-	
-	
 	
 	 
 	@BeforeEach

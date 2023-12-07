@@ -48,6 +48,7 @@ public class Buque {
     
     public void actualizarPosicion(Posicion posicionNueva) {
     	// Cuando nos movemos, tambien le preguntamos a la fase si se puede actualizar
+    	//este mensaje se manda cada 1 segundo 
     	this.posicion = posicionNueva;
     	this.actualizarFase();
     }
